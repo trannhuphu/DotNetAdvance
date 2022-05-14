@@ -1,0 +1,27 @@
+﻿<Window x:Class="SalesWPFApp.WindowOrder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalesWPFApp"
+        mc:Ignorable="d"
+        Title="WindowOrder" Height="525" Width="814">
+    <Grid>
+        <Label Content="Order Management" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Arial" FontWeight="Bold"/>
+        <Label Content="OrderId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Product Id" HorizontalAlignment="Left" Margin="34,113,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Unit Price" HorizontalAlignment="Left" Margin="400,57,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Quantity" HorizontalAlignment="Left" Margin="39,167,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Discount" HorizontalAlignment="Left" Margin="400,107,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox x:Name="txtOrderId" HorizontalAlignment="Left" Margin="131,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtProductId" HorizontalAlignment="Left" Margin="131,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtUnitPrice" HorizontalAlignment="Left" Margin="131,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtQuantity" HorizontalAlignment="Left" Margin="551,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtDiscount" HorizontalAlignment="Left" Margin="551,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <DataGrid x:Name="dgvOrder" Margin="0,217,178,0"/>
+        <Button x:Name="btnRead" Content="Read" HorizontalAlignment="Left" Margin="663,0,0,0" VerticalAlignment="Center" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="663,313,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="663,388,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,460,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
+    </Grid>
+</Window>
