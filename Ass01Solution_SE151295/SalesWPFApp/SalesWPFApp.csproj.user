@@ -7,7 +7,51 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="WindowLogin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="WindowMemberDetails.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="WindowMembers.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="WindowOrder.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="WindowOrderList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="WindowProduct.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="WindowProductDetail.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowLogin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowMemberDetails.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowMembers.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowOrder.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowOrderList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowProduct.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowProductDetail.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
