@@ -11,17 +11,27 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DataAccess;
 
 namespace SalesWPFApp
 {
     /// <summary>
     /// Interaction logic for WindowLogin.xaml
     /// </summary>
+    /// 
+
     public partial class WindowLogin : Window
     {
+        IMemberRepository member = new MemberRepository();
+        IProductRepository product = new ProductRepository();
         public WindowLogin()
         {
             InitializeComponent();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }
