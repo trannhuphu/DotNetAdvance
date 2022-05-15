@@ -20,7 +20,7 @@
         <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="551,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
         <DataGrid x:Name="dgvMember" Margin="0,217,178,0"/>
         <Button x:Name="btnRead" Content="Read" HorizontalAlignment="Left" Margin="663,178,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="663,241,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="663,241,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnCreate_Click" />
         <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="663,306,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
         <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,371,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
     </Grid>

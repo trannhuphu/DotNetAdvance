@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DataAccess;
+using BusinessObject.Models;
 
 namespace SalesWPFApp
 {
@@ -19,9 +21,22 @@ namespace SalesWPFApp
     /// </summary>
     public partial class WindowMembers : Window
     {
-        public WindowMembers()
+        public IMemberRepository wndMemberRepository {set ; get;}
+        public WindowMembers(IMemberRepository member)
         {
             InitializeComponent();
+            wndMemberRepository = member;
+            LoadMemberList();
+        }
+        public void LoadMemberList(){
+            dgvMember.ItemsSource=wndMemberRepository.GetMembers();
+        }
+
+        public void btnCreate_Click(object sender, RoutedEventArgs e)
+        {
+            var wndNewMem = new WindowMemberDetails(wndMemberRepository, null);
+            wndNewMem.Show();
+            this.Close();
         }
     }
 }

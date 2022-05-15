@@ -26,7 +26,7 @@ namespace DataAccess
                     {
                         instance = new MemberDAO();
                     }
-                    return Instance;
+                    return instance;
                 }
             }
         }
@@ -137,24 +137,27 @@ namespace DataAccess
             string userAdmin = config["Account:email"];
             string userPassword = config["Account:password"];
 
-            if (strEmail == userAdmin && strPassword == userPassword)
+            if (strEmail == userAdmin)
             {
                 return 1; //role admin
             }
             else
             {
-                member = GetMemberList().Where(tmp => tmp.Email == strEmail
-                                        && tmp.Password == strPassword).FirstOrDefault();
-                if (member != null)
+                try
                 {
-                    CurrentMemberId = member.MemberId;
-                    return 2; //role user
+                    member = GetMemberList().Where(tmp => tmp.Email == strEmail
+                                            && tmp.Password == strPassword).FirstOrDefault();
+                    if (member != null)
+                    {
+                        CurrentMemberId = member.MemberId;
+                    }
+                } catch (Exception ex)
+                {
+                    throw new Exception (ex.Message);
                 }
+                return 2;
             }
-            throw new Exception("Error Login"); //login false
         }
-
-
     }
 }
 
