@@ -13,15 +13,30 @@
         <Label Content="Company Name" HorizontalAlignment="Left" Margin="400,57,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="City" HorizontalAlignment="Left" Margin="39,167,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="Country" HorizontalAlignment="Left" Margin="400,107,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox x:Name="txtMemberId" HorizontalAlignment="Left" Margin="131,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="131,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="131,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <TextBox x:Name="txtCompanyName" HorizontalAlignment="Left" Margin="551,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="551,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtMemberId" HorizontalAlignment="Left" Margin="131,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+                 Text="{Binding Path=MemberId, Mode=OneWay}"   
+                 DataContext="{Binding ElementName=dgvMember, 
+                 Path=SelectedItems}"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="131,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+                 Text="{Binding Path=Email, Mode=OneWay}"   
+                 DataContext="{Binding ElementName=dgvMember, 
+                 Path=SelectedItems}"/>
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="131,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+                 Text="{Binding Path=City, Mode=OneWay}"   
+                 DataContext="{Binding ElementName=dgvMember, 
+                 Path=SelectedItems}"/>
+        <TextBox x:Name="txtCompanyName" HorizontalAlignment="Left" Margin="551,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+                 Text="{Binding Path=CompanyName, Mode=OneWay}"   
+                 DataContext="{Binding ElementName=dgvMember, 
+                 Path=SelectedItems}"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="551,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+                 Text="{Binding Path=Country, Mode=OneWay}"   
+                 DataContext="{Binding ElementName=dgvMember, 
+                 Path=SelectedItems}"/>
         <DataGrid x:Name="dgvMember" Margin="0,217,178,0"/>
         <Button x:Name="btnRead" Content="Read" HorizontalAlignment="Left" Margin="663,178,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
         <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="663,241,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnCreate_Click" />
         <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="663,306,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,371,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,371,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnDelete_Click"/>
     </Grid>
 </Window>

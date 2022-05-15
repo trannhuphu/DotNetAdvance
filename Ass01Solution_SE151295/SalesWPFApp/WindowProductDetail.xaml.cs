@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessObject.Models;
+using DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,52 @@ namespace SalesWPFApp
     /// </summary>
     public partial class WindowProductDetail : Window
     {
-        public WindowProductDetail()
+        public IProductRepository productRepositoryDetail { set; get; }
+        public bool IsAdminLogin = true;
+        public WindowProductDetail(IProductRepository productRepos, Product product)
         {
             InitializeComponent();
+            productRepositoryDetail = productRepos;
+            if (product != null)
+            {
+                IsAdminLogin = false;
+                txtProductId.Text = product.ProductId.ToString();
+                txtProductName.Text = product.ProductName.ToString();
+                txtUnitPrice.Text = product.UnitPrice.ToString();
+                txtUnitsInStock.Text = product.UnitsInStock.ToString();
+                txtWeight.Text = product.Weight.ToString();
+                txtCategoryId.Text = product.CategoryId.ToString();
+
+                product.UnitPrice = int.Parse(txtUnitPrice.Text);
+            }
+        }
+        // product.UnitPrice = int.Parse(txtUnitPrice.Text);
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var productNew = new Product
+                {
+                    ProductId = int.Parse(txtProductId.Text),
+                    ProductName = txtProductName.Text,
+                    UnitPrice = int.Parse(txtUnitPrice.Text),
+                    UnitsInStock = int.Parse(txtUnitsInStock.Text),
+                    Weight = txtWeight.Text,
+                    CategoryId = int.Parse(txtCategoryId.Text)
+                };
+                if (IsAdminLogin)
+                {
+                    productRepositoryDetail.AddPro(productNew);
+                }
+                else
+                {
+                    productRepositoryDetail.UpdatePro(productNew);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Create/Update Information");
+            }
         }
     }
 }

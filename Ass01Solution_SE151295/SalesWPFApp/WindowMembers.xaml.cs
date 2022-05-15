@@ -38,5 +38,45 @@ namespace SalesWPFApp
             wndNewMem.Show();
             this.Close();
         }
+
+        private Member GetMemberObject()
+        {
+            Member mem = null;
+            try
+            {
+                mem = new Member
+                {
+                    MemberId = int.Parse(txtMemberId.Text),
+                    Email = txtEmail.Text,
+                    CompanyName = txtCompanyName.Text,
+                    City = txtCity.Text,
+                    Country = txtCountry.Text
+                    
+                };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Get Member");
+            }
+            return mem;
+        }
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+               // if (MessageBox.Show("Are you sure?", "Member Management - Delete",
+               // MessageBoxButton.OKCancel, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1) == DialogResult.OK)
+                {
+                    var member = GetMemberObject();
+                    wndMemberRepository.Delete(member);
+                    LoadMemberList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Delete a member");
+            }
+        }
     }
 }

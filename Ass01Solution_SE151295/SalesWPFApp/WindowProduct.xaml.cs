@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,23 @@ namespace SalesWPFApp
     /// </summary>
     public partial class WindowProduct : Window
     {
-        public WindowProduct()
+        public IProductRepository productRepository { set; get; }
+        public WindowProduct(IProductRepository pro)
         {
             InitializeComponent();
+            productRepository = pro;
+            LoadProductList();
+        }
+        public void LoadProductList()
+        {
+            dgvProduct.ItemsSource = productRepository.GetProducts();
+        }
+
+        public void btnCreate_Click(object sender, RoutedEventArgs e)
+        {
+            var productNew = new WindowProductDetail(productRepository, null);
+            productNew.Show();
+            this.Close();
         }
     }
 }
