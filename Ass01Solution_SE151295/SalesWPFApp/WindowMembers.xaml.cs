@@ -19,7 +19,7 @@ namespace SalesWPFApp
     /// <summary>
     /// Interaction logic for WindowMembers.xaml
     /// </summary>
-    public partial class WindowMembers : Window
+    public partial class WindowMembers : UserControl
     {
         public IMemberRepository wndMemberRepository {set ; get;}
         public WindowMembers(IMemberRepository member)
@@ -28,17 +28,46 @@ namespace SalesWPFApp
             wndMemberRepository = member;
             LoadMemberList();
         }
+
+        /// <summary>
+        /// Load member
+        /// </summary>
         public void LoadMemberList(){
             dgvMember.ItemsSource=wndMemberRepository.GetMembers();
         }
 
+        /// <summary>
+        /// Add event create member
+        /// </summary>
         public void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            var wndNewMem = new WindowMemberDetails(wndMemberRepository, null);
-            wndNewMem.Show();
-            this.Close();
+            var wndMemCreate = new WindowMemberDetails(wndMemberRepository, null,true);
+            wndMemCreate.Closed += WindowMemberDetailsClosed;
+            wndMemCreate.Show();  
         }
 
+        /// <summary>
+        /// Add event update member
+        /// </summary>
+        public void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            var MemCurrent = wndMemberRepository.GetMemByID(int.Parse(txtMemberId.Text));
+            var wndMemUpdate = new WindowMemberDetails(wndMemberRepository, MemCurrent);
+            wndMemUpdate.Closed += WindowMemberDetailsClosed;
+            wndMemUpdate.Show();
+        }
+        
+        /// <summary>
+        /// Add event for closed windown MemberDtailed
+        /// </summary>
+        public void WindowMemberDetailsClosed(object sender, EventArgs e)
+        {
+            LoadMemberList();
+        }
+
+        /// <summary>
+        /// Implement get member
+        /// </summary>
         private Member GetMemberObject()
         {
             Member mem = null;
@@ -60,6 +89,10 @@ namespace SalesWPFApp
             }
             return mem;
         }
+
+        /// <summary>
+        /// Add event delete member
+        /// </summary>
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             try

@@ -22,14 +22,14 @@ namespace SalesWPFApp
     public partial class WindowMemberDetails : Window
     {
         public IMemberRepository memberRepositoryDetail {set;get;}
-        public bool IsAdminLogin = true;
-        public WindowMemberDetails(IMemberRepository memberRepos, Member member)
+        public bool IsCreateMember = false;
+        public WindowMemberDetails(IMemberRepository memberRepos, Member member, bool IsCreateMem=false)
         {
             InitializeComponent();
             memberRepositoryDetail = memberRepos;
+            IsCreateMember = IsCreateMem;
             if(member != null)
             {
-                IsAdminLogin = false;
                 txtMemberId.Text = member.MemberId.ToString();
                 txtCompanyName.Text = member.CompanyName.ToString();
                 txtCity.Text = member.City.ToString();
@@ -51,7 +51,7 @@ namespace SalesWPFApp
                     Country = txtCountry.Text,
                     Password = txtPassword.Text
                 };
-                if(IsAdminLogin)
+                if(IsCreateMember)
                 {
                     memberRepositoryDetail.AddMem(NewMember);
                 }
@@ -59,6 +59,7 @@ namespace SalesWPFApp
                 {
                     memberRepositoryDetail.UpdateMem(NewMember);
                 }
+                this.Close();
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Create/Update Information");
