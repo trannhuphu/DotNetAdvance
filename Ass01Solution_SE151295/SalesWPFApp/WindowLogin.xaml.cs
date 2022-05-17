@@ -24,7 +24,7 @@ namespace SalesWPFApp
     public partial class WindowLogin : Window
     {
         IMemberRepository wndMemberRepositoryLogin = new MemberRepository();
-        IProductRepository product = new ProductRepository();
+        IProductRepository wndProductRepositoryLogin = new ProductRepository();
         
         public WindowLogin()
         {
@@ -40,7 +40,7 @@ namespace SalesWPFApp
 
                 if(role == 1)
                 {
-                    var wndMain = new MainWindow(wndMemberRepositoryLogin, role, memberTemp);
+                    var wndMain = new MainWindow( role, memberTemp, wndMemberRepositoryLogin, wndProductRepositoryLogin);
                     wndMain.Show();
                 }
                 else 

@@ -19,7 +19,7 @@ namespace SalesWPFApp
     /// <summary>
     /// Interaction logic for WindowProduct.xaml
     /// </summary>
-    public partial class WindowProduct : Window
+    public partial class WindowProduct : UserControl
     {
         public IProductRepository productRepository { set; get; }
         public WindowProduct(IProductRepository pro)
@@ -41,7 +41,7 @@ namespace SalesWPFApp
         {
             var productNew = new WindowProductDetail(productRepository, null);
             productNew.Show();
-            this.Close();
+            //this.Close();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -80,7 +80,6 @@ namespace SalesWPFApp
         {
             try
             {
-
                 {
                     var pro = GetProductObject();
                     productRepository.Delete(pro);
@@ -92,9 +91,5 @@ namespace SalesWPFApp
                 MessageBox.Show(ex.Message, "Delete a product");
             }
         }
-
-        
-
-
     }
 }

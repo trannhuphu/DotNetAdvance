@@ -33,6 +33,7 @@ namespace SalesWPFApp
         /// Load member
         /// </summary>
         public void LoadMemberList(){
+            dgvMember.SelectedIndex = 0;
             dgvMember.ItemsSource=wndMemberRepository.GetMembers();
         }
 
