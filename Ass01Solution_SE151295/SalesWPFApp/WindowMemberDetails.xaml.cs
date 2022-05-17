@@ -65,5 +65,10 @@ namespace SalesWPFApp
                 MessageBox.Show(ex.Message, "Error Create/Update Information");
             }
         }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

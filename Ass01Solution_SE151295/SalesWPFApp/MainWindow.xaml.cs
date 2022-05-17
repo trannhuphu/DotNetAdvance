@@ -32,7 +32,9 @@ namespace SalesWPFApp
             }
             else 
             {
-                tabMember.Content = new WindowMemberDetails(mainRepos,mem);
+                //var wndMemDetail = new WindowMemberDetails(mainRepos,mem);
+                //wndMemDetail.Closed += WindowMemberDetailsClosed;
+                //wndMemDetail.Show();
             }
         }
     }

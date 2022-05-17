@@ -37,23 +37,31 @@ namespace SalesWPFApp
             try {
                 Member memberTemp = new Member();
                 role = wndMemberRepositoryLogin.Login(txtEmail.Text, txtPassword.Text, ref memberTemp);
-                var wndMain = new MainWindow(wndMemberRepositoryLogin, role, memberTemp);
-                wndMain.Show();
-                // if(role == 1)
-                // {
-                //    var wndMember = new WindowMembers(wndMemberRepositoryLogin);
-                //    wndMember.Show();
-                // }
-                // else 
-                // {
-                //     var wndMember = new WindowMemberDetails(wndMemberRepositoryLogin,memberTemp);
-                //     wndMember.Show();
-                // }
-                this.Close();
+
+                if(role == 1)
+                {
+                    var wndMain = new MainWindow(wndMemberRepositoryLogin, role, memberTemp);
+                    wndMain.Show();
+                }
+                else 
+                {
+                    var wndMember = new WindowMemberDetails(wndMemberRepositoryLogin,memberTemp);
+                    wndMember.Closed += WindowMemberDetailsClosed;
+                    wndMember.Show();
+                }
+                this.Hide();
             } catch (Exception ex)
             {
                MessageBox.Show(ex.Message, "Login Error");
             }
+        }
+        private void WindowMemberDetailsClosed(Object sender, EventArgs e)
+        {
+            this.Show();
+        }
+        private void btnCancel_Click(Object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
