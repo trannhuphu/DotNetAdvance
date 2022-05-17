@@ -22,14 +22,17 @@ namespace SalesWPFApp
     public partial class WindowProductDetail : Window
     {
         public IProductRepository productRepositoryDetail { set; get; }
-        public bool IsAdminLogin = true;
-        public WindowProductDetail(IProductRepository productRepos, Product product)
+        public bool IsCreateProduct = false;
+
+      
+        public WindowProductDetail(IProductRepository productRepos, Product product, bool IsCreatePro = false)
         {
             InitializeComponent();
             productRepositoryDetail = productRepos;
+            IsCreateProduct= IsCreatePro;
             if (product != null)
             {
-                IsAdminLogin = false;
+                
                 txtProductId.Text = product.ProductId.ToString();
                 txtProductName.Text = product.ProductName.ToString();
                 txtUnitPrice.Text = product.UnitPrice.ToString();
@@ -54,7 +57,7 @@ namespace SalesWPFApp
                     Weight = txtWeight.Text,
                     CategoryId = int.Parse(txtCategoryId.Text)
                 };
-                if (IsAdminLogin)
+                if (IsCreateProduct)
                 {
                     productRepositoryDetail.AddPro(productNew);
                 }
@@ -68,5 +71,7 @@ namespace SalesWPFApp
                 MessageBox.Show(ex.Message, "Error Create/Update Information");
             }
         }
+
+       
     }
 }

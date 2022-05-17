@@ -21,8 +21,8 @@
         <TextBox x:Name="txtCategoryId" HorizontalAlignment="Left" Margin="172,209,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
         <TextBox x:Name="txtUnitPrice" HorizontalAlignment="Left" Margin="172,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
         <TextBox x:Name="txtUnitsInStock" HorizontalAlignment="Left" Margin="172,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="119,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold"/>
-        <Button Content="Logout" HorizontalAlignment="Left" Margin="280,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="119,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnSave_Click" />
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="280,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold"/>
 
     </Grid>
 </Window>

@@ -26,8 +26,8 @@
         <DataGrid x:Name="dgvProduct" Margin="0,370,178,10"/>
         <Button x:Name="btnRead" Content="Read" HorizontalAlignment="Left" Margin="663,382,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
         <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="663,459,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="663,536,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,613,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="663,536,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,613,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnDelete_Click"/>
         <GroupBox Header="SEARCH" Margin="39,237,104,339" FontWeight="Bold" FontSize="16"/>
 
         <Label Content="By Id" HorizontalAlignment="Left" Margin="50,258,0,0" VerticalAlignment="Top" FontSize="15"/>
