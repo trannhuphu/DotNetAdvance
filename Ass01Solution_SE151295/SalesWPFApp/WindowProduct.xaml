@@ -1,11 +1,10 @@
-﻿<Window x:Class="SalesWPFApp.WindowProduct"
+﻿<UserControl x:Class="SalesWPFApp.WindowProduct"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesWPFApp"
-        mc:Ignorable="d"
-        Title="WindowProduct" Height="688" Width="799">
+        mc:Ignorable="d">
     <Grid Margin="0,0,0,-6">
         <Label Content="Product Management" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Arial" FontWeight="Bold"/>
         <Label Content="ProductId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15"/>
@@ -41,4 +40,4 @@
         <TextBox x:Name="txtSearchByUnitsInStock" HorizontalAlignment="Left" Margin="475,306,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
 
     </Grid>
-</Window>
+</UserControl>

@@ -23,7 +23,7 @@ namespace DataAccess
                     {
                         instance = new ProductDAO();
                     }
-                    return Instance;
+                    return instance;
                 }
             }
         }

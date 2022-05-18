@@ -22,17 +22,20 @@ namespace SalesWPFApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(IMemberRepository mainRepos, int role, Member mem)
+        public MainWindow(int role, Member mem, IMemberRepository mainRepos=null, IProductRepository pos=null)
         {
             InitializeComponent();
 
             if(role == 1)
             {
                tabMember.Content = new WindowMembers(mainRepos);
+               tabProduct.Content = new WindowProduct(pos);
             }
             else 
             {
-                tabMember.Content = new WindowMemberDetails(mainRepos,mem);
+                //var wndMemDetail = new WindowMemberDetails(mainRepos,mem);
+                //wndMemDetail.Closed += WindowMemberDetailsClosed;
+                //wndMemDetail.Show();
             }
         }
     }

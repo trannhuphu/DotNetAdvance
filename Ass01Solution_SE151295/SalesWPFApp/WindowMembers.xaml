@@ -7,13 +7,13 @@
         mc:Ignorable="d">
     <Grid>
         <Label Content="FStore Management" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Arial" FontWeight="Bold"/>
-        <Label Content="MemberId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="MemberId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15" />
         <Label Content="Email" HorizontalAlignment="Left" Margin="34,113,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="Company Name" HorizontalAlignment="Left" Margin="400,57,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="City" HorizontalAlignment="Left" Margin="39,167,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="Country" HorizontalAlignment="Left" Margin="400,107,0,0" VerticalAlignment="Top" FontSize="15"/>
         <TextBox x:Name="txtMemberId" HorizontalAlignment="Left" Margin="131,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-            Text="{Binding SelectedItem.MemberId, ElementName=dgvMember}"/>
+            Text="{Binding SelectedItem.MemberId, ElementName=dgvMember}" />
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="131,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
             Text="{Binding SelectedItem.Email, ElementName=dgvMember}"/>
         <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="131,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"

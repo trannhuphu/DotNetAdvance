@@ -143,19 +143,14 @@ namespace DataAccess
             }
             else
             {
-                try
+                member = GetMemberList().Where(tmp => tmp.Email == strEmail
+                                        && tmp.Password == strPassword).FirstOrDefault();
+                if (member != null)
                 {
-                    member = GetMemberList().Where(tmp => tmp.Email == strEmail
-                                            && tmp.Password == strPassword).FirstOrDefault();
-                    if (member != null)
-                    {
-                        CurrentMemberId = member.MemberId;
-                    }
-                } catch (Exception ex)
-                {
-                    throw new Exception (ex.Message);
+                    CurrentMemberId = member.MemberId;
+                    return 2;
                 }
-                return 2;
+                throw new Exception ("User mail or Password is incorrect!");
             }
         }
     }
