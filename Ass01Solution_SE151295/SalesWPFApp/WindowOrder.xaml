@@ -9,19 +9,29 @@
     <Grid>
         <Label Content="Order Management" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Arial" FontWeight="Bold"/>
         <Label Content="OrderId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="Product Id" HorizontalAlignment="Left" Margin="34,113,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="Unit Price" HorizontalAlignment="Left" Margin="400,57,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="Quantity" HorizontalAlignment="Left" Margin="39,167,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="Discount" HorizontalAlignment="Left" Margin="400,107,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox x:Name="txtOrderId" HorizontalAlignment="Left" Margin="131,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <TextBox x:Name="txtProductId" HorizontalAlignment="Left" Margin="131,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <TextBox x:Name="txtUnitPrice" HorizontalAlignment="Left" Margin="131,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <TextBox x:Name="txtQuantity" HorizontalAlignment="Left" Margin="551,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <TextBox x:Name="txtDiscount" HorizontalAlignment="Left" Margin="551,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <Label Content="Member Id" HorizontalAlignment="Left" Margin="34,113,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Freight" HorizontalAlignment="Left" Margin="39,167,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Order Date" HorizontalAlignment="Left" Margin="400,57,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Required Date" HorizontalAlignment="Left" Margin="400,107,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Shipped Date" HorizontalAlignment="Left" Margin="402,161,0,0" VerticalAlignment="Top" FontSize="15"/>
+
+        <TextBox x:Name="txtOrderId" HorizontalAlignment="Left" Margin="131,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+             Text="{Binding SelectedItem.OrderId, ElementName=dgvOrder}" />
+        <TextBox x:Name="txtMemberId" HorizontalAlignment="Left" Margin="131,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+             Text="{Binding SelectedItem.MemberId, ElementName=dgvOrder}" />
+        <TextBox x:Name="txtFreight" HorizontalAlignment="Left" Margin="131,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+             Text="{Binding SelectedItem.Freight, ElementName=dgvOrder}" />
+        <DatePicker x:Name="datetimeOrderDate" HorizontalAlignment="Left" Margin="551,62,0,0" VerticalAlignment="Top" Height="24" Width="210"
+             Text="{Binding SelectedItem.OrderDate, ElementName=dgvOrder}" />
+        <DatePicker x:Name="datetimeRequiredDate" HorizontalAlignment="Left" Margin="551,113,0,0" VerticalAlignment="Top" Height="21" Width="210"
+             Text="{Binding SelectedItem.RequiredDate, ElementName=dgvOrder}" />
+        <DatePicker x:Name="datetimeShippedDate" HorizontalAlignment="Left" Margin="551,170,0,0" VerticalAlignment="Top" Height="21" Width="210"
+             Text="{Binding SelectedItem.ShippedDate, ElementName=dgvOrder}" />
+       
         <DataGrid x:Name="dgvOrder" Margin="0,217,178,0"/>
         <Button x:Name="btnRead" Content="Read" HorizontalAlignment="Left" Margin="663,0,0,0" VerticalAlignment="Center" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="663,313,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="663,388,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,460,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="663,313,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnCreate_Click"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="663,388,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,460,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnDelete_Click"/>
     </Grid>
 </Window>
