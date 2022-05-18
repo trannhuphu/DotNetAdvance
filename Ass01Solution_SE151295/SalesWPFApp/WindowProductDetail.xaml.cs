@@ -39,11 +39,9 @@ namespace SalesWPFApp
                 txtUnitsInStock.Text = product.UnitsInStock.ToString();
                 txtWeight.Text = product.Weight.ToString();
                 txtCategoryId.Text = product.CategoryId.ToString();
-
-                product.UnitPrice = int.Parse(txtUnitPrice.Text);
             }
         }
-        // product.UnitPrice = int.Parse(txtUnitPrice.Text);
+        
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             try
