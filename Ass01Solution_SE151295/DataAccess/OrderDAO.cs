@@ -91,10 +91,7 @@ namespace DataAccess
                     myOrderDB.Entry<Order>(ord).State = EntityState.Modified;
                     myOrderDB.SaveChanges();
                 }
-                else
-                {
-                    throw new Exception("The Order does not already exist");
-                }
+             
             }
             catch (Exception ex)
             {

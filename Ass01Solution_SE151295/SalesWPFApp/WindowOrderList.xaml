@@ -24,7 +24,7 @@
 
 
         <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="95,391,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnSave_Click" />
-        <Button Content="Logout" HorizontalAlignment="Left" Margin="280,391,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="280,391,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnCancel_Click"/>
 
     </Grid>
 </Window>

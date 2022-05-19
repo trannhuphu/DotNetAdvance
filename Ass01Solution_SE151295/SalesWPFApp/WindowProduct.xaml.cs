@@ -30,6 +30,7 @@ namespace SalesWPFApp
         }
         public void LoadProductList()
         {
+            dgvProduct.SelectedIndex = 0;
             dgvProduct.ItemsSource = productRepository.GetProducts();
         }
 
@@ -39,38 +40,41 @@ namespace SalesWPFApp
         }
         public void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            var productNew = new WindowProductDetail(productRepository, null);
+            var productNew = new WindowProductDetail(productRepository, null, true);
+            productNew.Closed += WindowProductDetailsClosed;
             productNew.Show();
             //this.Close();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            var proCurrent = productRepository.GetProByID(int.Parse(txtProductId.Text));
-            var proUpdate = new WindowProductDetail(productRepository, proCurrent);
-            proUpdate.Closed += WindowProductDetailsClosed;
-            proUpdate.Show();
+            try
+            {
+                var proCurrent = productRepository.GetProByID(int.Parse(txtProductId.Text));
+                var proUpdate = new WindowProductDetail(productRepository, proCurrent);
+                proUpdate.Closed += WindowProductDetailsClosed;
+                proUpdate.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Input type is incorrect, please try again!", "Error Update");
+            }
         }
         private Product GetProductObject()
         {
             Product pro = null;
-            try
-            {
+            
                 pro = new Product
                 {
                     ProductId = int.Parse(txtProductId.Text),
                     ProductName = txtProductName.Text,
                     CategoryId = int.Parse(txtCategoryId.Text),
                     Weight = txtWeight.Text,
-                    UnitPrice = int.Parse(txtUnitPrice.Text),
+                    UnitPrice = decimal.Parse(txtUnitPrice.Text),
                     UnitsInStock = int.Parse(txtUnitsInStock.Text)
 
                 };
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Get Product");
-            }
+           
             return pro;
         }
         /// <summary>
@@ -88,8 +92,10 @@ namespace SalesWPFApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Delete a product");
+                MessageBox.Show("Product is not exist!", "Delete a product");
             }
         }
+
+        
     }
 }

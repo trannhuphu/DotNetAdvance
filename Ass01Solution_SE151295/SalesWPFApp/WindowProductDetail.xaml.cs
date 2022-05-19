@@ -50,7 +50,7 @@ namespace SalesWPFApp
                 {
                     ProductId = int.Parse(txtProductId.Text),
                     ProductName = txtProductName.Text,
-                    UnitPrice = int.Parse(txtUnitPrice.Text),
+                    UnitPrice = decimal.Parse(txtUnitPrice.Text),
                     UnitsInStock = int.Parse(txtUnitsInStock.Text),
                     Weight = txtWeight.Text,
                     CategoryId = int.Parse(txtCategoryId.Text)
@@ -63,6 +63,7 @@ namespace SalesWPFApp
                 {
                     productRepositoryDetail.UpdatePro(productNew);
                 }
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -70,6 +71,9 @@ namespace SalesWPFApp
             }
         }
 
-       
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

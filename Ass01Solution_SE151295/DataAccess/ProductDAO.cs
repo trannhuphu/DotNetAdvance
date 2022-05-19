@@ -84,17 +84,14 @@ namespace DataAccess
         {
             try
             {
-                Product mb = GetProByID(pro.ProductId);
-                if (mb != null)
+                Product product = GetProByID(pro.ProductId);
+                if (product != null)
                 {
                     var myProDB = new FStoreDBContext();
                     myProDB.Entry<Product>(pro).State = EntityState.Modified;
                     myProDB.SaveChanges();
                 }
-                else
-                {
-                    throw new Exception("The product does not already exist");
-                }
+               
             }
             catch (Exception ex)
             {

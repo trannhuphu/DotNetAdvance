@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SalesWPFApp"
         mc:Ignorable="d"
         Title="WindowProductDetail" Height="442" Width="431">
-    <Grid Margin="0,0,0,21">
+    <Grid Margin="0,0,0,-16">
         <Label Content="Update Information" HorizontalAlignment="Left" Margin="96,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
         <Label Content="ProductId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="ProductName" HorizontalAlignment="Left" Margin="34,113,0,0" VerticalAlignment="Top" FontSize="15"/>
@@ -22,7 +22,7 @@
         <TextBox x:Name="txtUnitPrice" HorizontalAlignment="Left" Margin="172,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
         <TextBox x:Name="txtUnitsInStock" HorizontalAlignment="Left" Margin="172,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
         <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="119,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnSave_Click" />
-        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="280,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="280,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnCancel_Click"/>
 
     </Grid>
 </Window>

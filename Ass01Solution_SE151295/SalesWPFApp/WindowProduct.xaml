@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesWPFApp"
         mc:Ignorable="d">
-    <Grid Margin="0,0,0,-6" Height="553" Width="751">
+    <Grid Margin="0,0,0,-6" Height="619" Width="770">
         <Label Content="Product Management" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Arial" FontWeight="Bold"/>
         <Label Content="ProductId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="ProductName" HorizontalAlignment="Left" Margin="34,113,0,0" VerticalAlignment="Top" FontSize="15"/>
@@ -28,12 +28,11 @@
         <TextBox x:Name="txtUnitsInStock" HorizontalAlignment="Left" Margin="526,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
                  Text="{Binding SelectedItem.UnitsInStock, ElementName=dgvProduct}" />
 
-        <DataGrid x:Name="dgvProduct" Margin="0,370,178,10"/>
-        <Button x:Name="btnRead" Content="Read" HorizontalAlignment="Left" Margin="622,370,0,0" VerticalAlignment="Top" Height="27" Width="86" FontSize="16" FontWeight="Bold" RenderTransformOrigin="0.479,0.178"/>
-        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="622,415,0,0" VerticalAlignment="Top" Height="26" Width="86" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="622,456,0,0" VerticalAlignment="Top" Height="30" Width="86" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="622,504,0,0" VerticalAlignment="Top" Height="29" Width="89" FontSize="16" FontWeight="Bold" Click="btnDelete_Click"/>
-        <GroupBox Header="SEARCH" Margin="40,227,40,202" FontWeight="Bold" FontSize="16"/>
+        <DataGrid x:Name="dgvProduct" Margin="0,370,129,10"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="668,395,0,0" VerticalAlignment="Top" Height="26" Width="86" FontSize="16" FontWeight="Bold" Click="btnCreate_Click"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="670,437,0,0" VerticalAlignment="Top" Height="30" Width="86" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="668,490,0,0" VerticalAlignment="Top" Height="28" Width="90" FontSize="16" FontWeight="Bold" Click="btnDelete_Click"/>
+        <GroupBox Header="SEARCH" Margin="34,204,85,280" FontWeight="Bold" FontSize="16"/>
 
         <Label Content="By Id" HorizontalAlignment="Left" Margin="50,258,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="By Name" HorizontalAlignment="Left" Margin="50,301,0,0" VerticalAlignment="Top" FontSize="15"/>
@@ -44,6 +43,7 @@
         <TextBox x:Name="txtSearchByName" HorizontalAlignment="Left" Margin="120,306,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
         <TextBox x:Name="txtSearchByPrice" HorizontalAlignment="Left" Margin="475,263,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
         <TextBox x:Name="txtSearchByUnitsInStock" HorizontalAlignment="Left" Margin="475,306,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="668,350,0,0" VerticalAlignment="Top" Height="30" Width="86" FontWeight="Bold" FontSize="16"/>
 
     </Grid>
 </UserControl>
