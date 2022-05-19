@@ -10,6 +10,8 @@
         <TabControl>
                 <TabItem x:Name="tabMember" Header="Member Management"></TabItem>
                 <TabItem x:Name="tabProduct" Header="Product Management"></TabItem>
+                <TabItem x:Name="tabOrder" Header="Order Management"></TabItem>
         </TabControl>
     </Grid>
 </Window>
+

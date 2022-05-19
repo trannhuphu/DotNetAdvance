@@ -52,10 +52,17 @@ namespace SalesWPFApp
         /// </summary>
         public void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            var MemCurrent = wndMemberRepository.GetMemByID(int.Parse(txtMemberId.Text));
-            var wndMemUpdate = new WindowMemberDetails(wndMemberRepository, MemCurrent);
-            wndMemUpdate.Closed += WindowMemberDetailsClosed;
-            wndMemUpdate.Show();
+            try
+            {
+                var MemCurrent = wndMemberRepository.GetMemByID(int.Parse(txtMemberId.Text));
+                var wndMemUpdate = new WindowMemberDetails(wndMemberRepository, MemCurrent);
+                wndMemUpdate.Closed += WindowMemberDetailsClosed;
+                wndMemUpdate.Show();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Input type is incorrect, please try again!","Error Update");
+            }
         }
         
         /// <summary>
@@ -72,22 +79,14 @@ namespace SalesWPFApp
         private Member GetMemberObject()
         {
             Member mem = null;
-            try
+            mem = new Member
             {
-                mem = new Member
-                {
-                    MemberId = int.Parse(txtMemberId.Text),
-                    Email = txtEmail.Text,
-                    CompanyName = txtCompanyName.Text,
-                    City = txtCity.Text,
-                    Country = txtCountry.Text
-                    
-                };
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Get Member");
-            }
+                MemberId = int.Parse(txtMemberId.Text),
+                Email = txtEmail.Text,
+                CompanyName = txtCompanyName.Text,
+                City = txtCity.Text,
+                Country = txtCountry.Text
+            };
             return mem;
         }
 
@@ -109,7 +108,7 @@ namespace SalesWPFApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Delete a member");
+                MessageBox.Show("Member is not exist!", "Delete a member");
             }
         }
     }

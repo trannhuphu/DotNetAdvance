@@ -25,6 +25,7 @@ namespace SalesWPFApp
     {
         IMemberRepository wndMemberRepositoryLogin = new MemberRepository();
         IProductRepository wndProductRepositoryLogin = new ProductRepository();
+        IOrderRepository wndOrderRepository = new OrderRepository();
         
         public WindowLogin()
         {
@@ -40,7 +41,7 @@ namespace SalesWPFApp
 
                 if(role == 1)
                 {
-                    var wndMain = new MainWindow( role, memberTemp, wndMemberRepositoryLogin, wndProductRepositoryLogin);
+                    var wndMain = new MainWindow( role, memberTemp, wndMemberRepositoryLogin, wndProductRepositoryLogin, wndOrderRepository);
                     wndMain.Show();
                 }
                 else 

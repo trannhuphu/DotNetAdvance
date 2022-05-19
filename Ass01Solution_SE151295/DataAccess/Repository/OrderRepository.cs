@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Repository
+namespace DataAccess
 {
-    class OrderRepository :IOrderRepository
+    public class OrderRepository :IOrderRepository
     {
         public Order GetOrderByID(int ordId) => OrderDAO.Instance.GetOrderByID(ordId);
         public IEnumerable<Order> GetOrders() => OrderDAO.Instance.GetOrderList();

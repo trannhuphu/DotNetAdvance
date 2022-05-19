@@ -1,6 +1,4 @@
-﻿using BusinessObject.Models;
-using DataAccess.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DataAccess;
+using BusinessObject.Models;
 
 namespace SalesWPFApp
 {
@@ -49,9 +49,9 @@ namespace SalesWPFApp
                 {
                     OrderId = int.Parse(txtOrderId.Text),
                     MemberId = int.Parse(txtMemberId.Text),
-                    OrderDate = datetimeOrderDate.Value,
-                    RequiredDate = datetimeRequiredDate.Value,
-                    ShippedDate = datetimeShippedDate.Value,
+                  //OrderDate = datetimeOrderDate.Value,
+                  //RequiredDate = datetimeRequiredDate.Value,
+                  //ShippedDate = datetimeShippedDate.Value,
                     Freight = decimal.Parse(txtFreight.Text)
                 };
                 if (IsCreateOrder)

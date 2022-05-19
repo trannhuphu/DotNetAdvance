@@ -23,7 +23,7 @@ namespace DataAccess
                     {
                         instance = new OrderDAO();
                     }
-                    return Instance;
+                    return instance;
                 }
             }
         }

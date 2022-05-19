@@ -22,14 +22,16 @@ namespace SalesWPFApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(int role, Member mem, IMemberRepository mainRepos=null, IProductRepository pos=null)
+        public MainWindow(int role, Member mem, IMemberRepository memberRepos=null, 
+        IProductRepository productRepos=null, IOrderRepository orderRepos=null)
         {
             InitializeComponent();
 
             if(role == 1)
             {
-               tabMember.Content = new WindowMembers(mainRepos);
-               tabProduct.Content = new WindowProduct(pos);
+               tabMember.Content = new WindowMembers(memberRepos);
+               tabProduct.Content = new WindowProduct(productRepos);
+               tabOrder.Content = new WindowOrder(orderRepos);
             }
             else 
             {
