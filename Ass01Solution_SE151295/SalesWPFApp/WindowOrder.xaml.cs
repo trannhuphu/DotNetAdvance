@@ -60,10 +60,16 @@ namespace SalesWPFApp
         /// </summary>
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            var orderCurrent = orderRepository.GetOrderByID(int.Parse(txtOrderId.Text));
-            var orderUpdate = new WindowOrderList(orderRepository, orderCurrent);
-            orderUpdate.Closed += WindowOrderListClosed;
-            orderUpdate.Show();
+            try
+            {
+                var orderCurrent = orderRepository.GetOrderByID(int.Parse(txtOrderId.Text));
+                var orderUpdate = new WindowOrderList(orderRepository, orderCurrent);
+                orderUpdate.Closed += WindowOrderListClosed;
+                orderUpdate.Show();
+            }catch (Exception ex)
+            {
+                MessageBox.Show("Input type is incorrect, please try again!", "Error Update");
+            }
         }
         /// <summary>
         /// Implement get member
@@ -71,8 +77,7 @@ namespace SalesWPFApp
         private Order GetOrderObject()
         {
             Order ord = null;
-            try
-            {
+            
                 ord = new Order
                 {
                     OrderId = int.Parse(txtOrderId.Text),
@@ -83,11 +88,7 @@ namespace SalesWPFApp
                     Freight = decimal.Parse(txtFreight.Text)
 
                 };
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Get Order");
-            }
+            
             return ord;
         }
 
@@ -106,7 +107,7 @@ namespace SalesWPFApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Delete a order");
+                MessageBox.Show("Order does not exist", "Delete a order");
             }
         }
     }
