@@ -5,15 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesWPFApp"
         mc:Ignorable="d"
-        Title="WindowLogin" Height="232" Width="398">
+        WindowStartupLocation="CenterScreen"
+        Title="WindowLogin" Height="232" Width="398" HorizontalAlignment="Center">
     <Grid Margin="0,0,10,-16">
         <Label Content="FStore Management" HorizontalAlignment="Left" Margin="84,10,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Arial" FontWeight="Bold"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="18"/>
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="115,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="26"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="115,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="26"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="115,104,0,0" VerticalAlignment="Top" Width="218" Height="26" PasswordChar="*"/>
         <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="115,157,0,0" VerticalAlignment="Top" Height="32" Width="87" FontSize="18" Click="btnLogin_Click"/>
         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="246,157,0,0" VerticalAlignment="Top" Height="32" Width="87" FontSize="18" Click="btnCancel_Click"/>
 
     </Grid>
+   
 </Window>

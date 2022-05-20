@@ -36,37 +36,60 @@ namespace SalesWPFApp
                 txtEmail.Text = member.Email.ToString();
                 txtCountry.Text = member.Country.ToString();
                 txtPassword.Text = member.Password.ToString();
+
+                txtMemberId.IsReadOnly = true;
             }
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            bool IsValidate = true;
             try {
-                var NewMember = new Member
+
+                txtMemberId.Text = txtMemberId.Text.Trim();
+                txtEmail.Text = txtEmail.Text.Trim();
+                txtCompanyName.Text = txtCompanyName.Text.Trim();
+                txtCity.Text = txtCity.Text.Trim();
+                txtCountry.Text = txtCountry.Text.Trim();
+                txtPassword.Text = txtPassword.Text.Trim();
+                if (txtMemberId.Text == string.Empty || txtEmail.Text == string.Empty ||
+                   txtCompanyName.Text == string.Empty || txtCity.Text == string.Empty ||
+                   txtCountry.Text == string.Empty || txtPassword.Text == string.Empty)
                 {
-                    MemberId = int.Parse(txtMemberId.Text),
-                    Email = txtEmail.Text,
-                    CompanyName = txtCompanyName.Text,
-                    City = txtCity.Text,
-                    Country = txtCountry.Text,
-                    Password = txtPassword.Text
-                };
-                if(IsCreateMember)
-                {
-                    memberRepositoryDetail.AddMem(NewMember);
+                    IsValidate = false;
+                    MessageBox.Show("The fields can not be empty!", "ERROR");
                 }
-                else
+
+                if (IsValidate)
                 {
-                    memberRepositoryDetail.UpdateMem(NewMember);
+                    var NewMember = new Member
+                    {
+                        MemberId = int.Parse(txtMemberId.Text),
+                        Email = txtEmail.Text,
+                        CompanyName = txtCompanyName.Text,
+                        City = txtCity.Text,
+                        Country = txtCountry.Text,
+                        Password = txtPassword.Text
+                    };
+                    if (IsCreateMember)
+                    {
+                        memberRepositoryDetail.AddMem(NewMember);
+                        MessageBox.Show("Create succesfully", "CREATE");
+                    }
+                    else
+                    {
+                        memberRepositoryDetail.UpdateMem(NewMember);
+                        MessageBox.Show("Update succesfully", "UPDATE");
+                    }
+                    this.Close();
                 }
-                this.Close();
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Create/Update Information");
             }
         }
 
-        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

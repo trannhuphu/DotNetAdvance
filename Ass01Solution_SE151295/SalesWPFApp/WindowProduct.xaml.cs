@@ -19,6 +19,7 @@ namespace SalesWPFApp
     /// <summary>
     /// Interaction logic for WindowProduct.xaml
     /// </summary>
+    
     public partial class WindowProduct : UserControl
     {
         public IProductRepository productRepository { set; get; }
@@ -32,6 +33,7 @@ namespace SalesWPFApp
         {
             dgvProduct.SelectedIndex = 0;
             dgvProduct.ItemsSource = productRepository.GetProducts();
+           
         }
 
         public void WindowProductDetailsClosed(object sender, EventArgs e)
@@ -94,6 +96,40 @@ namespace SalesWPFApp
             {
                 MessageBox.Show("Product is not exist!", "Delete a product");
             }
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            bool IsSearch = true;
+            var proList = productRepository.SearchProduct(txtSearchById.Text, txtSearchByName.Text,
+                                                            txtSearchByPrice.Text, txtSearchByUnitsInStock.Text);
+            if (proList != null)
+            {
+                if (proList.Count > 0)
+                {
+                    dgvProduct.ItemsSource = proList;
+                }
+                else
+                {
+                    IsSearch = false;
+                }
+            }
+            else
+            {
+                IsSearch = false;
+            }
+
+            if (IsSearch == false)
+            {
+
+                MessageBox.Show("Product is not exist!", "Search");
+            }
+
+        }
+
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            LoadProductList();
         }
 
         

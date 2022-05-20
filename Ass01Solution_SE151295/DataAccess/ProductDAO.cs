@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    class ProductDAO
+    public class ProductDAO
     {
         private static ProductDAO instance = null;
         private static readonly object instanceLock = new object();
@@ -115,6 +115,78 @@ namespace DataAccess
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public List<Product> Search(string productDataId, string productName, string price, string unitStock)
+        {
+            int productID, stock;
+            decimal unitPrice;
+            List<Product> tmpObject = null;
+            List<Product> result = null;
+            if (productDataId != string.Empty)
+            {
+                if (int.TryParse(productDataId, out productID))
+                {
+                    tmpObject = GetProductList().Where(tmp => tmp.ProductId == productID).ToList();
+                    result = tmpObject;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            if (productName != string.Empty)
+            {
+                if (result != null)
+                {
+                    result = result.Where(tmp => tmp.ProductName.Contains(productName)).ToList();
+                }
+                else
+                {
+                    result = GetProductList().Where(tmp => tmp.ProductName.Contains(productName)).ToList();
+                }
+            }
+
+            if (price != string.Empty)
+            {
+                if (decimal.TryParse(price, out unitPrice))
+                {
+                    if (result != null)
+                    {
+                        result = result.Where(tmp => tmp.UnitPrice == unitPrice).ToList();
+                    }
+                    else
+                    {
+                        result = GetProductList().Where(tmp => tmp.UnitPrice.Equals(unitPrice)).ToList();
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            if (unitStock != string.Empty)
+            {
+                if (int.TryParse(unitStock, out stock))
+                {
+                    if (result != null)
+                    {
+                        result = result.Where(tmp => tmp.UnitsInStock == stock).ToList();
+                    }
+                    else
+                    {
+                        result = GetProductList().Where(tmp => tmp.UnitsInStock.Equals(stock)).ToList();
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            return result;
         }
     }
 }

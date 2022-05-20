@@ -14,5 +14,8 @@ namespace DataAccess
         void AddPro(Product product);
         void Delete(Product product);
         void UpdatePro(Product product);
+
+        List<Product> SearchProduct(string productDataId, string productName, string price, string unitStock);
     }
 }
+

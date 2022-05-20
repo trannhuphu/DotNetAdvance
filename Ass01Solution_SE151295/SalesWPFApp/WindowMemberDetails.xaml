@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="WindowMemberDetails" Height="448" Width="438">
     <Grid Margin="0,0,10,12">
-        <Label Content="Update Information" HorizontalAlignment="Left" Margin="92,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+        <Label Content="Member Information" HorizontalAlignment="Left" Margin="92,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
         <Label Content="MemberId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="34,113,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="34,158,0,0" VerticalAlignment="Top" FontSize="15"/>
@@ -21,6 +21,6 @@
         <TextBox x:Name="txtCompanyName" HorizontalAlignment="Left" Margin="172,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
         <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="172,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
         <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="119,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnSave_Click"/>
-        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="280,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnLogout_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="280,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnCancel_Click"/>
     </Grid>
 </Window>

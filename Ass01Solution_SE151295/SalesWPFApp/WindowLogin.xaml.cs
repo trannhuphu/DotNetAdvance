@@ -37,7 +37,7 @@ namespace SalesWPFApp
             int role = 0;
             try {
                 Member memberTemp = new Member();
-                role = wndMemberRepositoryLogin.Login(txtEmail.Text, txtPassword.Text, ref memberTemp);
+                role = wndMemberRepositoryLogin.Login(txtEmail.Text, txtPassword.Password, ref memberTemp);
 
                 if(role == 1)
                 {

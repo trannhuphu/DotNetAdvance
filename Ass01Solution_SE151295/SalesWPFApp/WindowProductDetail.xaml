@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesWPFApp"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="WindowProductDetail" Height="442" Width="431">
     <Grid Margin="0,0,0,-16">
-        <Label Content="Update Information" HorizontalAlignment="Left" Margin="96,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+        <Label Content="Product Information" HorizontalAlignment="Left" Margin="96,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
         <Label Content="ProductId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="ProductName" HorizontalAlignment="Left" Margin="34,113,0,0" VerticalAlignment="Top" FontSize="15"/>
         <Label Content="Weight" HorizontalAlignment="Left" Margin="34,158,0,0" VerticalAlignment="Top" FontSize="15"/>

@@ -14,5 +14,8 @@ namespace DataAccess
         public void AddPro(Product product) => ProductDAO.Instance.AddProduct(product);
         public void Delete(Product product) => ProductDAO.Instance.RemoveProduct(product);
         public void UpdatePro(Product product) => ProductDAO.Instance.UpdateProduct(product);
+
+        public List<Product> SearchProduct(string productDataId, string productName, string price, string unitStock)
+         => ProductDAO.Instance.Search(productDataId, productName, price, unitStock);
     }
 }

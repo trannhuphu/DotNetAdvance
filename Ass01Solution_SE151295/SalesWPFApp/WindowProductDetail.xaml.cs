@@ -23,8 +23,7 @@ namespace SalesWPFApp
     {
         public IProductRepository productRepositoryDetail { set; get; }
         public bool IsCreateProduct = false;
-
-      
+        public bool IsUpdateFlow { set; get; }
         public WindowProductDetail(IProductRepository productRepos, Product product, bool IsCreatePro = false)
         {
             InitializeComponent();
@@ -39,31 +38,56 @@ namespace SalesWPFApp
                 txtUnitsInStock.Text = product.UnitsInStock.ToString();
                 txtWeight.Text = product.Weight.ToString();
                 txtCategoryId.Text = product.CategoryId.ToString();
+
+                txtProductId.IsReadOnly = true;
             }
         }
         
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            bool IsValidated = true;
             try
             {
-                var productNew = new Product
+                txtProductId.Text = txtProductId.Text.Trim();
+                txtProductName.Text = txtProductName.Text.Trim();
+                txtUnitPrice.Text = txtUnitPrice.Text.Trim();
+                txtUnitsInStock.Text = txtUnitsInStock.Text.Trim();
+                txtWeight.Text = txtWeight.Text.Trim();
+                txtCategoryId.Text = txtCategoryId.Text.Trim();
+
+                if (txtProductId.Text == string.Empty || txtProductName.Text == string.Empty ||
+                  txtUnitPrice.Text == string.Empty || txtUnitsInStock.Text == string.Empty ||
+                  txtWeight.Text == string.Empty || txtCategoryId.Text == string.Empty)
                 {
-                    ProductId = int.Parse(txtProductId.Text),
-                    ProductName = txtProductName.Text,
-                    UnitPrice = decimal.Parse(txtUnitPrice.Text),
-                    UnitsInStock = int.Parse(txtUnitsInStock.Text),
-                    Weight = txtWeight.Text,
-                    CategoryId = int.Parse(txtCategoryId.Text)
-                };
-                if (IsCreateProduct)
-                {
-                    productRepositoryDetail.AddPro(productNew);
+                    IsValidated = false;
+                    MessageBox.Show("The fields can not be empty!", "ERROR");
                 }
-                else
+
+                if (IsValidated)
                 {
-                    productRepositoryDetail.UpdatePro(productNew);
+                    var productNew = new Product
+                    {
+                        ProductId = int.Parse(txtProductId.Text),
+                        ProductName = txtProductName.Text,
+                        UnitPrice = decimal.Parse(txtUnitPrice.Text),
+                        UnitsInStock = int.Parse(txtUnitsInStock.Text),
+                        Weight = txtWeight.Text,
+                        CategoryId = int.Parse(txtCategoryId.Text)
+                    };
+
+                    if (IsCreateProduct)
+                    {
+                        productRepositoryDetail.AddPro(productNew);
+                        MessageBox.Show("Create succesfully", "CREATE");
+                    }
+                    else
+                    {
+                        productRepositoryDetail.UpdatePro(productNew);
+                        MessageBox.Show("Update succesfully", "UPDATE");
+                    }
+                    this.Close();
                 }
-                this.Close();
+                
             }
             catch (Exception ex)
             {

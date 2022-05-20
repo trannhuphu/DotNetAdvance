@@ -22,18 +22,19 @@
             Text="{Binding SelectedItem.CompanyName, ElementName=dgvMember}"/>
         <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="551,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
             Text="{Binding SelectedItem.Country, ElementName=dgvMember}"/>
-        <DataGrid x:Name="dgvMember" AutoGenerateColumns="False" Margin="0,217,178,0">
+        <DataGrid x:Name="dgvMember" AutoGenerateColumns="False" Margin="0,217,178,0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding MemberId}" Header="Member Id" />
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
                 <DataGridTextColumn Binding="{Binding CompanyName}" Header="Company Name" />
                 <DataGridTextColumn Binding="{Binding City}" Header="City" />
                 <DataGridTextColumn Binding="{Binding Country}" Header="Country"/>
+
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnRead" Content="Read" HorizontalAlignment="Left" Margin="663,178,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="663,241,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnCreate_Click" />
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="663,306,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,371,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnDelete_Click"/>
+        <Button x:Name="btnRead" Content="Read" HorizontalAlignment="Left" Margin="614,0,0,0" VerticalAlignment="Center" Height="38" Width="98" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="614,246,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnCreate_Click" />
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="614,314,0,0" VerticalAlignment="Top" Height="38" Width="98" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="614,371,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnDelete_Click"/>
     </Grid>
 </UserControl>
