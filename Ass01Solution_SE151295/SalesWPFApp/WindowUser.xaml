@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="SalesWPFApp.WindowUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalesWPFApp"
+        mc:Ignorable="d">
+    <Grid Margin="0,0,10,12">
+        <Label Content="Member Information" HorizontalAlignment="Left" Margin="92,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+        <Label Content="MemberId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="34,113,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="34,158,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Company Name" HorizontalAlignment="Left" Margin="34,261,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="34,210,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="38,302,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox x:Name="txtMemberId" HorizontalAlignment="Left" Margin="172,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="172,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="172,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="172,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtCompanyName" HorizontalAlignment="Left" Margin="172,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="172,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="119,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnSave_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="280,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnCancel_Click"/>
+    </Grid>
+</UserControl>

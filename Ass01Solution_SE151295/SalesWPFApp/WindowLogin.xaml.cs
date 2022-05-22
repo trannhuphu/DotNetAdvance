@@ -38,18 +38,8 @@ namespace SalesWPFApp
             try {
                 Member memberTemp = new Member();
                 role = wndMemberRepositoryLogin.Login(txtEmail.Text, txtPassword.Password, ref memberTemp);
-
-                if(role == 1)
-                {
-                    var wndMain = new MainWindow( role, memberTemp, wndMemberRepositoryLogin, wndProductRepositoryLogin, wndOrderRepository);
-                    wndMain.Show();
-                }
-                else 
-                {
-                    var wndMember = new WindowMemberDetails(wndMemberRepositoryLogin,memberTemp);
-                    wndMember.Closed += WindowMemberDetailsClosed;
-                    wndMember.Show();
-                }
+                var wndMain = new MainWindow( role, memberTemp, wndMemberRepositoryLogin, wndProductRepositoryLogin, wndOrderRepository);
+                wndMain.Show();
                 this.Hide();
             } catch (Exception ex)
             {

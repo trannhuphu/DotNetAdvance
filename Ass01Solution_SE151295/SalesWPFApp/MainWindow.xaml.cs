@@ -26,19 +26,20 @@ namespace SalesWPFApp
         IProductRepository productRepos=null, IOrderRepository orderRepos=null)
         {
             InitializeComponent();
+            bool IsAdminLogin = false;
 
             if(role == 1)
             {
                tabMember.Content = new WindowMembers(memberRepos);
-               tabProduct.Content = new WindowProduct(productRepos);
-               tabOrder.Content = new WindowOrder(orderRepos);
+               IsAdminLogin = true;
             }
             else 
             {
-                //var wndMemDetail = new WindowMemberDetails(mainRepos,mem);
-                //wndMemDetail.Closed += WindowMemberDetailsClosed;
-                //wndMemDetail.Show();
+                tabMember.Content = new WindowUser(memberRepos,mem);
             }
+
+            tabOrder.Content = new WindowOrder(orderRepos, IsAdminLogin, mem);
+            tabProduct.Content = new WindowProduct(productRepos, IsAdminLogin);
         }
     }
 }

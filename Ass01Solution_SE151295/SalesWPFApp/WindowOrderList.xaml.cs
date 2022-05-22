@@ -24,7 +24,7 @@ namespace SalesWPFApp
         public IOrderRepository orderRepositoryDetail { set; get; }
         public bool IsCreateOrder = false;
 
-        public WindowOrderList(IOrderRepository orderRepos, Order order, bool IsCreateOrd = false)
+        public WindowOrderList(IOrderRepository orderRepos, Order order, Member mem=null,bool IsCreateOrd = false, bool IsAdmin = false)
         {
             InitializeComponent();
             orderRepositoryDetail = orderRepos;
@@ -38,6 +38,15 @@ namespace SalesWPFApp
                 datetimeRequiredDate.Text = order.RequiredDate.ToString();
                 datetimeShippedDate.Text = order.ShippedDate.ToString();
                 txtFreight.Text = order.Freight.ToString();
+                txtMemberId.IsReadOnly = (IsAdmin == false) ? true : false;
+            }
+            else
+            {
+                if(mem != null)
+                {
+                    txtMemberId.Text = mem.MemberId.ToString();
+                    txtMemberId.IsReadOnly = true;
+                }
             }
         }
 
@@ -49,9 +58,9 @@ namespace SalesWPFApp
                 {
                     OrderId = int.Parse(txtOrderId.Text),
                     MemberId = int.Parse(txtMemberId.Text),
-                  //OrderDate = datetimeOrderDate.Value,
-                  //RequiredDate = datetimeRequiredDate.Value,
-                  //ShippedDate = datetimeShippedDate.Value,
+                    OrderDate = datetimeOrderDate.SelectedDate.Value,
+                    RequiredDate = datetimeRequiredDate.SelectedDate.Value,
+                    ShippedDate = datetimeShippedDate.SelectedDate.Value,
                     Freight = decimal.Parse(txtFreight.Text)
                 };
                 if (IsCreateOrder)
@@ -62,6 +71,7 @@ namespace SalesWPFApp
                 {
                     orderRepositoryDetail.UpdateOrd(orderNew);
                 }
+                this.Close();
             }
             catch (Exception ex)
             {

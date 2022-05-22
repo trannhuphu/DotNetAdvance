@@ -27,7 +27,7 @@
                  Text="{Binding SelectedItem.UnitPrice, ElementName=dgvProduct}" />
         <TextBox x:Name="txtUnitsInStock" HorizontalAlignment="Left" Margin="526,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
                  Text="{Binding SelectedItem.UnitsInStock, ElementName=dgvProduct}" />
-        <DataGrid x:Name="dgvProduct" AutoGenerateColumns="False" Margin="0,336,148,44" IsReadOnly="True">
+        <DataGrid x:Name="dgvProduct" AutoGenerateColumns="False" Margin="0,336,148,44" IsReadOnly="True" ColumnWidth="*">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ProductId}" Header="Product Id" />
                 <DataGridTextColumn Binding="{Binding CategoryId}" Header="Category Id" />

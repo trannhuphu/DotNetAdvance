@@ -137,7 +137,7 @@ namespace DataAccess
             string userAdmin = config["Account:email"];
             string userPassword = config["Account:password"];
 
-            if (strEmail == userAdmin)
+            if (strEmail == userAdmin && strPassword == userPassword)
             {
                 return 1; //role admin
             }

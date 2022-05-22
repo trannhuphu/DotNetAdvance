@@ -43,6 +43,21 @@ namespace DataAccess
             return ord;
         }
 
+        public IEnumerable<Order> GetOrderListByMemID(int memberId)
+        {
+            List<Order> ord;
+            try
+            {
+                var myOrderDB = new FStoreDBContext();
+                ord = myOrderDB.Orders.Where(tmp => tmp.MemberId == memberId).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return ord;
+        }
+
         public Order GetOrderByID(int ordID)
         {
             Order ord  = null;

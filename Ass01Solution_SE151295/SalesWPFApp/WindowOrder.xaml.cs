@@ -23,19 +23,37 @@ namespace SalesWPFApp
     public partial class WindowOrder : UserControl
     {
         public IOrderRepository orderRepository { set; get; }
-        public WindowOrder(IOrderRepository ord)
+
+        public bool IsAdminLoginGlobal = false;
+
+        public Member memGlobal = null;
+
+        public WindowOrder(IOrderRepository ord, bool IsAdminLogin=false, Member mem=null)
         {
             InitializeComponent();
+            IsAdminLoginGlobal = IsAdminLogin;
+            memGlobal = mem;
             orderRepository = ord;
             LoadOrderList();
         }
+
         /// <summary>
         /// Load order
         /// </summary>
         public void LoadOrderList()
         {
             dgvOrder.SelectedIndex = 0;
-            dgvOrder.ItemsSource = orderRepository.GetOrders();
+            if(IsAdminLoginGlobal)
+            {
+                dgvOrder.ItemsSource = orderRepository.GetOrders();
+            }
+            else
+            {
+                if(memGlobal != null)
+                {
+                    dgvOrder.ItemsSource = orderRepository.GetOrderListByMemID(memGlobal.MemberId);
+                }
+            }
         }
 
         /// <summary>
@@ -43,7 +61,7 @@ namespace SalesWPFApp
         /// </summary>
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            var orderCreate = new WindowOrderList(orderRepository, null, true);
+            var orderCreate = new WindowOrderList(orderRepository, null, memGlobal, true, IsAdminLoginGlobal);
             orderCreate.Closed += WindowOrderListClosed;
             orderCreate.Show();
         }
@@ -63,7 +81,7 @@ namespace SalesWPFApp
             try
             {
                 var orderCurrent = orderRepository.GetOrderByID(int.Parse(txtOrderId.Text));
-                var orderUpdate = new WindowOrderList(orderRepository, orderCurrent);
+                var orderUpdate = new WindowOrderList(orderRepository, orderCurrent,memGlobal,false,IsAdminLoginGlobal);
                 orderUpdate.Closed += WindowOrderListClosed;
                 orderUpdate.Show();
             }catch (Exception ex)
@@ -82,9 +100,9 @@ namespace SalesWPFApp
                 {
                     OrderId = int.Parse(txtOrderId.Text),
                     MemberId = int.Parse(txtMemberId.Text),
-                  //  OrderDate = datetimeOrderDate.Value,
-                  //  RequiredDate = datetimeRequiredDate.Value,
-                  //  ShippedDate = datetimeShippedDate.Value,
+                    OrderDate = datetimeOrderDate.SelectedDate.Value,
+                    RequiredDate = datetimeRequiredDate.SelectedDate.Value,
+                    ShippedDate = datetimeShippedDate.SelectedDate.Value,
                     Freight = decimal.Parse(txtFreight.Text)
 
                 };

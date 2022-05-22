@@ -27,7 +27,16 @@
         <DatePicker x:Name="datetimeShippedDate" HorizontalAlignment="Left" Margin="551,170,0,0" VerticalAlignment="Top" Height="21" Width="210"
              Text="{Binding SelectedItem.ShippedDate, ElementName=dgvOrder}" />
        
-        <DataGrid x:Name="dgvOrder" Margin="0,217,178,0"/>
+        <DataGrid x:Name="dgvOrder" AutoGenerateColumns="False" Margin="0,217,178,0" IsReadOnly="True" ColumnWidth="*">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding OrderId}" Header="Order Id"/>
+                <DataGridTextColumn Binding="{Binding MemberId}" Header="Member Id"/>
+                <DataGridTextColumn Binding="{Binding OrderDate}" Header="Order Date"/>
+                <DataGridTextColumn Binding="{Binding RequiredDate}" Header="Required Date"/>
+                <DataGridTextColumn Binding="{Binding ShippedDate}" Header="Shipped Date"/>
+                <DataGridTextColumn Binding="{Binding Freight}" Header="Freight"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button x:Name="btnRead" Content="Read" HorizontalAlignment="Left" Margin="663,0,0,0" VerticalAlignment="Center" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
         <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="663,313,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnCreate_Click"/>
         <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="663,388,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click"/>

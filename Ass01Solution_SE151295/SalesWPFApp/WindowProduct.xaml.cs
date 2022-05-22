@@ -23,12 +23,31 @@ namespace SalesWPFApp
     public partial class WindowProduct : UserControl
     {
         public IProductRepository productRepository { set; get; }
-        public WindowProduct(IProductRepository pro)
+
+        public WindowProduct(IProductRepository pro, bool IsAdminLogin=false)
         {
             InitializeComponent();
+            verifyPermission(IsAdminLogin);
             productRepository = pro;
             LoadProductList();
         }
+
+        public void verifyPermission(bool IsAdminLogin)
+        {
+            if(IsAdminLogin)
+            {
+                btnCreate.IsEnabled = true;
+                btnDelete.IsEnabled = true;
+                btnUpdate.IsEnabled = true;
+            }
+            else
+            {
+                btnCreate.IsEnabled = false;
+                btnDelete.IsEnabled = false;
+                btnUpdate.IsEnabled = false;
+            }
+        }
+
         public void LoadProductList()
         {
             dgvProduct.SelectedIndex = 0;
@@ -131,7 +150,5 @@ namespace SalesWPFApp
         {
             LoadProductList();
         }
-
-        
     }
 }
