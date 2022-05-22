@@ -132,5 +132,32 @@ namespace SalesWPFApp
                 MessageBox.Show("Order does not exist", "Delete a order");
             }
         }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            OnWndOrderClosed();
+        }
+
+        public delegate void CloseWindowOrder();
+        public event CloseWindowOrder _eventClosedOrder;
+        public event CloseWindowOrder eventClosedOrder
+        {
+            add
+            {
+                _eventClosedOrder += value;
+            }
+
+            remove
+            {
+                _eventClosedOrder -= value;
+            }
+        }
+        public void OnWndOrderClosed()
+        {
+            if (_eventClosedOrder != null)
+            {
+                _eventClosedOrder();
+            }
+        }
     }
 }

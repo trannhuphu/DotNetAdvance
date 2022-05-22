@@ -26,7 +26,7 @@
              Text="{Binding SelectedItem.RequiredDate, ElementName=dgvOrder}" />
         <DatePicker x:Name="datetimeShippedDate" HorizontalAlignment="Left" Margin="551,170,0,0" VerticalAlignment="Top" Height="21" Width="210"
              Text="{Binding SelectedItem.ShippedDate, ElementName=dgvOrder}" />
-       
+
         <DataGrid x:Name="dgvOrder" AutoGenerateColumns="False" Margin="0,217,178,0" IsReadOnly="True" ColumnWidth="*">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding OrderId}" Header="Order Id"/>
@@ -37,9 +37,9 @@
                 <DataGridTextColumn Binding="{Binding Freight}" Header="Freight"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnRead" Content="Read" HorizontalAlignment="Left" Margin="663,0,0,0" VerticalAlignment="Center" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="663,313,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnCreate_Click"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="663,388,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,460,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnDelete_Click"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="629,217,0,0" VerticalAlignment="Top" Height="38" Width="98" FontSize="16" FontWeight="Bold" Click="btnCreate_Click"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="629,282,0,0" VerticalAlignment="Top" Height="38" Width="98" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="629,346,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnDelete_Click"/>
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="629,414,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnLogout_Click"/>
     </Grid>
 </UserControl>

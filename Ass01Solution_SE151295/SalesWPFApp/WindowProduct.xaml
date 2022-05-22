@@ -4,30 +4,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesWPFApp"
-        mc:Ignorable="d">
-    <Grid Height="633" Width="771">
-        <Label Content="Product Management" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Arial" FontWeight="Bold"/>
-        <Label Content="ProductId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="ProductName" HorizontalAlignment="Left" Margin="34,113,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="Weight" HorizontalAlignment="Left" Margin="39,167,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="CategoryId" HorizontalAlignment="Left" Margin="400,66,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="UnitPrice" HorizontalAlignment="Left" Margin="407,113,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="UnitsInStock" HorizontalAlignment="Left" Margin="400,166,0,0" VerticalAlignment="Top" FontSize="15"/>
+        mc:Ignorable="d" Height="611" Width="801">
+    <Grid Margin="15,0,0,-52" Height="665" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="776">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="673*"/>
+            <ColumnDefinition Width="103*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Product Management" HorizontalAlignment="Left" Margin="271,10,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Arial" FontWeight="Bold"/>
+        <Label Content="ProductId" HorizontalAlignment="Left" Margin="34,45,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="ProductName" HorizontalAlignment="Left" Margin="34,85,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Weight" HorizontalAlignment="Left" Margin="39,122,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="CategoryId" HorizontalAlignment="Left" Margin="400,45,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="UnitPrice" HorizontalAlignment="Left" Margin="407,85,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="UnitsInStock" HorizontalAlignment="Left" Margin="400,121,0,0" VerticalAlignment="Top" FontSize="15"/>
 
 
-        <TextBox x:Name="txtProductId" HorizontalAlignment="Left" Margin="131,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-                 Text="{Binding SelectedItem.ProductId, ElementName=dgvProduct}" />
-        <TextBox x:Name="txtProductName" HorizontalAlignment="Left" Margin="131,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-                 Text="{Binding SelectedItem.ProductName, ElementName=dgvProduct}" />
-        <TextBox x:Name="txtWeight" HorizontalAlignment="Left" Margin="131,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-                 Text="{Binding SelectedItem.Weight, ElementName=dgvProduct}" />
-        <TextBox x:Name="txtCategoryId" HorizontalAlignment="Left" Margin="526,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-                 Text="{Binding SelectedItem.CategoryId, ElementName=dgvProduct}" />
-        <TextBox x:Name="txtUnitPrice" HorizontalAlignment="Left" Margin="526,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-                 Text="{Binding SelectedItem.UnitPrice, ElementName=dgvProduct}" />
-        <TextBox x:Name="txtUnitsInStock" HorizontalAlignment="Left" Margin="526,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-                 Text="{Binding SelectedItem.UnitsInStock, ElementName=dgvProduct}" />
-        <DataGrid x:Name="dgvProduct" AutoGenerateColumns="False" Margin="0,336,148,158" IsReadOnly="True" ColumnWidth="*">
+        <TextBox x:Name="txtProductId" HorizontalAlignment="Left" Margin="131,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+                 Text="{Binding SelectedItem.ProductId, ElementName=dgvProduct}" IsReadOnly="True"/>
+        <TextBox x:Name="txtProductName" HorizontalAlignment="Left" Margin="131,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+                 Text="{Binding SelectedItem.ProductName, ElementName=dgvProduct}" IsReadOnly="True"/>
+        <TextBox x:Name="txtWeight" HorizontalAlignment="Left" Margin="131,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+                 Text="{Binding SelectedItem.Weight, ElementName=dgvProduct}" IsReadOnly="True"/>
+        <TextBox x:Name="txtCategoryId" HorizontalAlignment="Left" Margin="526,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+                 Text="{Binding SelectedItem.CategoryId, ElementName=dgvProduct}" Grid.ColumnSpan="2" IsReadOnly="True"/>
+        <TextBox x:Name="txtUnitPrice" HorizontalAlignment="Left" Margin="526,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+                 Text="{Binding SelectedItem.UnitPrice, ElementName=dgvProduct}" Grid.ColumnSpan="2" IsReadOnly="True"/>
+        <TextBox x:Name="txtUnitsInStock" HorizontalAlignment="Left" Margin="526,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+                 Text="{Binding SelectedItem.UnitsInStock, ElementName=dgvProduct}" Grid.ColumnSpan="2" IsReadOnly="True"/>
+        <DataGrid x:Name="dgvProduct" AutoGenerateColumns="False" Margin="10,303,42,133" IsReadOnly="True" ColumnWidth="*">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ProductId}" Header="Product Id" />
                 <DataGridTextColumn Binding="{Binding CategoryId}" Header="Category Id" />
@@ -39,25 +43,25 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="668,347,0,0" VerticalAlignment="Top" Height="26" Width="86" FontSize="16" FontWeight="Bold" Click="btnCreate_Click"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="670,395,0,0" VerticalAlignment="Top" Height="30" Width="86" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="668,447,0,0" VerticalAlignment="Top" Height="28" Width="88" FontSize="16" FontWeight="Bold" Click="btnDelete_Click"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="652,302,0,0" VerticalAlignment="Top" Height="36" Width="86" FontSize="16" FontWeight="Bold" Click="btnCreate_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="652,352,0,0" VerticalAlignment="Top" Height="35" Width="86" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click" RenderTransformOrigin="-0.058,-0.567" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="650,402,0,0" VerticalAlignment="Top" Height="35" Width="88" FontSize="16" FontWeight="Bold" Click="btnDelete_Click" Grid.ColumnSpan="2"/>
 
 
-        <GroupBox Header="SEARCH" Margin="34,223,86,315" FontWeight="Bold" FontSize="16"/>
+        <GroupBox Header="SEARCH" Margin="10,158,7,380" FontWeight="Bold" FontSize="16"/>
 
-        <Label Content="By Id" HorizontalAlignment="Left" Margin="50,258,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="By Name" HorizontalAlignment="Left" Margin="50,301,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="By Unit Price" HorizontalAlignment="Left" Margin="337,258,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="By UnitsInStock" HorizontalAlignment="Left" Margin="337,301,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="By Id" HorizontalAlignment="Left" Margin="26,195,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="By Name" HorizontalAlignment="Left" Margin="26,238,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="By Unit Price" HorizontalAlignment="Left" Margin="313,195,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="By UnitsInStock" HorizontalAlignment="Left" Margin="313,238,0,0" VerticalAlignment="Top" FontSize="15"/>
 
-        <TextBox x:Name="txtSearchById" HorizontalAlignment="Left" Margin="122,263,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <TextBox x:Name="txtSearchByName" HorizontalAlignment="Left" Margin="120,306,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <TextBox x:Name="txtSearchByPrice" HorizontalAlignment="Left" Margin="475,263,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <TextBox x:Name="txtSearchByUnitsInStock" HorizontalAlignment="Left" Margin="475,306,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
-        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="711,278,0,0" VerticalAlignment="Top" Height="30" Width="68" FontWeight="Bold" FontSize="16" Click="btnSearch_Click"/>
-        <Button x:Name="btnLoad" Content="Load" HorizontalAlignment="Left" Margin="668,493,0,0" VerticalAlignment="Top" Height="31" Width="88" FontWeight="Bold" FontSize="18" Click="btnLoad_Click"/>
-        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="298,493,0,0" VerticalAlignment="Top" Height="31" Width="88" FontWeight="Bold" FontSize="18"/>
+        <TextBox x:Name="txtSearchById" HorizontalAlignment="Left" Margin="98,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtSearchByName" HorizontalAlignment="Left" Margin="96,243,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtSearchByPrice" HorizontalAlignment="Left" Margin="451,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <TextBox x:Name="txtSearchByUnitsInStock" HorizontalAlignment="Left" Margin="451,243,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
+        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Center" Margin="0,202,0,0" VerticalAlignment="Top" Height="42" Width="82" FontWeight="Bold" FontSize="16" Click="btnSearch_Click" Grid.Column="1"/>
+        <Button x:Name="btnLoad" Content="Load" HorizontalAlignment="Left" Margin="650,452,0,0" VerticalAlignment="Top" Height="33" Width="88" FontWeight="Bold" FontSize="18" Click="btnLoad_Click" Grid.ColumnSpan="2" RenderTransformOrigin="0.545,1.839"/>
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="650,499,0,0" Width="88" FontWeight="Bold" FontSize="18" Click="btnLogout_Click" RenderTransformOrigin="0.466,-1.29" Height="33" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 
     </Grid>
 </UserControl>

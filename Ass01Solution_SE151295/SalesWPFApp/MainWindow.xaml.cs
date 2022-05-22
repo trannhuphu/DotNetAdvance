@@ -30,16 +30,31 @@ namespace SalesWPFApp
 
             if(role == 1)
             {
-               tabMember.Content = new WindowMembers(memberRepos);
+               WindowMembers wndMem =  new WindowMembers(memberRepos);
+               wndMem.eventClosedMem += CloseWindowMain;
+               tabMember.Content = wndMem;
                IsAdminLogin = true;
             }
             else 
             {
-                tabMember.Content = new WindowUser(memberRepos,mem);
+                WindowUser wndUser = new WindowUser(memberRepos, mem);
+                wndUser.eventClosedUser += CloseWindowMain;
+                tabMember.Content = wndUser;
             }
 
-            tabOrder.Content = new WindowOrder(orderRepos, IsAdminLogin, mem);
-            tabProduct.Content = new WindowProduct(productRepos, IsAdminLogin);
+            WindowOrder wndOrder = new WindowOrder(orderRepos, IsAdminLogin, mem);
+            WindowProduct wndProduct = new WindowProduct(productRepos, IsAdminLogin);
+
+            wndOrder.eventClosedOrder += CloseWindowMain;
+            wndProduct.eventClosedPro += CloseWindowMain;
+
+            tabOrder.Content = wndOrder;
+            tabProduct.Content = wndProduct;
+        }
+
+        public void CloseWindowMain()
+        {
+            this.Close();
         }
     }
 }

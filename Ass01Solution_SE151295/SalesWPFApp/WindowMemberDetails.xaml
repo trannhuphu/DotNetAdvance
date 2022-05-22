@@ -21,6 +21,6 @@
         <TextBox x:Name="txtCompanyName" HorizontalAlignment="Left" Margin="172,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
         <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="172,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"/>
         <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="119,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnSave_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="280,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnCancel_Click"/>
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="280,360,0,0" VerticalAlignment="Top" Height="40" Width="102" FontSize="16" FontWeight="Bold" Click="btnLogout_Click"/>
     </Grid>
 </Window>

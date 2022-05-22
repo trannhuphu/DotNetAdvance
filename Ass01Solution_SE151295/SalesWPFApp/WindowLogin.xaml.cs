@@ -39,6 +39,7 @@ namespace SalesWPFApp
                 Member memberTemp = new Member();
                 role = wndMemberRepositoryLogin.Login(txtEmail.Text, txtPassword.Password, ref memberTemp);
                 var wndMain = new MainWindow( role, memberTemp, wndMemberRepositoryLogin, wndProductRepositoryLogin, wndOrderRepository);
+                wndMain.Closed += WindowMainClosed;
                 wndMain.Show();
                 this.Hide();
             } catch (Exception ex)
@@ -47,6 +48,10 @@ namespace SalesWPFApp
             }
         }
         private void WindowMemberDetailsClosed(Object sender, EventArgs e)
+        {
+            this.Show();
+        }
+        private void WindowMainClosed(Object sender, EventArgs e)
         {
             this.Show();
         }

@@ -90,7 +90,7 @@ namespace SalesWPFApp
             }
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

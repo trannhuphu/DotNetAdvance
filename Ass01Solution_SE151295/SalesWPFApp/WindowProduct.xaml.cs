@@ -150,5 +150,35 @@ namespace SalesWPFApp
         {
             LoadProductList();
         }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            OnWndProClosed();
+        }
+        
+        public delegate void CloseWindowProduct();
+        public event CloseWindowProduct _eventClosedPro;
+        public event CloseWindowProduct eventClosedPro
+        {
+            add
+            {
+                _eventClosedPro += value;
+            }
+
+            remove
+            {
+                _eventClosedPro -= value;
+            }
+        }    
+        public void OnWndProClosed()
+        {
+           if(_eventClosedPro != null)
+            {
+                _eventClosedPro();
+            }
+        }
+
+
+
     }
 }

@@ -6,23 +6,28 @@
         xmlns:local="clr-namespace:SalesWPFApp"
         mc:Ignorable="d">
     <Grid Height="458" Width="779">
-        <Label Content="FStore Management" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Arial" FontWeight="Bold"/>
-        <Label Content="MemberId" HorizontalAlignment="Left" Margin="34,66,0,0" VerticalAlignment="Top" FontSize="15" />
-        <Label Content="Email" HorizontalAlignment="Left" Margin="34,113,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="Company Name" HorizontalAlignment="Left" Margin="400,57,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="City" HorizontalAlignment="Left" Margin="39,167,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <Label Content="Country" HorizontalAlignment="Left" Margin="400,107,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox x:Name="txtMemberId" HorizontalAlignment="Left" Margin="131,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-            Text="{Binding SelectedItem.MemberId, ElementName=dgvMember}" />
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="131,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-            Text="{Binding SelectedItem.Email, ElementName=dgvMember}"/>
-        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="131,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-            Text="{Binding SelectedItem.City, ElementName=dgvMember}"/>
-        <TextBox x:Name="txtCompanyName" HorizontalAlignment="Left" Margin="551,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-            Text="{Binding SelectedItem.CompanyName, ElementName=dgvMember}"/>
-        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="551,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
-            Text="{Binding SelectedItem.Country, ElementName=dgvMember}"/>
-        <DataGrid x:Name="dgvMember" AutoGenerateColumns="False" Margin="0,217,178,0" IsReadOnly="True" ColumnWidth="*">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="370*"/>
+            <ColumnDefinition Width="318*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="FStore Management" HorizontalAlignment="Left" Margin="188,-15,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Arial" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <Label Content="MemberId" HorizontalAlignment="Left" Margin="34,38,0,0" VerticalAlignment="Top" FontSize="15" Grid.ColumnSpan="2" />
+        <Label Content="Email" HorizontalAlignment="Left" Margin="34,85,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Company Name" HorizontalAlignment="Left" Margin="309,29,0,0" VerticalAlignment="Top" FontSize="15" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="39,139,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="309,79,0,0" VerticalAlignment="Top" FontSize="15" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <TextBox x:Name="txtMemberId" HorizontalAlignment="Left" Margin="40,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+            Text="{Binding SelectedItem.MemberId, ElementName=dgvMember}" Grid.Column="1" IsReadOnly="True"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="40,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+            Text="{Binding SelectedItem.Email, ElementName=dgvMember}" Grid.Column="1" IsReadOnly="True"/>
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="40,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+            Text="{Binding SelectedItem.City, ElementName=dgvMember}" Grid.Column="1" IsReadOnly="True"/>
+        <TextBox x:Name="txtCompanyName" HorizontalAlignment="Left" Margin="90,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+            Text="{Binding SelectedItem.CompanyName, ElementName=dgvMember}" Grid.Column="2" IsReadOnly="True"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="90,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="20"
+            Text="{Binding SelectedItem.Country, ElementName=dgvMember}" Grid.Column="2" IsReadOnly="True"/>
+        <DataGrid x:Name="dgvMember" AutoGenerateColumns="False" Margin="0,192,175,-26" IsReadOnly="True" ColumnWidth="*" Grid.ColumnSpan="3">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding MemberId}" Header="Member Id" />
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
@@ -31,9 +36,9 @@
                 <DataGridTextColumn Binding="{Binding Country}" Header="Country"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="614,217,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnCreate_Click" />
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="614,288,0,0" VerticalAlignment="Top" Height="38" Width="98" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="614,338,0,0" VerticalAlignment="Top" Height="38" Width="98" FontSize="16" FontWeight="Bold" Click="btnDelete_Click"/>
-        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="614,409,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="175,192,0,0" VerticalAlignment="Top" Height="40" Width="98" FontSize="16" FontWeight="Bold" Click="btnCreate_Click" Grid.Column="2" />
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="175,254,0,0" VerticalAlignment="Top" Height="40" Width="98" FontSize="16" FontWeight="Bold" Click="btnUpdate_Click" Grid.Column="2"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="175,318,0,0" VerticalAlignment="Top" Height="38" Width="98" FontSize="16" FontWeight="Bold" Click="btnDelete_Click" Grid.Column="2"/>
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="175,381,0,0" VerticalAlignment="Top" Height="39" Width="98" FontSize="16" FontWeight="Bold" Click="btnLogout_Click" Grid.Column="2"/>
     </Grid>
 </UserControl>

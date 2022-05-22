@@ -111,5 +111,36 @@ namespace SalesWPFApp
                 MessageBox.Show("Member is not exist!", "Delete a member");
             }
         }
+
+        /// <summary>
+        /// Add event fot Log out
+        /// </summary>
+        public void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            OnWndMemClosed();
+        }
+        
+        public delegate void CloseWindowMem();
+        public event CloseWindowMem _eventClosedMem;
+        public event CloseWindowMem eventClosedMem
+        {
+            add
+            {
+                _eventClosedMem += value;
+            }
+
+            remove
+            {
+                _eventClosedMem -= value;
+            }
+        }    
+        public void OnWndMemClosed()
+        {
+           if(_eventClosedMem != null)
+            {
+                _eventClosedMem();
+            }
+        }
+
     }
 }
