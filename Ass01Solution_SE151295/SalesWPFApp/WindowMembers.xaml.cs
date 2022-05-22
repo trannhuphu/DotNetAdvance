@@ -42,7 +42,7 @@ namespace SalesWPFApp
         /// </summary>
         public void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            var wndMemCreate = new WindowMemberDetails(wndMemberRepository, null,true);
+            var wndMemCreate = new WindowMemberDetails(wndMemberRepository, null,true,true);
             wndMemCreate.Closed += WindowMemberDetailsClosed;
             wndMemCreate.Show();  
         }
@@ -55,7 +55,7 @@ namespace SalesWPFApp
             try
             {
                 var MemCurrent = wndMemberRepository.GetMemByID(int.Parse(txtMemberId.Text));
-                var wndMemUpdate = new WindowMemberDetails(wndMemberRepository, MemCurrent);
+                var wndMemUpdate = new WindowMemberDetails(wndMemberRepository, MemCurrent, false,true);
                 wndMemUpdate.Closed += WindowMemberDetailsClosed;
                 wndMemUpdate.Show();
             }

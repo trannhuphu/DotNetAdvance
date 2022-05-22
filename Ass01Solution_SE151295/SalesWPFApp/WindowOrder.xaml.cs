@@ -61,6 +61,10 @@ namespace SalesWPFApp
         /// </summary>
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
+            if (IsAdminLoginGlobal)
+            {
+                memGlobal = null;
+            }
             var orderCreate = new WindowOrderList(orderRepository, null, memGlobal, true, IsAdminLoginGlobal);
             orderCreate.Closed += WindowOrderListClosed;
             orderCreate.Show();

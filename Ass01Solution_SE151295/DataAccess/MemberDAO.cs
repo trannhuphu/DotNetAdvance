@@ -94,10 +94,10 @@ namespace DataAccess
                     myMemDB.Entry<Member>(mem).State = EntityState.Modified;
                     myMemDB.SaveChanges();
                 }
-                // else
-                // {
-                //     throw new Exception("The member does not already exist");
-                // }
+                 else
+                 {
+                     throw new Exception("The member does not already exist");
+                 }
             }
             catch (Exception ex)
             {

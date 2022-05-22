@@ -23,7 +23,7 @@ namespace SalesWPFApp
     {
         public IMemberRepository memberRepositoryDetail {set;get;}
         public bool IsCreateMember = false;
-        public WindowMemberDetails(IMemberRepository memberRepos, Member member, bool IsCreateMem=false)
+        public WindowMemberDetails(IMemberRepository memberRepos, Member member, bool IsCreateMem=false, bool IsAdmin = false)
         {
             InitializeComponent();
             memberRepositoryDetail = memberRepos;
@@ -39,6 +39,7 @@ namespace SalesWPFApp
 
                 txtMemberId.IsReadOnly = true;
             }
+            txtMemberId.IsReadOnly = (IsAdmin == false) ? true : false;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

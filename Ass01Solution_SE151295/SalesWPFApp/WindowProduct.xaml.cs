@@ -61,7 +61,7 @@ namespace SalesWPFApp
         }
         public void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            var productNew = new WindowProductDetail(productRepository, null, true);
+            var productNew = new WindowProductDetail(productRepository, null, true,true);
             productNew.Closed += WindowProductDetailsClosed;
             productNew.Show();
             //this.Close();
@@ -72,7 +72,7 @@ namespace SalesWPFApp
             try
             {
                 var proCurrent = productRepository.GetProByID(int.Parse(txtProductId.Text));
-                var proUpdate = new WindowProductDetail(productRepository, proCurrent);
+                var proUpdate = new WindowProductDetail(productRepository, proCurrent,false,true);
                 proUpdate.Closed += WindowProductDetailsClosed;
                 proUpdate.Show();
             }

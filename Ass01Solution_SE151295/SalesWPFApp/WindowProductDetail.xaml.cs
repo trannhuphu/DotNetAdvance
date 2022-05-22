@@ -24,7 +24,7 @@ namespace SalesWPFApp
         public IProductRepository productRepositoryDetail { set; get; }
         public bool IsCreateProduct = false;
         public bool IsUpdateFlow { set; get; }
-        public WindowProductDetail(IProductRepository productRepos, Product product, bool IsCreatePro = false)
+        public WindowProductDetail(IProductRepository productRepos, Product product, bool IsCreatePro = false, bool IsAdmin = false)
         {
             InitializeComponent();
             productRepositoryDetail = productRepos;
@@ -37,10 +37,9 @@ namespace SalesWPFApp
                 txtUnitPrice.Text = product.UnitPrice.ToString();
                 txtUnitsInStock.Text = product.UnitsInStock.ToString();
                 txtWeight.Text = product.Weight.ToString();
-                txtCategoryId.Text = product.CategoryId.ToString();
-
-                txtProductId.IsReadOnly = true;
+                txtCategoryId.Text = product.CategoryId.ToString();         
             }
+            txtProductId.IsReadOnly = (IsAdmin == false) ? true : false;
         }
         
         private void btnSave_Click(object sender, RoutedEventArgs e)

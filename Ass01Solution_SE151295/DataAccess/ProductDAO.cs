@@ -91,6 +91,10 @@ namespace DataAccess
                     myProDB.Entry<Product>(pro).State = EntityState.Modified;
                     myProDB.SaveChanges();
                 }
+                else
+                {
+                    throw new Exception("Product is not exist!");
+                }    
                
             }
             catch (Exception ex)
