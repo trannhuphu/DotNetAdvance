@@ -17,9 +17,12 @@ namespace ShoppingAssignment_SE151295.Pages.Login
             _DBcontext = DBcontext;
         }
 
+        [BindProperty (SupportsGet = true)]
+        public string MyName {set; get;}
+
         public void OnGet()
         {
-           // _context = context;
+         
         }
     }
 }
