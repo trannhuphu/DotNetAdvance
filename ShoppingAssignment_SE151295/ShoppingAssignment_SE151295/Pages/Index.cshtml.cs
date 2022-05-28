@@ -17,9 +17,9 @@ namespace ShoppingAssignment_SE151295.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            return RedirectToPage("/Login/MyLogin");
         }
     }
 }
