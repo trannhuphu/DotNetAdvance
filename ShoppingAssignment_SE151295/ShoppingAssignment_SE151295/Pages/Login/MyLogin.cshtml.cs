@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using ShoppingAssignment_SE151295.Models;
 
 namespace ShoppingAssignment_SE151295.Pages.Login
@@ -29,6 +31,17 @@ namespace ShoppingAssignment_SE151295.Pages.Login
 
         public async Task<IActionResult> OnPostAsync()
         {
+            IConfiguration config = new ConfigurationBuilder()
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json", true, true)
+                         .Build();
+            
+            string userAdmin = config["Account:email"];
+            string userPassword = config["Account:password"];
+
+            if (CusLogin.Email == userAdmin && CusLogin.Password == userPassword)
+                return RedirectToPage("/Customers/CustomerManage");
+
             Customer CusTmp = await _context.Customers.FirstOrDefaultAsync(m => m.Email == CusLogin.Email 
                 && m.Password == CusLogin.Password);
 
@@ -37,8 +50,7 @@ namespace ShoppingAssignment_SE151295.Pages.Login
                 ErrorMsg = "Email or Passowrd are incorrect";
                 return Page();
             }
-
-            return RedirectToPage("/Customers/Index");
+            return RedirectToPage("/Customers/UserManage", "User",new {id = CusTmp.CustomerId});
         }
     }
 }

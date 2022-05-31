@@ -9,11 +9,11 @@ using ShoppingAssignment_SE151295.Models;
 
 namespace ShoppingAssignment_SE151295.Pages.Customers
 {
-    public class IndexModel : PageModel
+    public class CustomerManageModel : PageModel
     {
         private readonly ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext _context;
 
-        public IndexModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context)
+        public CustomerManageModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context)
         {
             _context = context;
         }
