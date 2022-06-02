@@ -47,10 +47,10 @@ namespace ShoppingAssignment_SE151295.Pages.Login
 
             if(CusTmp == null)
             {
-                ErrorMsg = "Email or Passowrd are incorrect";
+                ErrorMsg = "Email or Password  are incorrect";
                 return Page();
             }
-            return RedirectToPage("/Customers/UserManage", "User",new {id = CusTmp.CustomerId});
+            return RedirectToPage("/Customers/UserInfo", "User",new {id = CusTmp.CustomerId});
         }
     }
 }

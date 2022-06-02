@@ -7,23 +7,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ShoppingAssignment_SE151295.Models;
 
-namespace ShoppingAssignment_SE151295.Pages.Orders
+namespace ShoppingAssignment_SE151295.Pages.Products
 {
-    public class IndexModel : PageModel
+    public class ProductManageModel : PageModel
     {
         private readonly ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext _context;
 
-        public IndexModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context)
+        public ProductManageModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context)
         {
             _context = context;
         }
 
-        public IList<Order> Order { get;set; }
+        public IList<Product> Product { get;set; }
 
         public async Task OnGetAsync()
         {
-            Order = await _context.Orders
-                .Include(o => o.Customer).ToListAsync();
+            Product = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Supplier).ToListAsync();
         }
     }
 }

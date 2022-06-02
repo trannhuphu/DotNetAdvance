@@ -10,11 +10,12 @@ using ShoppingAssignment_SE151295.Models;
 
 namespace ShoppingAssignment_SE151295.Pages.Customers
 {
-    public class UserManageModel : PageModel
+    public class UserInfoModel : CommonUser
     {
+        
         private readonly ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext _context;
 
-        public UserManageModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context)
+        public UserInfoModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context)
         {
             _context = context;
         }
@@ -30,11 +31,35 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
             }
 
             Customer = await _context.Customers.FirstOrDefaultAsync(m => m.CustomerId == id);
+            if(Customer != null)
+            {
+                UserCurrent = Customer;
+            }
+            else
+            {
+                if(UserCurrent != null)
+                {
+                    Customer = UserCurrent;
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            
+            return Page();
+        }
 
-            if (Customer == null)
+        public async Task<IActionResult> OnGetViewAsync()
+        {
+            if(UserCurrent != null)
+            {
+                Customer = UserCurrent;
+            }
+            else
             {
                 return NotFound();
-            }
+            }          
             return Page();
         }
 

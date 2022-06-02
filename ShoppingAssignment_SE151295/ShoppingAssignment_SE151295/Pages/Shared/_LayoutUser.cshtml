@@ -14,17 +14,14 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="Customers/UserManage">Member Info</a>
+                            <a class="nav-link text-dark" asp-page="/Customers/UserInfo" asp-page-handler="View">Member Info</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Admin">Product Info</a>
+                            <a class="nav-link text-dark" asp-page="/Products/UserProduct">Product Info</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Admin">Order Info</a>
+                            <a class="nav-link text-dark" asp-page="/Orders/UserOrder" >Order Info</a>
                         </li>
-                         @* <li class="nav-item">
-                              <a asp-page="/Login/MyLogin" class="btn btn-primary" style="margin-right:100px">Log out</a>
-                        </li> *@
                     </ul>
                      <a asp-page="/Login/MyLogin" class="btn btn-primary" style="margin-right:100px">Log out</a>
                 </div>

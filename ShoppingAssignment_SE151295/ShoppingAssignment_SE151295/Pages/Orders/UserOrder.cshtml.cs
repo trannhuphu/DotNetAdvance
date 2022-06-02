@@ -6,25 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ShoppingAssignment_SE151295.Models;
+using ShoppingAssignment_SE151295.Pages.Customers;
 
-namespace ShoppingAssignment_SE151295.Pages.Products
+namespace ShoppingAssignment_SE151295.Pages.Orders
 {
-    public class IndexModel : PageModel
+    public class UserOrderModel : CommonUser
     {
         private readonly ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext _context;
 
-        public IndexModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context)
+        public UserOrderModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context)
         {
             _context = context;
         }
 
-        public IList<Product> Product { get;set; }
+        public IList<Order> Order { get;set; }
 
         public async Task OnGetAsync()
         {
-            Product = await _context.Products
-                .Include(p => p.Category)
-                .Include(p => p.Supplier).ToListAsync();
+            Order = await _context.Orders
+                .Where(p=> p.CustomerId == UserCurrent.CustomerId).ToListAsync();
         }
     }
 }
