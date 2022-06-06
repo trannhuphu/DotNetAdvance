@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShoppingAssignment_SE151295.Models;
 
-namespace ShoppingAssignment_SE151295.Pages.Customers
+namespace ShoppingAssignment_SE151295.Pages.OrderDetails
 {
     public class EditModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
         }
 
         [BindProperty]
-        public Customer Customer { get; set; }
+        public OrderDetail OrderDetail { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -29,12 +29,16 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
                 return NotFound();
             }
 
-            Customer = await _context.Customers.FirstOrDefaultAsync(m => m.CustomerId == id);
+            OrderDetail = await _context.OrderDetails
+                .Include(o => o.Order)
+                .Include(o => o.Product).FirstOrDefaultAsync(m => m.OrderId == id);
 
-            if (Customer == null)
+            if (OrderDetail == null)
             {
                 return NotFound();
             }
+           ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId");
+           ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName");
             return Page();
         }
 
@@ -47,7 +51,7 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
                 return Page();
             }
 
-            _context.Attach(Customer).State = EntityState.Modified;
+            _context.Attach(OrderDetail).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +59,7 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(Customer.CustomerId))
+                if (!OrderDetailExists(OrderDetail.OrderId))
                 {
                     return NotFound();
                 }
@@ -65,12 +69,12 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
                 }
             }
 
-            return RedirectToPage("./CustomerManage");
+            return RedirectToPage("./OrderDetailManage",new {id = OrderDetail.OrderId});
         }
 
-        private bool CustomerExists(string id)
+        private bool OrderDetailExists(string id)
         {
-            return _context.Customers.Any(e => e.CustomerId == id);
+            return _context.OrderDetails.Any(e => e.OrderId == id);
         }
     }
 }

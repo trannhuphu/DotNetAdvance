@@ -23,6 +23,8 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
         [BindProperty]
         public Customer Customer { get; set; }
 
+        public bool IsUpdateSuccess { get; set; } = false;
+
         public async Task<IActionResult> OnGetUserAsync(string id)
         {
             if (id == null)
@@ -90,7 +92,9 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
                 }
             }
 
-            return RedirectToPage("./Index");
+            UserCurrent = Customer;
+            IsUpdateSuccess = true;
+            return Page();
         }
 
         private bool CustomerExists(string id)

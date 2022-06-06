@@ -15,9 +15,10 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Order.OrderId" />
             <div class="form-group">
-                <label asp-for="Order.CustomerId" class="control-label"></label>
-                <select asp-for="Order.CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
-                <span asp-validation-for="Order.CustomerId" class="text-danger"></span>
+                <label asp-for="Order.Customer.ContactName" class="control-label"></label>
+                <input type="hidden" asp-for="Order.Customer.CustomerId"/>
+                <input asp-for="Order.Customer.ContactName" class="form-control" readonly/>
+                <span asp-validation-for="Order.Customer.ContactName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Order.OrderDate" class="control-label"></label>
@@ -52,7 +53,7 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./OrderManage">Back to List</a>
 </div>
 
 @section Scripts {

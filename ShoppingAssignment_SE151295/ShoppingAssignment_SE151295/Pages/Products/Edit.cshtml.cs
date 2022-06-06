@@ -69,7 +69,7 @@ namespace ShoppingAssignment_SE151295.Pages.Products
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./ProductManage");
         }
 
         private bool ProductExists(int id)

@@ -6,11 +6,8 @@
     Layout = "~/Pages/Shared/_LayoutUser.cshtml";
 }
 
-<h1>Order Management</h1>
+<h1>Order Info</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -54,10 +51,10 @@
                 @Html.DisplayFor(modelItem => item.ShipAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer.CustomerId)
+                @Html.DisplayFor(modelItem => item.CustomerId)
             </td>
             <td>
-                <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a>
+                <a asp-page="/OrderDetails/UserOrderDetail" asp-route-id="@item.OrderId">Details</a>
             </td>
         </tr>
 }

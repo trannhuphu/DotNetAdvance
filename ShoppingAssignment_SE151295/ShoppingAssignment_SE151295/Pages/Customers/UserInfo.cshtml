@@ -42,6 +42,10 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+        @if (@Model.IsUpdateSuccess == true)
+        {
+            <p class="alert alert-success" role="alert">Your information is updated</p>
+        }
     </div>
 </div>
 

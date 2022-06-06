@@ -1,0 +1,54 @@
+@page
+@model ShoppingAssignment_SE151295.Pages.OrderDetails.UserOrderDetailModel
+
+@{
+    ViewData["Title"] = "UserOrderDetail";
+}
+
+<h1>UserOrderDetail</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetail[0].Product)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OrderDetail) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+            <td>
+@*                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-page="/Orders/UserOrder">Back to List</a>
+</div>

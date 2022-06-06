@@ -54,7 +54,7 @@ namespace ShoppingAssignment_SE151295.Pages.Products
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./ProductManage");
         }
     }
 }

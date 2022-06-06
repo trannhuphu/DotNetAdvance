@@ -52,7 +52,7 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./CustomerManage");
         }
     }
 }

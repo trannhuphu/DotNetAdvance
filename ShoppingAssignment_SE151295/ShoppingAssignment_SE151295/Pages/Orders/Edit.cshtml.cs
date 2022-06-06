@@ -51,6 +51,8 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
 
             _context.Attach(Order).State = EntityState.Modified;
 
+
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -67,7 +69,7 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./OrderManage");
         }
 
         private bool OrderExists(string id)
