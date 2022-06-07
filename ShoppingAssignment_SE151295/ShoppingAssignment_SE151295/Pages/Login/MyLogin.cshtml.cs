@@ -52,5 +52,10 @@ namespace ShoppingAssignment_SE151295.Pages.Login
             }
             return RedirectToPage("/Customers/UserInfo", "User",new {id = CusTmp.CustomerId});
         }
+
+        public async Task<IActionResult> OnPostRegisterAsync()
+        {
+            return RedirectToPage("/Customers/Register");
+        }
     }
 }
