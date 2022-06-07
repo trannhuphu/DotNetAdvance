@@ -27,6 +27,9 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
         [BindProperty]
         public Order Order { get; set; }
 
+        [BindProperty]
+        public string ErrorMessage {set;get;}
+
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
@@ -35,10 +38,21 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
                 return Page();
             }
 
-            _context.Orders.Add(Order);
-            await _context.SaveChangesAsync();
+            Order orderTmp =  _context.Orders.Where(p => p.OrderId == Order.OrderId)
+                                .SingleOrDefault();
 
-            return RedirectToPage("./Index");
+            if(orderTmp != null)
+            {
+                ErrorMessage = "This order with id = " + Order.OrderId + " has already exist!!";
+                return Page();
+            }
+            else
+            {
+                _context.Orders.Add(Order);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("./OrderManage");
         }
     }
 }

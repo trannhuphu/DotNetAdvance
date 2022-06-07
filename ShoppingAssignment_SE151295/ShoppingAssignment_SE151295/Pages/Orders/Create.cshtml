@@ -56,6 +56,10 @@
 
 <div>
     <a asp-page="OrderManage">Back to List</a>
+    @if (!string.IsNullOrEmpty(@Model.ErrorMessage))
+    {
+        <p class="alert alert-danger" role="alert">@Model.ErrorMessage</p>
+    }
 </div>
 
 @section Scripts {
