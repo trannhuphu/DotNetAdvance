@@ -55,6 +55,20 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
 
             try
             {
+                int countQuantity = OrderDetail.Quantity;
+                Product product = _context.Products.Where(p => p.ProductId == OrderDetail.ProductId).SingleOrDefault();
+
+                if (countQuantity < product.QuantityPerUnit) 
+                {
+                    product.QuantityPerUnit -= countQuantity;
+                }
+                else
+                {
+                   // ErrorMsg = product.ProductName + " is not enough to buy";
+                    return Page();
+                }
+                _context.Update(product);
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

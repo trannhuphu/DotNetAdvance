@@ -72,6 +72,18 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
             }
             else
             {
+                int countQuantity = OrderDetail.Quantity;
+                Product product = _context.Products.Where(p => p.ProductId == OrderDetail.ProductId).SingleOrDefault();
+                if (countQuantity < product.QuantityPerUnit) 
+                {
+                    product.QuantityPerUnit -= countQuantity;
+                }
+                else
+                {
+                    ErrorMsg = product.ProductName + " is not enough to buy";
+                    return Page();
+                }
+                _context.Update(product);
                 _context.OrderDetails.Add(OrderDetail);     
             }
 
