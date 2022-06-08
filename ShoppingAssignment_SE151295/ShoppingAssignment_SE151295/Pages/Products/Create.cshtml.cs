@@ -77,10 +77,8 @@ namespace ShoppingAssignment_SE151295.Pages.Products
                         FileUpload.CopyTo(fileStream);
             
                         Message = "The file was upload successfully";
-                    }
-                
+                    }            
             }
-
             return Page();
         }
     }
