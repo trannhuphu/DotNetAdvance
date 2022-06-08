@@ -14,17 +14,22 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Product.ProductId" class="control-label"></label>
+                <input asp-for="Product.ProductId" class="form-control" />
+                <span asp-validation-for="Product.ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Product.ProductName" class="control-label"></label>
                 <input asp-for="Product.ProductName" class="form-control" />
                 <span asp-validation-for="Product.ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Product.SupplierId" class="control-label"></label>
-                <select asp-for="Product.SupplierId" class ="form-control" asp-items="ViewBag.SupplierId"></select>
+                <select asp-for="Product.SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Product.CategoryId" class="control-label"></label>
-                <select asp-for="Product.CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+                <select asp-for="Product.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Product.QuantityPerUnit" class="control-label"></label>
@@ -36,10 +41,22 @@
                 <input asp-for="Product.UnitPrice" class="form-control" />
                 <span asp-validation-for="Product.UnitPrice" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Product.ProductImage" class="control-label"></label>
-                <input asp-for="Product.ProductImage" class="form-control" />
-                <span asp-validation-for="Product.ProductImage" class="text-danger"></span>
+                @*<input asp-for="Product.ProductImage" class="form-control" />
+            <span asp-validation-for="Product.ProductImage" class="text-danger"></span>*@
+                <img src="" alt="Picture Product"
+                     width="100" height="100" id="uploadFileimg"
+                     style="display:none"/>
+ 
+                <input type="file" asp-for="FileUpload" id="uploadfile" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ProductStatus" class="control-label"></label>
+                <input asp-for="Product.ProductStatus" class="form-control" />
+                <span asp-validation-for="Product.ProductStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -47,11 +64,35 @@
         </form>
     </div>
 </div>
-
+@*<form method="post" enctype="multipart/form-data">
+    <input type="file" asp-for="FileUpload" />
+    <input type="submit" asp-page-handler="Hello" />
+</form>*@
 <div>
     <a asp-page="ProductManage">Back to List</a>
 </div>
 
+<div>
+    @{if (Model.FileUpload != null)
+        {
+            <img src="~/images/@Model.FileUpload.FileName" width="500" height="333"/>
+        }
+    }
+</div>
+<script>
+    const uploadElement = document.querySelector("#uploadfile");
+    const uploadImgElement = document.querySelector("#uploadFileimg");
+
+    uploadElement?.addEventListener("change", (event) => {
+        if (Array.isArray(event.target.files)) return;
+        const file = event.target.files[0];
+        const fileUrl = URL.createObjectURL(file);
+
+        uploadImgElement.setAttribute("src", fileUrl);
+        uploadImgElement.style.display = "inline-block";
+    })
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
 }

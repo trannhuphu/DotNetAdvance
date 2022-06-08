@@ -10,14 +10,17 @@
         <form method="POST">
             <div class="form-group">
                 <label for="email" class="control-label">Email</label>
-                <input type="text" class="form-control" asp-for="CusLogin.Email" placeholder="Email"/>
+                <input type="text" class="form-control" asp-for="CusLogin.Email" placeholder="Email" />
             </div>
             <div class="form-group">
                 <label for="password" class="control-label">Password</label>
-                <input type="text" class="form-control" asp-for="CusLogin.Password" placeholder="Password"/>
+                <input type="password" class="form-control" asp-for="CusLogin.Password" placeholder="Password" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <input type="submit" asp-page-handler="Register" value="Register" class="btn btn-primary" />
             </div>
         </form>
         @if (!string.IsNullOrEmpty(@Model.ErrorMsg))
