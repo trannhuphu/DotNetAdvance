@@ -22,6 +22,12 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
         [BindProperty]
         public OrderDetail OrderDetail { get; set; }
 
+        [BindProperty]
+        public string ErrorMsg {set;get;}
+
+        [BindProperty]
+        public int oldQuanity {set;get;}
+
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
@@ -37,6 +43,7 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
             {
                 return NotFound();
             }
+            oldQuanity = OrderDetail.Quantity;
            ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId");
            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName");
             return Page();
@@ -55,20 +62,18 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
 
             try
             {
-                int countQuantity = OrderDetail.Quantity;
+                int shiftQuantity = OrderDetail.Quantity - oldQuanity;
+
                 Product product = _context.Products.Where(p => p.ProductId == OrderDetail.ProductId).SingleOrDefault();
 
-                if (countQuantity < product.QuantityPerUnit) 
+                product.QuantityPerUnit = product.QuantityPerUnit - shiftQuantity;
+                if (product.QuantityPerUnit < 0)
                 {
-                    product.QuantityPerUnit -= countQuantity;
-                }
-                else
-                {
-                   // ErrorMsg = product.ProductName + " is not enough to buy";
+                    ErrorMsg = product.ProductName + " is not enough to buy";
                     return Page();
                 }
-                _context.Update(product);
 
+                _context.Update(product);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

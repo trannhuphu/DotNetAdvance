@@ -27,6 +27,7 @@ namespace ShoppingAssignment_SE151295
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSession();
             services.AddDbContext<NorthwindCopyDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
@@ -46,11 +47,14 @@ namespace ShoppingAssignment_SE151295
             }
 
             app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

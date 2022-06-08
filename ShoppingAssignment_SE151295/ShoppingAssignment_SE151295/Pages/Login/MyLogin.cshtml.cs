@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,12 @@ namespace ShoppingAssignment_SE151295.Pages.Login
         {
         }
 
+        public IActionResult OnGetSession()
+        {
+            ErrorMsg = "Please login first!!";
+            return Page();
+        }
+
         public string ErrorMsg {set;get;}
 
         public async Task<IActionResult> OnPostAsync()
@@ -40,7 +47,10 @@ namespace ShoppingAssignment_SE151295.Pages.Login
             string userPassword = config["Account:password"];
 
             if (CusLogin.Email == userAdmin && CusLogin.Password == userPassword)
+            {
+                 HttpContext.Session.SetString("username", userAdmin);
                 return RedirectToPage("/Customers/CustomerManage");
+            }
 
             Customer CusTmp = await _context.Customers.FirstOrDefaultAsync(m => m.Email == CusLogin.Email 
                 && m.Password == CusLogin.Password);
@@ -50,6 +60,9 @@ namespace ShoppingAssignment_SE151295.Pages.Login
                 ErrorMsg = "Email or Password  are incorrect";
                 return Page();
             }
+
+            HttpContext.Session.SetString("username", CusTmp.ContactName);
+
             return RedirectToPage("/Customers/UserInfo", "User",new {id = CusTmp.CustomerId});
         }
     }
