@@ -26,7 +26,11 @@ namespace ShoppingAssignment_SE151295.Pages.Products
 
         public IActionResult OnGet()
         {
-   
+            if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToPage("/Login/MyLogin","Session");
+            }
+            
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
             ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "CompanyName");
             return Page();

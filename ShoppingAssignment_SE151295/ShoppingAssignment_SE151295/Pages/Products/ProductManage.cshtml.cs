@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -20,11 +21,18 @@ namespace ShoppingAssignment_SE151295.Pages.Products
 
         public IList<Product> Product { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToPage("/Login/MyLogin","Session");
+            }
+
             Product = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Supplier).ToListAsync();
+
+            return Page();
         }
     }
 }

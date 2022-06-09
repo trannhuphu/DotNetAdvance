@@ -34,7 +34,7 @@
 </div>
 
 <div>
-    <a asp-page="./OrderDetailManage">Back to List</a>
+    <a asp-page="./OrderDetailManage" asp-route-id="OrderDetail.OrderId" >Back to List</a>
     @if (!string.IsNullOrEmpty(@Model.ErrorMsg))
     {
         <p class="alert alert-danger" role="alert">@Model.ErrorMsg</p>

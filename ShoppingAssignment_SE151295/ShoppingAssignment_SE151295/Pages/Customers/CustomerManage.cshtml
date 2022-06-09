@@ -56,8 +56,8 @@
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.CustomerId">Edit</a> |
-                <a asp-page="./Delete" asp-route-id="@item.CustomerId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.CustomerId.Trim()">Edit</a> |
+                <a asp-page="./Delete" asp-route-id="@item.CustomerId.Trim()">Delete</a>
             </td>
         </tr>
 }

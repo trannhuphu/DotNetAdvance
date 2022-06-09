@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -30,6 +31,11 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
+            if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToPage("/Login/MyLogin","Session");
+            }
+            
             if (id == null)
             {
                 return NotFound();
@@ -88,7 +94,7 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
                 }
             }
 
-            return RedirectToPage("./OrderDetailManage",new {id = OrderDetail.OrderId});
+            return RedirectToPage("./OrderDetailManage",new {id = OrderDetail.OrderId.Trim()});
         }
 
         private bool OrderDetailExists(string id)

@@ -54,7 +54,7 @@
                 @Html.DisplayFor(modelItem => item.CustomerId)
             </td>
             <td>
-                <a asp-page="/OrderDetails/UserOrderDetail" asp-route-id="@item.OrderId">Details</a>
+                <a asp-page="/OrderDetails/UserOrderDetail" asp-route-id="@item.OrderId.Trim()">Details</a>
             </td>
         </tr>
 }

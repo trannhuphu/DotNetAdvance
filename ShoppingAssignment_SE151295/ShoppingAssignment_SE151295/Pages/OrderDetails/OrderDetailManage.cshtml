@@ -56,8 +56,8 @@
             <td>
 @*                 @Html.ActionLink("Edit", "Edit", new { id = item.Order.OrderId}) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
-                <a asp-page="./Edit" asp-route-id="@item.OrderId">Edit</a> | 
-                <a asp-page="./Delete" asp-route-orderid="@item.OrderId" asp-route-productid="@item.ProductId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.OrderId.Trim()">Edit</a> | 
+                <a asp-page="./Delete" asp-route-orderid="@item.OrderId.Trim()" asp-route-productid="@item.ProductId">Delete</a>
             </td>
         </tr>
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -24,7 +25,11 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
 
         public IActionResult OnGet(string id)
         {
-            //ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName");
+            if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToPage("/Login/MyLogin","Session");
+            }
+            
             OrderId = id;
             ListPro = _context.Products.ToList();
             return Page();
@@ -49,6 +54,8 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
             {
                 return Page();
             }
+
+            ListPro = _context.Products.ToList();
 
             int productidlocal = int.Parse(Request.Form["selectedPro"]
                                 .GetEnumerator().Current);
@@ -87,8 +94,9 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
                 _context.OrderDetails.Add(OrderDetail);     
             }
 
+            
             await _context.SaveChangesAsync();
-            return RedirectToPage("./OrderDetailManage", new {id = OrderId});
+            return RedirectToPage("./OrderDetailManage", new {id = OrderId.Trim()});
         }
     }
 }

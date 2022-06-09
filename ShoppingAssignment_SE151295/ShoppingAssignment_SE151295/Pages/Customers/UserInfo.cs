@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -27,6 +28,11 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
 
         public async Task<IActionResult> OnGetUserAsync(string id)
         {
+            if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToPage("/Login/MyLogin","Session");
+            }
+            
             if (id == null)
             {
                 return NotFound();
@@ -52,8 +58,13 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
             return Page();
         }
 
-        public async Task<IActionResult> OnGetViewAsync()
+        public IActionResult OnGetView()
         {
+            if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToPage("/Login/MyLogin","Session");
+            }
+            
             if(UserCurrent != null)
             {
                 Customer = UserCurrent;

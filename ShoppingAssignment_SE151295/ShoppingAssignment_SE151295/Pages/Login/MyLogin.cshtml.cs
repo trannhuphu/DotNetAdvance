@@ -26,6 +26,7 @@ namespace ShoppingAssignment_SE151295.Pages.Login
 
         public void OnGet()
         {
+            HttpContext.Session.Clear();
         }
 
         public IActionResult OnGetSession()
@@ -48,7 +49,7 @@ namespace ShoppingAssignment_SE151295.Pages.Login
 
             if (CusLogin.Email == userAdmin && CusLogin.Password == userPassword)
             {
-                 HttpContext.Session.SetString("username", userAdmin);
+                HttpContext.Session.SetString("username", userAdmin);
                 return RedirectToPage("/Customers/CustomerManage");
             }
 
@@ -63,7 +64,7 @@ namespace ShoppingAssignment_SE151295.Pages.Login
 
             HttpContext.Session.SetString("username", CusTmp.ContactName);
 
-            return RedirectToPage("/Customers/UserInfo", "User",new {id = CusTmp.CustomerId});
+            return RedirectToPage("/Customers/UserInfo", "User",new {id = CusTmp.CustomerId.Trim()});
         }
 
         public async Task<IActionResult> OnPostRegisterAsync()
