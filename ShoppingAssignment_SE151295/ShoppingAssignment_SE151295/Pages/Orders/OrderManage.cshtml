@@ -8,9 +8,6 @@
 
 <h1>Order Management</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -63,11 +60,16 @@
                 @Html.DisplayFor(modelItem => item.OrderId)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.OrderId.Trim()">Edit</a> |
-                <a asp-page="/OrderDetails/OrderDetailManage" asp-route-id="@item.OrderId.Trim()">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.OrderId.Trim()">Delete</a>
+                <div class="btn-group">
+                <a asp-page="./Edit" asp-route-id="@item.OrderId.Trim()" class="btn btn-sm btn-info">Edit</a>
+                <a asp-page="/OrderDetails/OrderDetailManage" asp-route-id="@item.OrderId.Trim()" class="btn btn-sm btn-outline-primary">Details</a>
+                <a asp-page="./Delete" asp-route-id="@item.OrderId.Trim()" class="btn btn-sm btn-danger">Delete</a>
+                </div>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<p>
+    <a asp-page="Create" class="btn btn-sm btn-success">Create New</a>
+</p>

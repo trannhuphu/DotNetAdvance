@@ -19,6 +19,8 @@ namespace ShoppingAssignment_SE151295.Pages.Products
             _context = context;
         }
 
+ 
+
         public IList<Product> Product { get;set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -31,6 +33,18 @@ namespace ShoppingAssignment_SE151295.Pages.Products
             Product = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Supplier).ToListAsync();
+
+            return Page();
+        }
+
+        [BindProperty]
+        public string search { set; get; }
+        public IActionResult OnPostSearchProduct()
+        {
+            if (!string.IsNullOrEmpty(search))
+            {
+                Product = _context.Products.Where(p => p.ProductId == int.Parse(search)).ToList();
+            }
 
             return Page();
         }
