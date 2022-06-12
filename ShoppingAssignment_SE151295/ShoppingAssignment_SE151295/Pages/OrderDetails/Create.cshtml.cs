@@ -60,7 +60,6 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
             int productidlocal = int.Parse(Request.Form["selectedPro"]
                                 .GetEnumerator().Current);
 
-
             OrderDetail.OrderId = OrderId;
             OrderDetail.UnitPrice = UnitPrice;
             OrderDetail.ProductId = productidlocal;
@@ -72,7 +71,7 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
 
             if (orderDetailTemp != null)
             {
-                ErrorMsg = "This order detail with product is " + orderDetailTemp.Product.ProductName + 
+                ErrorMsg = "This order detail which has the " + orderDetailTemp.Product.ProductName + 
                 " has already exist";
                 ListPro = _context.Products.ToList();
                 return Page();
@@ -94,7 +93,6 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
                 _context.OrderDetails.Add(OrderDetail);     
             }
 
-            
             await _context.SaveChangesAsync();
             return RedirectToPage("./OrderDetailManage", new {id = OrderId.Trim()});
         }

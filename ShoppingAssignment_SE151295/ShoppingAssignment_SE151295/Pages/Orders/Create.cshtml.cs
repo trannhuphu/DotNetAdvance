@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +11,7 @@ using ShoppingAssignment_SE151295.Models;
 
 namespace ShoppingAssignment_SE151295.Pages.Orders
 {
+
     public class CreateModel : PageModel
     {
         private readonly ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext _context;
@@ -25,6 +27,7 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
             {
                 return RedirectToPage("/Login/MyLogin","Session");
             }
+
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
                 return Page();
         }
@@ -49,10 +52,12 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
             if(orderTmp != null)
             {
                 ErrorMessage = "This order with id = " + Order.OrderId + " has already exist!!";
+                ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
                 return Page();
             }
             else
             {
+                Order.OrderDate = DateTime.Now;
                 _context.Orders.Add(Order);
                 await _context.SaveChangesAsync();
             }

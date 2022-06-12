@@ -24,17 +24,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Order.OrderDate" class="control-label"></label>
-                <input asp-for="Order.OrderDate" class="form-control" />
-                <span asp-validation-for="Order.OrderDate" class="text-danger"></span>
+                <input asp-for="@DateTime.Now" class="form-control" readonly />
             </div>
             <div class="form-group">
                 <label asp-for="Order.RequiredDate" class="control-label"></label>
-                <input asp-for="Order.RequiredDate" class="form-control" />
+                <input id="IdRequired" asp-for="Order.RequiredDate" onchange="selectRequireDate()" min="@DateTime.Now.ToString("yyyy-MM-ddThh:mm")" class="form-control"/>
                 <span asp-validation-for="Order.RequiredDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Order.ShippedDate" class="control-label"></label>
-                <input asp-for="Order.ShippedDate" class="form-control" />
+                <input id="IdShippedDate" asp-for="Order.ShippedDate" class="form-control" />
                 <span asp-validation-for="Order.ShippedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -53,6 +52,13 @@
         </form>
     </div>
 </div>
+
+<script>
+   function selectRequireDate() {
+       let value = document.getElementById("IdRequired").value;
+       document.getElementById("IdShippedDate").setAttribute("min", value); 
+   }
+</script>
 
 <div>
     <a asp-page="OrderManage">Back to List</a>

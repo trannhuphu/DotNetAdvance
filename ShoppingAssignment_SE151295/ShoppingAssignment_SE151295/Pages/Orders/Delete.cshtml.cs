@@ -55,7 +55,25 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
 
             if (Order != null)
             {
+                IList<OrderDetail> listOrderDetailRm = _context.OrderDetails
+                .Include(o => o.Order)
+                .Include(o => o.Product)
+                .Where(p => p.OrderId == Order.OrderId).ToList();
+
+                foreach (var tmepOrderDetail in listOrderDetailRm)
+                {
+                    int shiftQuantity = tmepOrderDetail.Quantity;
+
+                    Product product = _context.Products.
+                    Where(p => p.ProductId == tmepOrderDetail.ProductId).SingleOrDefault();
+
+                    product.QuantityPerUnit = product.QuantityPerUnit + shiftQuantity;
+                    _context.Update(product);
+                }
+
+                _context.OrderDetails.RemoveRange(listOrderDetailRm);
                 _context.Orders.Remove(Order);
+
                 await _context.SaveChangesAsync();
             }
 

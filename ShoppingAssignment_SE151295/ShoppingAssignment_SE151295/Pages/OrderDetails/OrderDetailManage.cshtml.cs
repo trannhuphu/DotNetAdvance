@@ -38,6 +38,16 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
                 .Include(o => o.Order)
                 .Include(o => o.Product).ToListAsync();
 
+            // if (OrderDetail != null)
+            // {
+            //     foreach (var item in OrderDetail)
+            //     {
+            //         Product pro = item.Product;
+            //         pro.ProductStatus = 0;
+            //         _context.Update(pro);
+            //     }
+            // }
+
             OrderId = id;
 
             return Page();

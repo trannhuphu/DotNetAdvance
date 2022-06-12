@@ -29,6 +29,8 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
         [BindProperty]
         public int oldQuanity {set;get;}
 
+        public string OrderId {get;set;}
+
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
@@ -50,6 +52,7 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
                 return NotFound();
             }
             oldQuanity = OrderDetail.Quantity;
+            OrderId = id;
            ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId");
            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName");
             return Page();

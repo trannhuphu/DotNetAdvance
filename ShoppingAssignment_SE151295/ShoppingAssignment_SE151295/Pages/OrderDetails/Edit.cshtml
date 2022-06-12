@@ -17,7 +17,7 @@
             <input type="hidden" asp-for="OrderDetail.ProductId" />
             <div class="form-group">
                 <label asp-for="OrderDetail.UnitPrice" class="control-label"></label>
-                <input asp-for="OrderDetail.UnitPrice" class="form-control" />
+                <input asp-for="OrderDetail.UnitPrice" class="form-control" readonly/>
                 <span asp-validation-for="OrderDetail.UnitPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -34,7 +34,7 @@
 </div>
 
 <div>
-    <a asp-page="./OrderDetailManage" asp-route-id="OrderDetail.OrderId" >Back to List</a>
+    <a asp-page="./OrderDetailManage" asp-route-id="@Model.OrderId" >Back to List</a>
     @if (!string.IsNullOrEmpty(@Model.ErrorMsg))
     {
         <p class="alert alert-danger" role="alert">@Model.ErrorMsg</p>
