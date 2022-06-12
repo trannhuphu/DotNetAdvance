@@ -28,7 +28,7 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
                 return RedirectToPage("/Login/MyLogin","Session");
             }
 
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "ContactName");
                 return Page();
         }
 
@@ -36,11 +36,15 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
         public Order Order { get; set; }
 
         [BindProperty]
+        public DateTime NowDate { get; set; } = DateTime.Now;
+
+        [BindProperty]
         public string ErrorMessage {set;get;}
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "ContactName");
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -52,12 +56,11 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
             if(orderTmp != null)
             {
                 ErrorMessage = "This order with id = " + Order.OrderId + " has already exist!!";
-                ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
                 return Page();
             }
             else
             {
-                Order.OrderDate = DateTime.Now;
+                Order.OrderDate = NowDate;
                 _context.Orders.Add(Order);
                 await _context.SaveChangesAsync();
             }

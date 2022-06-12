@@ -23,12 +23,17 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
         [BindProperty]
         public Order Order { get; set; }
 
+        [BindProperty]
+        public DateTime NowDate { get; set; }
+
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
             {
                 return RedirectToPage("/Login/MyLogin","Session");
             }
+        
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "ContactName");
             
             if (id == null)
             {
@@ -38,11 +43,12 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
             Order = await _context.Orders
                 .Include(o => o.Customer).FirstOrDefaultAsync(m => m.OrderId == id);
 
+            NowDate = (DateTime)Order.OrderDate;
+
             if (Order == null)
             {
                 return NotFound();
             }
-           ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
             return Page();
         }
 
@@ -50,6 +56,8 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "ContactName");
+           
             if (!ModelState.IsValid)
             {
                 return Page();

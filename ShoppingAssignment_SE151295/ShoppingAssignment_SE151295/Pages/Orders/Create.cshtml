@@ -24,11 +24,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Order.OrderDate" class="control-label"></label>
-                <input asp-for="@DateTime.Now" class="form-control" readonly />
+                <input asp-for="NowDate" class="form-control" readonly />
             </div>
             <div class="form-group">
                 <label asp-for="Order.RequiredDate" class="control-label"></label>
-                <input id="IdRequired" asp-for="Order.RequiredDate" onchange="selectRequireDate()" min="@DateTime.Now.ToString("yyyy-MM-ddThh:mm")" class="form-control"/>
+                <input id="IdRequired" asp-for="Order.RequiredDate" onchange="selectRequireDate()" min="@Model.NowDate.ToString("yyyy-MM-ddThh:mm")" class="form-control"/>
                 <span asp-validation-for="Order.RequiredDate" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -13,26 +13,26 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Order.OrderId" />
             <div class="form-group">
-                <label asp-for="Order.Customer.ContactName" class="control-label"></label>
-                <input type="hidden" asp-for="Order.Customer.CustomerId"/>
-                <input asp-for="Order.Customer.ContactName" class="form-control" readonly/>
-                <span asp-validation-for="Order.Customer.ContactName" class="text-danger"></span>
+                <label asp-for="Order.OrderId" class="control-label"></label>
+                <input asp-for="Order.OrderId" class="form-control" readonly/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.CustomerId" class="control-label"></label>
+                <select asp-for="Order.CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Order.OrderDate" class="control-label"></label>
-                <input asp-for="Order.OrderDate" class="form-control" />
-                <span asp-validation-for="Order.OrderDate" class="text-danger"></span>
+                <input asp-for="Order.OrderDate" class="form-control" readonly />
             </div>
             <div class="form-group">
                 <label asp-for="Order.RequiredDate" class="control-label"></label>
-                <input asp-for="Order.RequiredDate" class="form-control" />
+                <input id="IdRequired" asp-for="Order.RequiredDate" onchange="selectRequireDate()" min="@Model.NowDate.ToString("yyyy-MM-ddThh:mm")" class="form-control" />
                 <span asp-validation-for="Order.RequiredDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Order.ShippedDate" class="control-label"></label>
-                <input asp-for="Order.ShippedDate" class="form-control" />
+                <input id="IdShippedDate" asp-for="Order.ShippedDate" class="form-control" />
                 <span asp-validation-for="Order.ShippedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -55,6 +55,14 @@
 <div>
     <a asp-page="./OrderManage" class="btn btn-secondary">Back to List</a>
 </div>
+
+<script>
+   function selectRequireDate() {
+       let value = document.getElementById("IdRequired").value;
+       document.getElementById("IdShippedDate").setAttribute("min", value); 
+   }
+</script>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
