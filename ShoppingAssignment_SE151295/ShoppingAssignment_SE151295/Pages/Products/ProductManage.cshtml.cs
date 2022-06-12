@@ -31,9 +31,28 @@ namespace ShoppingAssignment_SE151295.Pages.Products
             }
 
             Product = await _context.Products
+                .Include(p => p.OrderDetails)
                 .Include(p => p.Category)
                 .Include(p => p.Supplier).ToListAsync();
 
+            foreach(var item in Product)
+            {
+                if(item.OrderDetails.Count != 0)
+                {
+                    item.ProductStatus = 0;
+                    _context.Update(item);
+                }
+                else
+                {
+                    if (item.ProductStatus == 0)
+                    {
+                        item.ProductStatus = 1;
+                        _context.Update(item);
+                    }
+                }
+            }
+
+            _context.SaveChanges();
             return Page();
         }
 

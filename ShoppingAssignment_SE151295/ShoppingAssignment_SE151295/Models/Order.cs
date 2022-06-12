@@ -12,7 +12,9 @@ namespace ShoppingAssignment_SE151295.Models
         {
             OrderDetails = new HashSet<OrderDetail>();
         }
+
         [Required(ErrorMessage = "OrderId is required!")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Please enter valid OrderId")]
         public string OrderId { get; set; }
 
         [Required(ErrorMessage = "CustomerId is required!")]

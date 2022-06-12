@@ -39,16 +39,35 @@ namespace ShoppingAssignment_SE151295.Pages.Products
         [BindProperty]
         public Product Product { get; set; }
 
+        [BindProperty]
+        public string ErrorMessage { get; set; }
+
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostCreateAsync()
         {
+            
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "CompanyName");
+            
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-           
-            _context.Products.Add(Product);
-            await _context.SaveChangesAsync();
+
+            Product tmpPro = _context.Products
+                            .Where(p => p.ProductId == Product.ProductId)
+                            .SingleOrDefault();
+            
+            if(tmpPro != null)
+            {
+                ErrorMessage = "The Product with id = " + tmpPro.ProductId + " has already exist!";
+                return Page();
+            }
+            else
+            {
+                _context.Products.Add(Product);
+                await _context.SaveChangesAsync();
+            }
 
             return RedirectToPage("./ProductManage");
         }

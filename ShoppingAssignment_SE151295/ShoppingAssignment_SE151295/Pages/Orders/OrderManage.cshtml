@@ -12,6 +12,12 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Order[0].OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Customer)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Order[0].OrderDate)
             </th>
             <th>
@@ -26,18 +32,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.Order[0].ShipAddress)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].Customer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderId)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Order) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.ContactName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
@@ -52,12 +58,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ShipAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.ContactName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderId)
             </td>
             <td>
                 <div class="btn-group">

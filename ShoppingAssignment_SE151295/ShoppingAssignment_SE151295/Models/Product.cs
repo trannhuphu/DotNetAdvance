@@ -14,6 +14,7 @@ namespace ShoppingAssignment_SE151295.Models
         }
 
         [Required(ErrorMessage = "ProductId is required!")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Please enter valid ProductId")]
         public int ProductId { get; set; }
 
         [Required(ErrorMessage = "ProductName is required!")]

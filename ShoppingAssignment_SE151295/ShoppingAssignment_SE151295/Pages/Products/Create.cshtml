@@ -24,11 +24,11 @@
                 <span asp-validation-for="Product.ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.SupplierId" class="control-label"></label>
+                <label asp-for="Product.Supplier" class="control-label"></label>
                 <select asp-for="Product.SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Product.CategoryId" class="control-label"></label>
+                <label asp-for="Product.Category" class="control-label"></label>
                 <select asp-for="Product.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
             <div class="form-group">
@@ -41,7 +41,6 @@
                 <input asp-for="Product.UnitPrice" class="form-control" />
                 <span asp-validation-for="Product.UnitPrice" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="Product.ProductImage" class="control-label"></label>
                 @*<input asp-for="Product.ProductImage" class="form-control" />
@@ -49,9 +48,7 @@
                 <img src="" alt="Picture Product"
                      width="100" height="100" id="uploadFileimg"
                      style="display:none"/>
- 
                 <input type="file" asp-for="FileUpload" id="uploadfile" />
-
             </div>
             <div class="form-group">
                 <label asp-for="Product.ProductStatus" class="control-label"></label>
@@ -59,7 +56,7 @@
                 <span asp-validation-for="Product.ProductStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" asp-page-handler="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -70,6 +67,10 @@
 </form>*@
 <div>
     <a asp-page="ProductManage">Back to List</a>
+    @if (!string.IsNullOrEmpty(@Model.ErrorMessage))
+    {
+        <p class="alert alert-danger" role="alert">@Model.ErrorMessage</p>
+    }
 </div>
 
 <div>
@@ -79,6 +80,7 @@
         }
     }
 </div>
+
 <script>
     const uploadElement = document.querySelector("#uploadfile");
     const uploadImgElement = document.querySelector("#uploadFileimg");
