@@ -24,9 +24,10 @@ namespace ShoppingAssignment_SE151295.Pages.Login
         [BindProperty (SupportsGet = true)]
         public Customer CusLogin { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
             HttpContext.Session.Clear();
+            return Page();
         }
 
         public IActionResult OnGetSession()

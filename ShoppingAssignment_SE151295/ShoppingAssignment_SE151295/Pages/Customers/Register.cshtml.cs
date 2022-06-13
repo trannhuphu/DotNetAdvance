@@ -20,13 +20,16 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
 
         public IActionResult OnGet()
         {
-            if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+           /* if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
             {
                 return RedirectToPage("/Login/MyLogin","Session");
-            }
+            }*/
             
             return Page();
         }
+
+        [BindProperty]
+        public bool IsUpdateSuccess { get; set; } = false;
 
         [BindProperty]
         public Customer Customer { get; set; }
@@ -38,11 +41,11 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
             {
                 return Page();
             }
-
+            IsUpdateSuccess = true;
             _context.Customers.Add(Customer);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./CustomerManage");
+            return Page();
         }
     }
 }
