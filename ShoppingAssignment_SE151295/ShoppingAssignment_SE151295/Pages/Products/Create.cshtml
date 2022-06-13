@@ -11,13 +11,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Product.ProductId" class="control-label"></label>
-                <input asp-for="Product.ProductId" class="form-control" />
-                <span asp-validation-for="Product.ProductId" class="text-danger"></span>
-            </div>
+@*             <div class="form-group">
+                <label asp-for="LocalProductId" class="control-label"></label>
+                <input asp-for="LocalProductId" class="form-control" readonly/>
+            </div> *@
             <div class="form-group">
                 <label asp-for="Product.ProductName" class="control-label"></label>
                 <input asp-for="Product.ProductName" class="form-control" />
@@ -45,10 +44,13 @@
                 <label asp-for="Product.ProductImage" class="control-label"></label>
                 @*<input asp-for="Product.ProductImage" class="form-control" />
             <span asp-validation-for="Product.ProductImage" class="text-danger"></span>*@
-                <img src="" alt="Picture Product"
-                     width="100" height="100" id="uploadFileimg"
-                     style="display:none"/>
-                <input type="file" asp-for="FileUpload" id="uploadfile" />
+
+                    <img src="" alt="Picture Product"
+                        width="100" height="100" id="uploadFileimg"
+                        style="display:none"/>
+
+                <input type="file" asp-for="FileUpload" id="uploadfile" class="form-control"/>
+                <span asp-validation-for="FileUpload" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Product.ProductStatus" class="control-label"></label>
@@ -72,7 +74,6 @@
         <p class="alert alert-danger" role="alert">@Model.ErrorMessage</p>
     }
 </div>
-
 <div>
     @{if (Model.FileUpload != null)
         {
@@ -87,7 +88,7 @@
 
     uploadElement?.addEventListener("change", (event) => {
         if (Array.isArray(event.target.files)) return;
-        const file = event.target.files[0];
+         const file = event.target.files[0];
         const fileUrl = URL.createObjectURL(file);
 
         uploadImgElement.setAttribute("src", fileUrl);

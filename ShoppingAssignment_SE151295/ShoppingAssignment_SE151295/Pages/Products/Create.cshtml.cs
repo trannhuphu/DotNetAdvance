@@ -30,11 +30,14 @@ namespace ShoppingAssignment_SE151295.Pages.Products
             {
                 return RedirectToPage("/Login/MyLogin","Session");
             }
-            
+ 
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
             ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "CompanyName");
             return Page();
         }
+
+/*         [BindProperty]
+        public int LocalProductId { get; set; } */
 
         [BindProperty]
         public Product Product { get; set; }
@@ -55,42 +58,36 @@ namespace ShoppingAssignment_SE151295.Pages.Products
             }
 
             Product tmpPro = _context.Products
-                            .Where(p => p.ProductId == Product.ProductId)
+                            .Where(p => p.ProductName.ToLower().Trim() == Product.ProductName.ToLower().Trim())
                             .SingleOrDefault();
             
             if(tmpPro != null)
             {
-                ErrorMessage = "The Product with id = " + tmpPro.ProductId + " has already exist!";
+                ErrorMessage = "The Product with name = " + tmpPro.ProductName + " has already exist!";
                 return Page();
             }
             else
             {
+                if(!string.IsNullOrEmpty(Product.ProductImage))
+                {
+                    string FilePath = Path.Combine(_environment.WebRootPath,
+                    "images", Product.ProductImage);
+                    System.IO.File.Delete(FilePath);
+                } 
+
+                Product.ProductImage = ProcessUploadImageFile();
+
                 _context.Products.Add(Product);
                 await _context.SaveChangesAsync();
             }
 
             return RedirectToPage("./ProductManage");
         }
-
-        public string Message { get; set; }
         
-
-        [Required(ErrorMessage = "Please choose at least on file")]
-        [DataType(DataType.Upload)]
-        [FileExtensions(Extensions = "png, jpg, jpeg, gif")]
-        [Display(Name = "Choose file(s) to upload")]
         [BindProperty]
         public IFormFile FileUpload { get; set; }
-        public string Clicked()
+        public string ProcessUploadImageFile()
         {
-            var clickMessage = "I was Clicked";
-            return clickMessage;
-        }
-
-        public string imageName { set; get; }
-        public IActionResult OnPostHello()
-        {
-            Message = "";
             if (FileUpload != null)
             {
             
@@ -98,11 +95,9 @@ namespace ShoppingAssignment_SE151295.Pages.Products
                     using (var fileStream = new FileStream(file, FileMode.Create))
                     {
                         FileUpload.CopyTo(fileStream);
-            
-                        Message = "The file was upload successfully";
                     }            
             }
-            return Page();
+            return FileUpload.FileName;
         }
     }
 }
