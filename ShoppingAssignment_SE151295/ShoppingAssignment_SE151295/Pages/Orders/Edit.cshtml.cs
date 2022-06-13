@@ -43,6 +43,8 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
             Order = await _context.Orders
                 .Include(o => o.Customer).FirstOrDefaultAsync(m => m.OrderId == id);
 
+            Order.OrderId = Order.OrderId.Trim();
+
             NowDate = (DateTime)Order.OrderDate;
 
             if (Order == null)
