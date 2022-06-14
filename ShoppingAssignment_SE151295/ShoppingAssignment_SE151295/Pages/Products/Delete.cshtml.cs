@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,10 +15,11 @@ namespace ShoppingAssignment_SE151295.Pages.Products
     public class DeleteModel : PageModel
     {
         private readonly ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext _context;
-
-        public DeleteModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context)
+        private IWebHostEnvironment _environment;
+        public DeleteModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         [BindProperty]
@@ -51,6 +54,13 @@ namespace ShoppingAssignment_SE151295.Pages.Products
             {
                 return NotFound();
             }
+
+            if(!string.IsNullOrEmpty(Product.ProductImage))
+            {
+                string FilePath = Path.Combine(_environment.WebRootPath,
+                "images", Product.ProductImage);
+                System.IO.File.Delete(FilePath);     
+            }        
 
             Product = await _context.Products.FindAsync(id);
 

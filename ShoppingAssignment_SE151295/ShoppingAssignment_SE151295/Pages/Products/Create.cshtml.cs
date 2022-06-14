@@ -36,9 +36,6 @@ namespace ShoppingAssignment_SE151295.Pages.Products
             return Page();
         }
 
-/*         [BindProperty]
-        public int LocalProductId { get; set; } */
-
         [BindProperty]
         public Product Product { get; set; }
 

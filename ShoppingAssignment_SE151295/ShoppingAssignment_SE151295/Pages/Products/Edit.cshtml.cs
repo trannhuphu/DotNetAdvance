@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,9 +18,12 @@ namespace ShoppingAssignment_SE151295.Pages.Products
     {
         private readonly ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext _context;
 
-        public EditModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context)
+        private IWebHostEnvironment _environment;
+       
+        public EditModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         [BindProperty]
@@ -57,6 +63,17 @@ namespace ShoppingAssignment_SE151295.Pages.Products
                 return Page();
             }
 
+            if (FileUpload != null)
+            {
+                if(!string.IsNullOrEmpty(Product.ProductImage))
+                {
+                    string FilePath = Path.Combine(_environment.WebRootPath,
+                    "images", Product.ProductImage);
+                    System.IO.File.Delete(FilePath);     
+                }        
+                Product.ProductImage = ProcessUploadImageFile();      
+            }
+            
             _context.Attach(Product).State = EntityState.Modified;
 
             try
@@ -76,6 +93,25 @@ namespace ShoppingAssignment_SE151295.Pages.Products
             }
 
             return RedirectToPage("./ProductManage");
+        }
+
+        [BindProperty]
+        public IFormFile FileUpload { get; set; }
+
+        public string ProcessUploadImageFile()
+        {
+            string uniqueFileName = null;
+
+            if (FileUpload != null)
+            {
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + FileUpload.FileName;
+                var file = Path.Combine(_environment.WebRootPath, "images", uniqueFileName);
+                using (var fileStream = new FileStream(file, FileMode.Create))
+                {
+                    FileUpload.CopyTo(fileStream);
+                }            
+            }
+            return uniqueFileName;
         }
 
         private bool ProductExists(int id)

@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Product.ProductId" class="control-label"></label>
@@ -45,8 +45,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Product.ProductImage" class="control-label"></label>
-                <input asp-for="Product.ProductImage" class="form-control" />
-                <span asp-validation-for="Product.ProductImage" class="text-danger"></span>
+                <input type="hidden" asp-for="Product.ProductImage" class="form-control"/>
+                <img src="~/images/@Model.Product.ProductImage" alt="Picture Product"width="100" height="100" id="uploadFileimg"/>
+                <input type="file" asp-for="FileUpload" id="uploadfile" class="form-control"/>
+                <span asp-validation-for="FileUpload" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Product.ProductStatus" class="control-label"></label>
@@ -63,6 +65,20 @@
 <div>
     <a asp-page="./ProductManage" class="btn btn-secondary">Back to List</a>
 </div>
+
+<script>
+    const uploadElement = document.querySelector("#uploadfile");
+    const uploadImgElement = document.querySelector("#uploadFileimg");
+
+    uploadElement?.addEventListener("change", (event) => {
+        if (Array.isArray(event.target.files)) return;
+         const file = event.target.files[0];
+        const fileUrl = URL.createObjectURL(file);
+
+        uploadImgElement.setAttribute("src", fileUrl);
+        uploadImgElement.style.display = "inline-block";
+    })
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
