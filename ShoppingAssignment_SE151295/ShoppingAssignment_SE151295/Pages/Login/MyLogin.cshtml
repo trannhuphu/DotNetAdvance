@@ -4,28 +4,28 @@
     ViewData["Title"] = "Login Page";
     Layout = "~/Pages/Shared/_LayoutLogin.cshtml";
 }
+<head>
 
-<div class="row">
-    <div class="col-md-4">
-        <form method="POST">
+    <link href="~/css/login.css" rel="stylesheet" />
+</head>
+<div class="overlay">
+    <form method="POST">
+        <div class="con">
+            <header class="head-form">
+                <h2>Log In</h2>
+            </header>
+            <br />
             <div class="form-group">
-                <label for="email" class="control-label">Email</label>
-                <input type="text" class="form-control" asp-for="CusLogin.Email" placeholder="Email" />
+                <input class="form-control" id="txt-input" type="text" placeholder="Email" asp-for="CusLogin.Email"><br />
+                <input class="form-control" type="password" placeholder="Password" id="pwd" asp-for="CusLogin.Password"><br/>
+
+                <input type="submit" value="Login" class="log-in" /><br /><br/>
+                <input type="submit" asp-page-handler="Register" value="Register" class="regis" />
             </div>
-            <div class="form-group">
-                <label for="password" class="control-label">Password</label>
-                <input type="password" class="form-control" asp-for="CusLogin.Password" placeholder="Password" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-            <div class="form-group">
-                <input type="submit" asp-page-handler="Register" value="Register" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
         @if (!string.IsNullOrEmpty(@Model.ErrorMsg))
         {
             <p class="alert alert-danger" role="alert">@Model.ErrorMsg</p>
         }
-    </div>
+    </form>
 </div>
