@@ -1,0 +1,94 @@
+﻿
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*body {
+    background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+    background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: 'Vibur', cursive;
+    font-family: 'Abel', sans-serif;
+    opacity: .95;
+}
+*/
+body {
+    background-image: url("../images/login.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+
+}
+
+form {
+    width: 450px;
+    min-height: 500px;
+    height: auto;
+    border-radius: 5px;
+    margin: 8% auto;
+    box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+    padding: 2%;
+    background-image: linear-gradient(-225deg, #E3FDF5 50%, #fdffb5 50%);
+}
+    /* form Container */
+    form .con {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin: 0 auto;
+    }
+
+/* the header form form */
+header {
+    margin: 2% auto 10% auto;
+    text-align: center;
+}
+    header h2 {
+        font-size: 250%;
+        font-family: 'Playfair Display', serif;
+        color: #3e403f;
+    }
+input[class="form-control"] {
+    width: 240px;
+    height: 50px;
+    margin-top: 2%;
+    padding: 15px;
+    font-size: 16px;
+    font-family: 'Abel', sans-serif;
+    color: #5E6472;
+    outline: none;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    transition: 0.2s linear;
+}
+
+input[id="txt-input"] {
+    width: 350px;
+}
+input[id="pwd"] {
+    width: 350px;
+}
+input:focus {
+    border-radius: 10px;
+}
+
+.log-in, .regis {
+    display: inline-block;
+    color: #ffffff;
+    font-size: 24px;
+    width: 350px;
+    height: 50px;
+    padding: 0 20px;
+    background: #006dd4;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 0.05em;
+}
