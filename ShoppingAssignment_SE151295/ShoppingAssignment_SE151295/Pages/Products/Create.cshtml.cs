@@ -85,16 +85,18 @@ namespace ShoppingAssignment_SE151295.Pages.Products
         public IFormFile FileUpload { get; set; }
         public string ProcessUploadImageFile()
         {
+            string uniqueFileName = null;
+
             if (FileUpload != null)
             {
-            
-                    var file = Path.Combine(_environment.WebRootPath, "images", FileUpload.FileName);
-                    using (var fileStream = new FileStream(file, FileMode.Create))
-                    {
-                        FileUpload.CopyTo(fileStream);
-                    }            
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + FileUpload.FileName;
+                var file = Path.Combine(_environment.WebRootPath, "images", uniqueFileName);
+                using (var fileStream = new FileStream(file, FileMode.Create))
+                {
+                    FileUpload.CopyTo(fileStream);
+                }            
             }
-            return FileUpload.FileName;
+            return uniqueFileName;
         }
     }
 }
