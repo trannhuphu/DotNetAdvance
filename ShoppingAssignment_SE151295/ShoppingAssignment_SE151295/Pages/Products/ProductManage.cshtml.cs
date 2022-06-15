@@ -19,8 +19,6 @@ namespace ShoppingAssignment_SE151295.Pages.Products
             _context = context;
         }
 
- 
-
         public IList<Product> Product { get;set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -57,12 +55,14 @@ namespace ShoppingAssignment_SE151295.Pages.Products
         }
 
         [BindProperty]
-        public string search { set; get; }
+        public string search {set;get;}
+
         public IActionResult OnPostSearchProduct()
         {
             if (!string.IsNullOrEmpty(search))
             {
-                Product = _context.Products.Where(p => p.ProductId == int.Parse(search)).ToList();
+                Product = _context.Products.Where(p => p.ProductId.ToString().Contains(search) ||
+                                                    p.ProductName.Contains(search)).ToList();
             }
 
             return Page();

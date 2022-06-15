@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ShoppingAssignment_SE151295.Models;
+using ShoppingAssignment_SE151295.Pages.Customers;
 
 namespace ShoppingAssignment_SE151295.Pages.Products
 {
-    public class UserProductModel : PageModel
+    public class UserProductModel : CommonUser
     {
         private readonly ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext _context;
 
@@ -21,7 +22,8 @@ namespace ShoppingAssignment_SE151295.Pages.Products
 
         public IList<Product> Product { get;set; }
 
-        public Customer CusTemp {get;set;}
+        [BindProperty]
+        public Customer Customer {get;set;} = UserCurrent;
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -31,10 +33,8 @@ namespace ShoppingAssignment_SE151295.Pages.Products
             }
 
             Product = await _context.Products
-                .Include(p => p.Category)
-                .Include(p => p.Supplier).ToListAsync();
-
-            CusTemp = await  _context.Customers.FirstOrDefaultAsync(m => m.CustomerId == id);
+            .Include(p => p.Category)
+            .Include(p => p.Supplier).ToListAsync();
 
             return Page();
         }

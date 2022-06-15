@@ -54,6 +54,12 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-page="/Login/MyLogin" class="btn btn-sm btn-success">Log in Here</a>
             </div>
+                @{
+                    if(!string.IsNullOrEmpty(@Model.ErrorMessage))
+                    {
+                        <p class="alert alert-danger" role="alert">@Model.ErrorMessage</p>
+                    }
+                }
         </form>
     </div>
 </div>

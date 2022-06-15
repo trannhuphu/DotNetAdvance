@@ -14,13 +14,15 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
     public class UserOrderModel : CommonUser
     {
         private readonly ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext _context;
-
         public UserOrderModel(ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext context)
         {
             _context = context;
         }
 
         public IList<Order> Order { get;set; }
+
+        [BindProperty]
+        public Customer Customer {get;set;} = UserCurrent;
 
         public async Task<IActionResult> OnGetAsync()
         {

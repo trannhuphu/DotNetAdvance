@@ -22,11 +22,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-page="/Orders/UserOrder">Order Info</a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" >Welcome @Model.Customer.ContactName</a>
-                        </li>
+                        </li> *@
                     </ul>
-                     <a asp-page="/Login/MyLogin" class="btn btn-primary" style="margin-right:100px">Log out</a>
+                     <a style="margin-right:70px">Welcome @Model.Customer.ContactName</a>
+                     <a asp-page="/Login/MyLogin" class="btn btn-primary" style="margin-right:10px">Log out</a>
                 </div>
                
             </div>

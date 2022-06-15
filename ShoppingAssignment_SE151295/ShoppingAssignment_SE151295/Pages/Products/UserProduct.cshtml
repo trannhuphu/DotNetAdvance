@@ -13,6 +13,7 @@
 <h1>Product Info</h1>
 
 <table class="table">
+    <input type="hidden" asp-for="Customer.ContactName" class="form-control" />
     <thead>
         <tr>
             <th>
@@ -52,7 +53,12 @@
                 @Html.DisplayFor(modelItem => item.UnitPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductImage)
+               @{
+                    if(!string.IsNullOrEmpty(@item.ProductImage))
+                    {
+                        <img src="~/images/@item.ProductImage" width="100" height="100"/>
+                    }
+               }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductStatus)

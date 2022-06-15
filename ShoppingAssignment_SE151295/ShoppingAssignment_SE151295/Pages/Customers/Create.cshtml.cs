@@ -25,13 +25,15 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
             {
                 return RedirectToPage("/Login/MyLogin","Session");
             }
-            TempData["SuccessMessage"] = "Create successfully";
 
             return Page();
         }
 
         [BindProperty]
         public Customer Customer { get; set; }
+
+        [BindProperty]
+        public string ErrorMessage { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -41,8 +43,20 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
                 return Page();
             }
 
-            _context.Customers.Add(Customer);
-            await _context.SaveChangesAsync();
+            Customer Custemp =  _context.Customers.Where(p => p.Email.Contains(Customer.Email)
+                                || p.CustomerId.Contains(Customer.CustomerId)).SingleOrDefault();
+
+            if(Custemp != null)
+            {
+                ErrorMessage = "The User ID or Email has already exist!";
+                return Page();
+            }
+            else
+            {
+                TempData["SuccessMessage"] = "Create successfully";
+                _context.Customers.Add(Customer);
+                await _context.SaveChangesAsync();
+            }
 
             return RedirectToPage("./CustomerManage");
         }

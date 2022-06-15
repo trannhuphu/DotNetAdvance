@@ -26,9 +26,7 @@ namespace ShoppingAssignment_SE151295.Models
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Phone is required!")]
-        [StringLength(10, ErrorMessage = "Maxlimit 10")]
-        [RegularExpression(@"^\d{10}$", ErrorMessage = "Please Enter 10 digits")]
-
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Please input valid phone number!")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Email is required!")]
