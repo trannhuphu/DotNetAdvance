@@ -27,6 +27,11 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
 
         public async Task<IActionResult> OnGetAsync(string orderid, int productid)
         {
+            if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToPage("/Login/MyLogin","Session");
+            }
+
             if (orderid == null)
             {
                 return NotFound();
