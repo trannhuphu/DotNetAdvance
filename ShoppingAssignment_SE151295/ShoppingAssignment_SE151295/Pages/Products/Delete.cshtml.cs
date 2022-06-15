@@ -69,7 +69,7 @@ namespace ShoppingAssignment_SE151295.Pages.Products
                 _context.Products.Remove(Product);
                 await _context.SaveChangesAsync();
             }
-
+            TempData["SuccessMessage"] = "Delete successfully";
             return RedirectToPage("./ProductManage");
         }
     }

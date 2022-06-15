@@ -91,7 +91,7 @@ namespace ShoppingAssignment_SE151295.Pages.Products
                     throw;
                 }
             }
-
+            TempData["SuccessMessage"] = "Edit successfully";
             return RedirectToPage("./ProductManage");
         }
 

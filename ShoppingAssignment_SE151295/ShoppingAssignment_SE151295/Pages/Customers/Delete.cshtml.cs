@@ -57,7 +57,7 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
                 _context.Customers.Remove(Customer);
                 await _context.SaveChangesAsync();
             }
-
+            TempData["SuccessMessage"] = "Delete successfully";
             return RedirectToPage("./CustomerManage");
         }
     }

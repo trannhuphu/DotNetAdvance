@@ -72,7 +72,7 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
                 _context.OrderDetails.Remove(OrderDetail);
                 await _context.SaveChangesAsync();
             }
-
+            TempData["SuccessMessage"] = "Delete successfully";
             return RedirectToPage("./OrderDetailManage",new {id = orderid.Trim()});
         }
     }

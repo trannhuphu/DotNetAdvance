@@ -64,7 +64,7 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
                 _context.Orders.Add(Order);
                 await _context.SaveChangesAsync();
             }
-
+            TempData["SuccessMessage"] = "Create successfully";
             return RedirectToPage("./OrderManage");
         }
     }

@@ -40,40 +40,56 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Order) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.ContactName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RequiredDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShippedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Freight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipAddress)
-            </td>
-            <td>
-                <div class="btn-group">
-                <a asp-page="./Edit" asp-route-id="@item.OrderId.Trim()" class="btn btn-sm btn-info">Edit</a>
-                <a asp-page="/OrderDetails/OrderDetailManage" asp-route-id="@item.OrderId.Trim()" class="btn btn-sm btn-outline-primary">Details</a>
-                <a asp-page="./Delete" asp-route-id="@item.OrderId.Trim()" class="btn btn-sm btn-danger">Delete</a>
-                </div>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Order)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.ContactName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequiredDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShippedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Freight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipAddress)
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a asp-page="./Edit" asp-route-id="@item.OrderId.Trim()" class="btn btn-sm btn-info">Edit</a>
+                        <a asp-page="/OrderDetails/OrderDetailManage" asp-route-id="@item.OrderId.Trim()" class="btn btn-sm btn-outline-primary">Details</a>
+                        <a asp-page="./Delete" asp-route-id="@item.OrderId.Trim()" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 <p>
     <a asp-page="Create" class="btn btn-sm btn-success">Create New</a>
 </p>
+@section Scripts{
+    <script type="text/javascript">
+        function openSuccessModal(strMessage) {
+            var myDiv = document.getElementById("MyModalSuccessAlertBody");
+            myDiv.innerHTML = strMessage;
+            $('#myModalSuccess').modal('show');
+        }
+        $(document).ready(function () {
+            var msg = "@TempData["SuccessMessage"]";
+            if (msg)
+                openSuccessModal(msg);
+        });
+    </script>
+}
+

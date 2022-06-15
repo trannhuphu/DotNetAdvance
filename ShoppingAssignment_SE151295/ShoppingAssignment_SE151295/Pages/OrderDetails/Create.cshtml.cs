@@ -94,6 +94,7 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
             }
 
             await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Create order detail successfully";
             return RedirectToPage("./OrderDetailManage", new {id = OrderId.Trim()});
         }
     }

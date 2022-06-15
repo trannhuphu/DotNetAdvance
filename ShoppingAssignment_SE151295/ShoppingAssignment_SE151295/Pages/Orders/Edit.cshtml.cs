@@ -82,7 +82,7 @@ namespace ShoppingAssignment_SE151295.Pages.Orders
                     throw;
                 }
             }
-
+            TempData["SuccessMessage"] = "Edit successfully";
             return RedirectToPage("./OrderManage");
         }
 

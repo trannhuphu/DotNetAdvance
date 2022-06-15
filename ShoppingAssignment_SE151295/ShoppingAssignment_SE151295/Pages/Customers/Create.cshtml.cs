@@ -25,7 +25,8 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
             {
                 return RedirectToPage("/Login/MyLogin","Session");
             }
-            
+            TempData["SuccessMessage"] = "Create successfully";
+
             return Page();
         }
 

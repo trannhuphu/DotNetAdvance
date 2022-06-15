@@ -70,7 +70,7 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
                     throw;
                 }
             }
-
+            TempData["SuccessMessage"] = "Edit successfully";
             return RedirectToPage("./CustomerManage");
         }
 

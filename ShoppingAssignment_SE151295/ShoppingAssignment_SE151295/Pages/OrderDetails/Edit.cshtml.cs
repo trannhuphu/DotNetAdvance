@@ -96,7 +96,7 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
                     throw;
                 }
             }
-
+            TempData["SuccessMessage"] = "Edit successfully";
             return RedirectToPage("./OrderDetailManage",new {id = OrderDetail.OrderId.Trim()});
         }
 

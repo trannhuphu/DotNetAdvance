@@ -9,13 +9,27 @@
     body {
         background-color: #f5faf9;
     }
+    .search-product{
+        display:flex;
+        flex-flow: row nowrap;
+        column-gap: 8px;
+        align-items:center;
+        margin-bottom: 8px;
+    }
+    .search-product > p{
+        margin-bottom: 0;
+    }
+    .search-input{
+        height:38px !important;
+    }
 </style>
+
 <h1>Product Management</h1>
 
 <form method="post">
-    <div>
+    <div class="search-product">
             <p> Search Product</p>
-            <input type="text" asp-for="search" placeholder="search"/>
+            <input type="text" asp-for="search" placeholder="search" class="search-input"/>
             <input type="submit" value="Search" asp-page-handler="SearchProduct" class="btn btn-primary"/>
         </div>
 </form>
@@ -94,3 +108,17 @@
 <p>
     <a asp-page="Create" class="btn btn-sm btn-success">Create New</a>
 </p>
+@section Scripts{ 
+    <script type="text/javascript">
+        function openSuccessModal(strMessage) {
+            var myDiv = document.getElementById("MyModalSuccessAlertBody");
+            myDiv.innerHTML = strMessage;
+            $('#myModalSuccess').modal('show');
+        }
+        $(document).ready(function () {
+            var msg = "@TempData["SuccessMessage"]";
+            if (msg)
+                openSuccessModal(msg);
+        });
+    </script>
+}

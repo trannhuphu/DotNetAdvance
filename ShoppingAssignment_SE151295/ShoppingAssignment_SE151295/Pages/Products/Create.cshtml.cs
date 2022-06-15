@@ -77,7 +77,7 @@ namespace ShoppingAssignment_SE151295.Pages.Products
                 _context.Products.Add(Product);
                 await _context.SaveChangesAsync();
             }
-
+            TempData["SuccessMessage"] = "Create successfully";
             return RedirectToPage("./ProductManage");
         }
         
