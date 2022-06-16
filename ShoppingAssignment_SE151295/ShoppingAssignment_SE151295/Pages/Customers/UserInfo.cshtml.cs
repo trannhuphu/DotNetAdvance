@@ -22,7 +22,7 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
         }
 
         [BindProperty]
-        public Customer Customer { get; set; }
+        public Customer Customer { get; set; } = UserCurrent;
 
         public bool IsUpdateSuccess { get; set; } = false;
 
@@ -36,23 +36,6 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
             if (id == null)
             {
                 return NotFound();
-            }
-
-            Customer = await _context.Customers.FirstOrDefaultAsync(m => m.CustomerId == id);
-            if(Customer != null)
-            {
-                UserCurrent = Customer;
-            }
-            else
-            {
-                if(UserCurrent != null)
-                {
-                    Customer = UserCurrent;
-                }
-                else
-                {
-                    return NotFound();
-                }
             }
             
             return Page();

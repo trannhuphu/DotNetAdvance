@@ -51,7 +51,7 @@ namespace ShoppingAssignment_SE151295.Pages.Login
             if (CusLogin.Email == userAdmin && CusLogin.Password == userPassword)
             {
                 HttpContext.Session.SetString("username", userAdmin);
-                return RedirectToPage("/Customers/CustomerManage");
+                return RedirectToPage("/Products/ProductManage");
             }
 
             Customer CusTmp = await _context.Customers.FirstOrDefaultAsync(m => m.Email == CusLogin.Email 
@@ -65,7 +65,7 @@ namespace ShoppingAssignment_SE151295.Pages.Login
 
             HttpContext.Session.SetString("username", CusTmp.ContactName);
 
-            return RedirectToPage("/Customers/UserInfo", "User",new {id = CusTmp.CustomerId.Trim()});
+            return RedirectToPage("/Products/UserProduct", "User",new {id = CusTmp.CustomerId.Trim()});
         }
 
         public async Task<IActionResult> OnPostRegisterAsync()

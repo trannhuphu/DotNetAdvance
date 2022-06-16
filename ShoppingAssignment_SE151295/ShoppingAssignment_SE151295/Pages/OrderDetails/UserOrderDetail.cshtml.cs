@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ShoppingAssignment_SE151295.Models;
+using ShoppingAssignment_SE151295.Pages.Customers;
 
 namespace ShoppingAssignment_SE151295.Pages.OrderDetails
 {
-    public class UserOrderDetailModel : PageModel
+    public class UserOrderDetailModel : CommonUser
     {
         private readonly ShoppingAssignment_SE151295.Models.NorthwindCopyDBContext _context;
 
@@ -20,6 +21,9 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
         }
 
         public IList<OrderDetail> OrderDetail { get;set; }
+
+        [BindProperty]
+        public Customer Customer {get;set;} =  UserCurrent;
 
         public async Task<IActionResult> OnGetAsync(string id)
         {

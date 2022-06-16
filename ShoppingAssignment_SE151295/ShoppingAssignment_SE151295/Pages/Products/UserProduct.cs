@@ -23,7 +23,7 @@ namespace ShoppingAssignment_SE151295.Pages.Products
         public IList<Product> Product { get;set; }
 
         [BindProperty]
-        public Customer Customer {get;set;} = UserCurrent;
+        public Customer Customer {get;set;}
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -32,6 +32,23 @@ namespace ShoppingAssignment_SE151295.Pages.Products
                 return RedirectToPage("/Login/MyLogin","Session");
             }
 
+            Customer = await _context.Customers.FirstOrDefaultAsync(m => m.CustomerId == id);
+            if(Customer != null)
+            {
+                UserCurrent = Customer;
+            }
+            else
+            {
+                if(UserCurrent != null)
+                {
+                    Customer = UserCurrent;
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+           
             Product = await _context.Products
             .Include(p => p.Category)
             .Include(p => p.Supplier).ToListAsync();
