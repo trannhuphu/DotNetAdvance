@@ -31,6 +31,12 @@
             <p> Search Product</p>
             <input type="text" asp-for="search" placeholder="search" class="search-input"/>
             <input type="submit" value="Search" asp-page-handler="SearchProduct" class="btn btn-primary"/>
+            @{
+                if(!string.IsNullOrEmpty(@Model.MsgErrsearch))
+                {
+                    <p class="alert alert-danger" role="alert">@Model.MsgErrsearch</p>
+                }
+            }
         </div>
 </form>
 <table class="table">

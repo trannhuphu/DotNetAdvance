@@ -57,12 +57,23 @@ namespace ShoppingAssignment_SE151295.Pages.Products
         [BindProperty]
         public string search {set;get;}
 
+        [BindProperty]
+        public string MsgErrsearch {set;get;}
+
         public IActionResult OnPostSearchProduct()
         {
             if (!string.IsNullOrEmpty(search))
             {
-                Product = _context.Products.Where(p => p.ProductId.ToString().Contains(search) ||
+                Product = _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Supplier)
+                .Where(p => p.ProductId.ToString().Contains(search) ||
                                                     p.ProductName.Contains(search)).ToList();
+            }
+            else
+            {
+                MsgErrsearch = "Can not find the Product Name or the Product ID!";
+                Product = _context.Products.ToList();
             }
 
             return Page();
