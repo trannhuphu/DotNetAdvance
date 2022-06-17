@@ -24,10 +24,17 @@ namespace SalesRazorPageApp.Pages
         [BindProperty]
         public Member member { set; get; }
 
+        [BindProperty]
+        public string ErrMsg { set; get; }
+
         public void OnGet()
         {
             memberRepository = new MemberRepository();
             member = memberRepository.GetMemByID(1);
+            if (member == null)
+            {
+                ErrMsg = "Member is not exist!";
+            }
         }
     }
 }

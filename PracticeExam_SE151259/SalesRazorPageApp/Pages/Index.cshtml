@@ -5,5 +5,15 @@
 }
 
 <div>
-    <a>Hello @Model.member.Email</a>
+
+    @{
+        if (!string.IsNullOrEmpty(Model.ErrMsg))
+        {
+            <p class="alert alert-danger" role="alert">@Model.ErrMsg</p>
+        }
+        else
+        {
+            <a>Hello @Model.member.Email</a>
+        }
+    }
 </div>

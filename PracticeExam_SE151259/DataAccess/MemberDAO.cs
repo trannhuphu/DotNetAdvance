@@ -14,7 +14,7 @@ namespace DataAccess
         private static MemberDAO instance = null;
         private static readonly object instanceLock = new object();
         private MemberDAO() { }
-        public static MemberDAO Instance
+        public static MemberDAO INSTANCE
         {
             get
             {
@@ -31,94 +31,39 @@ namespace DataAccess
 
         public IEnumerable<Member> GetMemberList()
         {
-            List<Member> mem;
-            try
-            {
-                var myMemDB = new FStoreDBContext();
-                mem = myMemDB.Members.ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var myMemDB = new FStoreDBContext();
+            List<Member> mem = myMemDB.Members.ToList();  
             return mem;
         }
 
         public Member GetMemByID(int memID)
         {
-            Member mem = null;
-            try
-            {
-                var myMemDB = new FStoreDBContext();
-                mem = myMemDB.Members.SingleOrDefault(mem => mem.MemberId == memID);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var myMemDB = new FStoreDBContext();
+            Member mem = myMemDB.Members.SingleOrDefault(mem => mem.MemberId == memID);  
             return mem;
         }
 
         public void AddMember(Member mem)
         {
-            try
-            {
-                Member member = GetMemByID(mem.MemberId);
-                if (member == null)
-                {
-                    var myMemDB = new FStoreDBContext();
-                    myMemDB.Members.Add(mem);
-                    myMemDB.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("The member is already exist");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+           var myMemDB = new FStoreDBContext();
+           myMemDB.Members.Add(mem);
+           myMemDB.SaveChanges();
         }
 
         public void UpdateMember(Member mem)
         {
-            try
-            {
-                Member mb = GetMemByID(mem.MemberId);
-                if (mb != null)
-                {
-                    var myMemDB = new FStoreDBContext();
-                    myMemDB.Entry<Member>(mem).State = EntityState.Modified;
-                    myMemDB.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("The member does not already exist");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+           Member mb = GetMemByID(mem.MemberId);
+           var myMemDB = new FStoreDBContext();
+           myMemDB.Entry<Member>(mem).State = EntityState.Modified;
+           myMemDB.SaveChanges();
         }
 
         public void RemoveMember(Member mem)
         {
-            try
-            {
-                Member member = GetMemByID(mem.MemberId);
-                if (member != null)
-                {
-                    var myMemDB = new FStoreDBContext();
-                    myMemDB.Members.Remove(mem);
-                    myMemDB.SaveChanges();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+           Member member = GetMemByID(mem.MemberId);
+           var myMemDB = new FStoreDBContext();
+           myMemDB.Members.Remove(mem);
+           myMemDB.SaveChanges();
         }
 
         private int CurrentMemberId = 0;
