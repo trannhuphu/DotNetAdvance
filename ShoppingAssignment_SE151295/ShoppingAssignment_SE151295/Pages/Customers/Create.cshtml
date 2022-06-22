@@ -9,6 +9,12 @@
 
 <h4>Customer</h4>
 <hr />
+@{
+    if (!string.IsNullOrEmpty(@Model.ErrorMessage))
+    {
+        <p class="alert alert-danger" role="alert">@Model.ErrorMessage</p>
+    }
+}
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -52,12 +58,6 @@
 
 <div>
     <a asp-page="CustomerManage">Back to List</a>
-    @{
-        if(!string.IsNullOrEmpty(@Model.ErrorMessage))
-        {
-            <p class="alert alert-danger" role="alert">@Model.ErrorMessage</p>
-        }
-    }
 </div>
 
 @section Scripts {

@@ -24,7 +24,8 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
 
         [BindProperty]
         public Customer Customer {get;set;} =  UserCurrent;
-
+        public decimal totalPrice { get; set; } = 0;
+        public decimal Price { get; set; } = 0;
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))

@@ -11,15 +11,20 @@
     }
 </style>
 <h1>Member Info</h1>
-
+@{
+    if (!string.IsNullOrEmpty(@Model.ErrorMessage))
+    {
+        <p class="alert alert-danger" role="alert">@Model.ErrorMessage</p>
+    }
+}
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Customer.CustomerId"/>
+            <input type="hidden" asp-for="Customer.CustomerId" />
             <div class="form-group">
                 <label asp-for="Customer.Password" class="control-label"></label>
-                <input asp-for="Customer.Password" class="form-control" />
+                <input asp-for="Customer.Password" type="password" class="form-control" />
                 <span asp-validation-for="Customer.Password" class="text-danger"></span>
             </div>
             <div class="form-group">

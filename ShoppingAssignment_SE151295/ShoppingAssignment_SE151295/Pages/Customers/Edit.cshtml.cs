@@ -44,6 +44,8 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
             return Page();
         }
 
+        [BindProperty]
+        public string ErrorMessage { get; set; }
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -53,6 +55,18 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
                 return Page();
             }
 
+            Customer Custemp = null;
+            try
+            {
+                Custemp = _context.Customers.Where(p => p.Email.Contains(Customer.Email)
+                                || p.CustomerId.Contains(Customer.CustomerId)).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = "The User ID or Email has already exist!";
+                return Page();
+            }
+            Customer.CustomerId = Customer.CustomerId.Trim();
             _context.Attach(Customer).State = EntityState.Modified;
 
             try

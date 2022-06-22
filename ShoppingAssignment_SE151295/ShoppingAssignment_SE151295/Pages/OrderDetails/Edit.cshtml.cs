@@ -31,7 +31,7 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
 
         public string OrderId {get;set;}
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(string id, int productid)
         {
             if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
             {
@@ -45,7 +45,9 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
 
             OrderDetail = await _context.OrderDetails
                 .Include(o => o.Order)
-                .Include(o => o.Product).FirstOrDefaultAsync(m => m.OrderId == id);
+                .Include(o => o.Product)
+                .Where(m => m.OrderId == id && m.ProductId == productid)
+                .FirstOrDefaultAsync();
 
             if (OrderDetail == null)
             {

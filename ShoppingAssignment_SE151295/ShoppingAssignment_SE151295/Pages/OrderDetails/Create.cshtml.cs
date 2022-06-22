@@ -80,7 +80,7 @@ namespace ShoppingAssignment_SE151295.Pages.OrderDetails
             {
                 int countQuantity = OrderDetail.Quantity;
                 Product product = _context.Products.Where(p => p.ProductId == OrderDetail.ProductId).SingleOrDefault();
-                if (countQuantity < product.QuantityPerUnit) 
+                if (countQuantity <= product.QuantityPerUnit) 
                 {
                     product.QuantityPerUnit -= countQuantity;
                 }

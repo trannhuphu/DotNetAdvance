@@ -47,14 +47,22 @@
                 @Html.DisplayFor(modelItem => item.Product.ProductName)
             </td>
             <td>
-@*                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+                @{
+                    Model.Price = item.UnitPrice * item.Quantity;
+                    Model.totalPrice += Model.Price;
+                }
+                @Model.Price
+            </td>
+            <td>
+                @*                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
             </td>
         </tr>
 }
     </tbody>
 </table>
 <div>
+    <h1>Total Order: @Model.totalPrice</h1>
     <a asp-page="/Orders/UserOrder">Back to List</a>
 </div>

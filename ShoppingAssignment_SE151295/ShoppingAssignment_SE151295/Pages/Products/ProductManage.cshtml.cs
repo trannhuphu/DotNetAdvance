@@ -19,13 +19,13 @@ namespace ShoppingAssignment_SE151295.Pages.Products
             _context = context;
         }
 
-        public IList<Product> Product { get;set; }
+        public IList<Product> Product { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
             {
-                return RedirectToPage("/Login/MyLogin","Session");
+                return RedirectToPage("/Login/MyLogin", "Session");
             }
 
             Product = await _context.Products
@@ -33,9 +33,9 @@ namespace ShoppingAssignment_SE151295.Pages.Products
                 .Include(p => p.Category)
                 .Include(p => p.Supplier).ToListAsync();
 
-            foreach(var item in Product)
+            foreach (var item in Product)
             {
-                if(item.OrderDetails.Count != 0)
+                if (item.OrderDetails.Count != 0)
                 {
                     item.ProductStatus = 0;
                     _context.Update(item);
@@ -55,10 +55,10 @@ namespace ShoppingAssignment_SE151295.Pages.Products
         }
 
         [BindProperty]
-        public string search {set;get;}
+        public string search { set; get; }
 
         [BindProperty]
-        public string MsgErrsearch {set;get;}
+        public string MsgErrsearch { set; get; }
 
         public IActionResult OnPostSearchProduct()
         {
@@ -68,12 +68,15 @@ namespace ShoppingAssignment_SE151295.Pages.Products
                 .Include(p => p.Category)
                 .Include(p => p.Supplier)
                 .Where(p => p.ProductId.ToString().Contains(search) ||
-                                                    p.ProductName.Contains(search)).ToList();
+                                                    p.ProductName.Contains(search) || p.UnitPrice.ToString().Contains(search)).ToList();
             }
             else
             {
                 MsgErrsearch = "Can not find the Product Name or the Product ID!";
-                Product = _context.Products.ToList();
+                Product = _context.Products
+                        .Include(p => p.OrderDetails)
+                        .Include(p => p.Category)
+                        .Include(p => p.Supplier).ToList();
             }
 
             return Page();

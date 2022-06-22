@@ -61,7 +61,7 @@
                 <td>
                     @*                 @Html.ActionLink("Edit", "Edit", new { id = item.Order.OrderId}) |
                         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
-                    <a asp-page="./Edit" asp-route-id="@item.OrderId.Trim()" class="btn btn-sm btn-info">Edit</a>
+                    <a asp-page="./Edit" asp-route-id="@item.OrderId.Trim()" asp-route-productid="@item.ProductId" class="btn btn-sm btn-info">Edit</a>
                     <a asp-page="./Delete" asp-route-orderid="@item.OrderId.Trim()" asp-route-productid="@item.ProductId" class="btn btn-sm btn-danger">Delete</a>
                 </td>
             </tr>
@@ -69,7 +69,7 @@
     </tbody>
 </table>
 <div>
-    <h4>Totoal Order: @Model.totalPrice</h4>
+    <h1>Total Order: @Model.totalPrice</h1>
     <a asp-page="/Orders/OrderManage" class="btn btn-primary">Back to List</a>
 </div>
 @section Scripts{

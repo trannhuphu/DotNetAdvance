@@ -45,16 +45,25 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
                 return Page();
             }
 
-            Customer Custemp =  _context.Customers.Where(p => p.Email.Contains(Customer.Email)
+            Customer Custemp = null;
+            try
+            {
+                Custemp = _context.Customers.Where(p => p.Email.Contains(Customer.Email)
                                 || p.CustomerId.Contains(Customer.CustomerId)).SingleOrDefault();
-
-            if(Custemp != null)
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = "The User ID or Email has already exist!";
+                return Page();
+            }
+            if (Custemp != null)
             {
                 ErrorMessage = "The User ID or Email has already exist!";
                 return Page();
             }
             else
             {
+               
                 IsUpdateSuccess = true;
                 _context.Customers.Add(Customer);
                 await _context.SaveChangesAsync();

@@ -25,7 +25,8 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
         public Customer Customer { get; set; } = UserCurrent;
 
         public bool IsUpdateSuccess { get; set; } = false;
-
+        [BindProperty]
+        public string ErrorMessage { get; set; }
         public async Task<IActionResult> OnGetUserAsync(string id)
         {
             if(string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
@@ -67,7 +68,18 @@ namespace ShoppingAssignment_SE151295.Pages.Customers
             {
                 return Page();
             }
-
+            Customer Custemp = null;
+            try
+            {
+                Custemp = _context.Customers.Where(p => p.Email.Contains(Customer.Email)
+                                || p.CustomerId.Contains(Customer.CustomerId)).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = "The User ID or Email has already exist!";
+                return Page();
+            }
+            Customer.CustomerId = Customer.CustomerId.Trim();
             _context.Attach(Customer).State = EntityState.Modified;
 
             try
