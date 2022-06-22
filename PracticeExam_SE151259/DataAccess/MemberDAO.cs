@@ -29,7 +29,7 @@ namespace DataAccess
             }
         }
 
-        public IEnumerable<Member> GetMemberList()
+        public List<Member> GetMemberList()
         {
             var myMemDB = new FStoreDBContext();
             List<Member> mem = myMemDB.Members.ToList();  
@@ -69,7 +69,10 @@ namespace DataAccess
         private int CurrentMemberId = 0;
         public int GetCurrentMemberId() => CurrentMemberId;
 
-        public int Login(string strEmail, string strPassword, ref Member member)
+        private bool IsAdmin = false;
+        public bool CheckIsAdmin() => IsAdmin;
+
+        public void Login(string strEmail, string strPassword)
         {
 
             IConfiguration config = new ConfigurationBuilder()
@@ -82,18 +85,21 @@ namespace DataAccess
 
             if (strEmail == userAdmin && strPassword == userPassword)
             {
-                return 1; //role admin
+                IsAdmin = true; //role admin
             }
             else
             {
-                member = GetMemberList().Where(tmp => tmp.Email == strEmail
+                var member = GetMemberList().Where(tmp => tmp.Email == strEmail
                                         && tmp.Password == strPassword).FirstOrDefault();
                 if (member != null)
                 {
                     CurrentMemberId = member.MemberId;
-                    return 2;
+                    IsAdmin = false;
                 }
-                throw new Exception("User mail or Password is incorrect!");
+                else
+                {
+                    throw new Exception();
+                }
             }
         }
     }

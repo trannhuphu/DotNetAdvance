@@ -2,18 +2,24 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Login page";
+    Layout = "~/Pages/Shared/_LayoutLogin.cshtml";
 }
-
-<div>
-
+<div class="col-4">
+    <form method="post">
+        <div class="form-group">
+            Email: <input asp-for="member.Email" />
+        </div>
+        <div class="form-group">
+            Password: <input asp-for="member.Password" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login" />
+        </div>
+    </form>
     @{
         if (!string.IsNullOrEmpty(Model.ErrMsg))
         {
-            <p class="alert alert-danger" role="alert">@Model.ErrMsg</p>
-        }
-        else
-        {
-            <a>Hello @Model.member.Email</a>
+            <p style="color:red" >@Model.ErrMsg</p>
         }
     }
 </div>

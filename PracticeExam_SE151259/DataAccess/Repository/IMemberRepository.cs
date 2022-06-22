@@ -9,11 +9,13 @@ namespace DataAccess.Repository
 {
     public interface IMemberRepository
     {
-        IEnumerable<Member> GetMembers();
+        List<Member> GetMembers();
         Member GetMemByID(int memId);
         void AddMem(Member member);
         void Delete(Member member);
         void UpdateMem(Member member);
-        int Login(string email, string password, ref Member member);
+        void Login(string email, string password);
+        bool CheckIsAdmin();
+        int GetCurrentMemberId();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BusinessObject.Models;
 using DataAccess.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -14,8 +15,6 @@ namespace SalesRazorPageApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        private IMemberRepository memberRepository = null;
-
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
@@ -27,14 +26,33 @@ namespace SalesRazorPageApp.Pages
         [BindProperty]
         public string ErrMsg { set; get; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            memberRepository = new MemberRepository();
-            member = memberRepository.GetMemByID(1);
-            if (member == null)
+            HttpContext.Session.Clear();
+            return Page();
+        }
+        public IActionResult OnGetSession()
+        {
+            ErrMsg = "Please login first!!";
+            return Page();
+        }
+
+        private IMemberRepository memberRepository = new MemberRepository();
+
+        public IActionResult OnPost()
+        {
+            try
             {
-                ErrMsg = "Member is not exist!";
+                memberRepository.Login(member.Email, member.Password);
+                HttpContext.Session.SetString("username", member.Email);
+                return RedirectToPage("./Products/MainProduct");       
             }
+            catch
+            {
+                ErrMsg = "Email or Password is incorrect!";
+            }
+
+            return Page();
         }
     }
 }
