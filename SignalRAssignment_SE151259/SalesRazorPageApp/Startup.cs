@@ -27,7 +27,7 @@ namespace SignalRAssignment
         {
             services.AddRazorPages();
             services.AddSession();
-            services.AddDbContext<FStoreDBContext>(options =>
+            services.AddDbContext<ApplicationDBContext>(options =>
                      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
