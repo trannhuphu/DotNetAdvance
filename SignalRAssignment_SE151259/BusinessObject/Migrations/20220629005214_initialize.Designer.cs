@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObject.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20220629000326_initialize")]
+    [Migration("20220629005214_initialize")]
     partial class initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,16 @@ namespace BusinessObject.Migrations
                     b.HasKey("UserID");
 
                     b.ToTable("AppUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            UserID = 1,
+                            Address = "HCM city",
+                            Email = "user01@gmail.com",
+                            FullName = "user01",
+                            Password = "123"
+                        });
                 });
 
             modelBuilder.Entity("BusinessObject.Models.PostCategories", b =>
@@ -61,6 +71,14 @@ namespace BusinessObject.Migrations
                     b.HasKey("CategoryID");
 
                     b.ToTable("PostCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryName = "Science",
+                            Description = "Category include info physical, math, etc."
+                        });
                 });
 
             modelBuilder.Entity("BusinessObject.Models.Posts", b =>
@@ -98,6 +116,19 @@ namespace BusinessObject.Migrations
                     b.HasIndex("CategoryID");
 
                     b.ToTable("Posts");
+
+                    b.HasData(
+                        new
+                        {
+                            PostID = 1,
+                            AuthorID = 1,
+                            CategoryID = 1,
+                            Content = "NASA fire a rocket",
+                            CreatedDate = new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PublishStatus = 1,
+                            Title = "Science",
+                            UpdatedDate = new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("BusinessObject.Models.Posts", b =>

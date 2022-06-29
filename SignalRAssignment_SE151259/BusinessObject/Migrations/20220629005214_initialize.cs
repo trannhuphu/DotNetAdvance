@@ -68,6 +68,21 @@ namespace BusinessObject.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AppUsers",
+                columns: new[] { "UserID", "Address", "Email", "FullName", "Password" },
+                values: new object[] { 1, "HCM city", "user01@gmail.com", "user01", "123" });
+
+            migrationBuilder.InsertData(
+                table: "PostCategories",
+                columns: new[] { "CategoryID", "CategoryName", "Description" },
+                values: new object[] { 1, "Science", "Category include info physical, math, etc." });
+
+            migrationBuilder.InsertData(
+                table: "Posts",
+                columns: new[] { "PostID", "AuthorID", "CategoryID", "Content", "CreatedDate", "PublishStatus", "Title", "UpdatedDate" },
+                values: new object[] { 1, 1, 1, "NASA fire a rocket", new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Science", new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_AuthorID",
                 table: "Posts",
