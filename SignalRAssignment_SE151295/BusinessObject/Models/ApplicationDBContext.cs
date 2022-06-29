@@ -9,7 +9,9 @@ namespace BusinessObject.Models
 {
     public partial class ApplicationDBContext : DbContext
     {
-
+        public ApplicationDBContext()
+        {
+        }
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options):
                 base(options)
         {
