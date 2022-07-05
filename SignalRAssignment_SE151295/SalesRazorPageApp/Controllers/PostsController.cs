@@ -8,36 +8,33 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObject.Models;
 using SignalRAssignment;
 using Microsoft.AspNetCore.SignalR;
+using DataAccess.Repository;
 
 namespace SalesRazorPageApp.Controllers
 {
     public class PostsController : Controller
     {
-        private readonly ApplicationDBContext _context;
+        public IPostRepository repository = new PostRepository();
         public IHubContext<SignalrServer> _signalRHub;
 
-        public PostsController(ApplicationDBContext context, IHubContext<SignalrServer> signalRHub)
+        public PostsController(IHubContext<SignalrServer> signalRHub)
         {
-            _context = context;
             _signalRHub = signalRHub;
         }
 
         // GET: Posts
         public  IActionResult Index()
         {
-            //var applicationDBContext = _context.Posts.Include(p => p.AppUsers).Include(p => p.PostCategories).ToList();
-            // _signalRHub.Clients.All.SendAsync("LoadPosts");
+
             return View();
         }
 
         // GET: Posts
         [HttpGet]
-        public IActionResult GetPostList()
+        public List<Posts> GetPostList()
         {
-            var applicationDBContext = _context.Posts
-                .Include(o => o.PostCategories)
-                .ToList();
-            return Ok(applicationDBContext);
+            var applicationDBContext = repository.GetPostList();
+            return applicationDBContext;
         }
 
         // GET: Posts/Details/5
@@ -48,10 +45,12 @@ namespace SalesRazorPageApp.Controllers
                 return NotFound();
             }
 
-            var posts = await _context.Posts
-                .Include(p => p.AppUsers)
-                .Include(p => p.PostCategories)
-                .FirstOrDefaultAsync(m => m.PostID == id);
+            /*            var posts = await _context.Posts
+                            .Include(p => p.AppUsers)
+                            .Include(p => p.PostCategories)
+                            .FirstOrDefaultAsync(m => m.PostID == id);*/
+            var posts = repository.GetPostById((int)id);
+
             if (posts == null)
             {
                 return NotFound();
@@ -63,8 +62,8 @@ namespace SalesRazorPageApp.Controllers
         // GET: Posts/Create
         public IActionResult Create()
         {
-            ViewData["AuthorID"] = new SelectList(_context.AppUsers, "UserID", "FullName");
-            ViewData["CategoryID"] = new SelectList(_context.PostCategories, "CategoryID", "CategoryName");
+            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName");
+            ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryName");
             return View();
         }
 
@@ -75,13 +74,12 @@ namespace SalesRazorPageApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(posts);
-                await _context.SaveChangesAsync();
+                repository.CreatePost(posts);
                 await _signalRHub.Clients.All.SendAsync("LoadPosts");
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorID"] = new SelectList(_context.AppUsers, "UserID", "FullName", posts.AuthorID);
-            ViewData["CategoryID"] = new SelectList(_context.PostCategories, "CategoryID", "CategoryName", posts.CategoryID);
+            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName", posts.AuthorID);
+            ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryName", posts.CategoryID);
             return View(posts);
         }
 
@@ -93,13 +91,13 @@ namespace SalesRazorPageApp.Controllers
                 return NotFound();
             }
 
-            var posts = await _context.Posts.FindAsync(id);
+            var posts = repository.GetPostById((int)id);
             if (posts == null)
             {
                 return NotFound();
             }
-            ViewData["AuthorID"] = new SelectList(_context.AppUsers, "UserID", "UserID", posts.AuthorID);
-            ViewData["CategoryID"] = new SelectList(_context.PostCategories, "CategoryID", "CategoryName", posts.CategoryID);
+            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "UserID", posts.AuthorID);
+            ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryName", posts.CategoryID);
             return View(posts);
         }
 
@@ -117,40 +115,31 @@ namespace SalesRazorPageApp.Controllers
             {
                 try
                 {
-                    _context.Update(posts);
-                    await _context.SaveChangesAsync();
+                    repository.UpdatePost(posts);
                     await _signalRHub.Clients.All.SendAsync("LoadPosts");
                 }
-                catch (DbUpdateConcurrencyException)
+                catch
                 {
-                    if (!PostsExists(posts.PostID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorID"] = new SelectList(_context.AppUsers, "UserID", "UserID", posts.AuthorID);
-            ViewData["CategoryID"] = new SelectList(_context.PostCategories, "CategoryID", "CategoryID", posts.CategoryID);
+            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "UserID", posts.AuthorID);
+            ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryID", posts.CategoryID);
             return View(posts);
         }
 
         // GET: Posts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var posts = await _context.Posts
-                .Include(p => p.AppUsers)
-                .Include(p => p.PostCategories)
-                .FirstOrDefaultAsync(m => m.PostID == id);
+            var posts = repository.GetPostById((int)id);
+               
             if (posts == null)
             {
                 return NotFound();
@@ -164,16 +153,14 @@ namespace SalesRazorPageApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int PostID)
         {
-            var posts = await _context.Posts.FindAsync(PostID);
-            _context.Posts.Remove(posts);
-            await _context.SaveChangesAsync();
+
+
+
+            var posts = repository.GetPostById(PostID);
+            repository.DeletePost(posts);
+
             await _signalRHub.Clients.All.SendAsync("LoadPosts");
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool PostsExists(int id)
-        {
-            return _context.Posts.Any(e => e.PostID == id);
         }
     }
 }

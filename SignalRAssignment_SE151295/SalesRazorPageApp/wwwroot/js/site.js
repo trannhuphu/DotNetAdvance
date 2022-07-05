@@ -9,7 +9,7 @@
     })
 
     LoadPosData();
-   
+
     function LoadPosData() {
         var tr = '';
         $.ajax({
@@ -49,7 +49,7 @@
                 <a href='../Posts/Delete?id=${postId}'>Delete</a>
             </td>
         </tr>`
-            
+
                 $("#tableBody").html(tr);
             },
 
