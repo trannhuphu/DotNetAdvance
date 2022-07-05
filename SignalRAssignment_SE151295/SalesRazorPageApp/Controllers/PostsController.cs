@@ -69,9 +69,7 @@ namespace SalesRazorPageApp.Controllers
         }
 
         // POST: Posts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PostID,AuthorID,CreatedDate,UpdatedDate,Title,Content,PublishStatus,CategoryID")] Posts posts)
         {
@@ -101,14 +99,12 @@ namespace SalesRazorPageApp.Controllers
                 return NotFound();
             }
             ViewData["AuthorID"] = new SelectList(_context.AppUsers, "UserID", "UserID", posts.AuthorID);
-            ViewData["CategoryID"] = new SelectList(_context.PostCategories, "CategoryID", "CategoryID", posts.CategoryID);
+            ViewData["CategoryID"] = new SelectList(_context.PostCategories, "CategoryID", "CategoryName", posts.CategoryID);
             return View(posts);
         }
 
         // POST: Posts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+       [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int PostID, [Bind("PostID,AuthorID,CreatedDate,UpdatedDate,Title,Content,PublishStatus,CategoryID")] Posts posts)
         {

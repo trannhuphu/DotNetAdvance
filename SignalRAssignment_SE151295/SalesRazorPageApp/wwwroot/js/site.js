@@ -15,25 +15,41 @@
         $.ajax({
             url: '/Posts/GetPostList',
             method: 'GET',
+
             success: (result) => {
-                $.each(result, (k, v) => {
-                    tr += `<tr>
+                var postId = result['$id']
+                var data = result['$values']
+                if (!data || !postId) {
+                    tr += 'No data'
+                    return
+                }
+                /*$.each(result, (k, v) => {
+                    console.log(v)*/
+                tr += `<tr>
             <td>
-               ${v[0].CreatedDate}
+               ${data[0].CreatedDate}
             </td>
             <td>
-              ${v[0].PostCategories.CategoryName}
+              ${data[0].UpdatedDate}
             </td>
             <td>
-              
+              ${data[0].Title}
             </td>
             <td>
-                <a href='../Posts/Edit?id=${v.PostID}'>Edit</a> |
-                <a href='../Posts/Details?id=${v.PostID}'>Details</a> |
-                <a href='../Posts/Delete?id=${v.PostID}'>Delete</a>
+              ${data[0].Content}
+            </td>
+            <td>
+              ${data[0].PublishStatus}
+            </td>
+            <td>
+              ${data[0].PostCategories.CategoryName}
+            </td>
+            <td>
+                <a href='../Posts/Edit?id=${postId}'>Edit</a> |             
+                <a href='../Posts/Delete?id=${postId}'>Delete</a>
             </td>
         </tr>`
-                })
+            
                 $("#tableBody").html(tr);
             },
 

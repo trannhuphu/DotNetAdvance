@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Post Management</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -28,11 +28,11 @@
                 @Html.DisplayNameFor(model => model.PublishStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PostCategories)
+                @Html.DisplayNameFor(model => model.PostCategories.CategoryName)
             </th>
-            <th>
+           @* <th>
                 @Html.DisplayNameFor(model => model.AppUsers)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
