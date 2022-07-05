@@ -15,5 +15,7 @@ namespace DataAccess.Repository
         void CreatePost(Posts post);
         Posts GetPostById(int postId);
         List<Posts> GetPostList();
+        List<AppUsers> GetAppUserList();
+
     }
 }

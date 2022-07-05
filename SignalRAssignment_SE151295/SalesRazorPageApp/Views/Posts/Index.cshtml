@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BusinessObject.Models.Posts>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublishStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostCategories)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppUsers)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+</table>

@@ -27,6 +27,7 @@ namespace DataAccess
                 }
             }
         }
+
         public List<Posts> GetPostList()
         {
             var db = new ApplicationDBContext();
@@ -35,6 +36,7 @@ namespace DataAccess
                                         .ToList();
             return posts;
         }
+
         public Posts GetPostById(int postId)
         {
             var db = new ApplicationDBContext();
@@ -43,6 +45,7 @@ namespace DataAccess
                                  .Where(tmp => tmp.PostID == postId).FirstOrDefault();
             return post;
         }
+
         public void CreatePost(Posts post)
         {
             var db = new ApplicationDBContext();
@@ -55,6 +58,7 @@ namespace DataAccess
             db.Entry<Posts>(post).State = EntityState.Modified;
             db.SaveChanges();
         }
+
         public void DeletePost(Posts post)
         {
             var db = new ApplicationDBContext();
@@ -66,6 +70,13 @@ namespace DataAccess
             var db = new ApplicationDBContext();
             List<PostCategories> category = db.PostCategories.ToList();
             return category;
+        }
+
+        public List<AppUsers> GetAppUserList()
+        {
+            var db = new ApplicationDBContext();
+            List<AppUsers> appUsers = db.AppUsers.ToList();
+            return appUsers;
         }
     }
 }

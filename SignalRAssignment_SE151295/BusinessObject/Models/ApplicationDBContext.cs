@@ -12,9 +12,18 @@ namespace BusinessObject.Models
         public ApplicationDBContext()
         {
         }
+
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options):
                 base(options)
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("server =(local); database = ApplicationDBContext;uid=sa;pwd=112233;");
+            }
         }
         public virtual  DbSet<Posts> Posts { set; get; }
         public virtual  DbSet<PostCategories> PostCategories { set; get; }
@@ -25,7 +34,17 @@ namespace BusinessObject.Models
             modelBuilder.Entity<Posts>(entity =>
             {
                 entity.Property(p => p.PostID)
+                      .HasColumnName("PostID")
                       .IsRequired();
+
+                entity.Property(p => p.AuthorID).HasColumnName("AuthorID");
+                entity.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
+                entity.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
+                entity.Property(p => p.Title).HasColumnName("Title");
+                entity.Property(p => p.Content).HasColumnName("Content");
+                entity.Property(p => p.PublishStatus).HasColumnName("PublishStatus");
+                entity.Property(p => p.CategoryID).HasColumnName("CategoryID");
+
 
                 entity.HasOne(d => d.PostCategories)
                       .WithMany(p => p.Posts)
@@ -41,12 +60,21 @@ namespace BusinessObject.Models
             {
                 entity.Property(p => p.CategoryID)
                       .IsRequired();
+
+                entity.Property(p => p.CategoryName).HasColumnName("CategoryName");
+                entity.Property(p => p.Description).HasColumnName("Description");
+
             });
 
             modelBuilder.Entity<AppUsers>(entity =>
             {
                 entity.Property(p => p.UserID)
                       .IsRequired();
+                entity.Property(p => p.FullName).HasColumnName("FullName");
+                entity.Property(p => p.Address).HasColumnName("Address");
+                entity.Property(p => p.Email).HasColumnName("Email");
+                entity.Property(p => p.Password).HasColumnName("Password");
+
             });
 
             modelBuilder.Entity<AppUsers>().HasData(

@@ -15,5 +15,6 @@ namespace DataAccess.Repository
         public void CreatePost(Posts post) => PostDAO.Instance.CreatePost(post);
         public Posts GetPostById(int postId) => PostDAO.Instance.GetPostById(postId);
         public List<Posts> GetPostList() => PostDAO.Instance.GetPostList();
+        public List<AppUsers> GetAppUserList() => PostDAO.Instance.GetAppUserList();
     }
 }

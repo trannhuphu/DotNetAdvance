@@ -1,16 +1,7 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-const { error } = require("jquery");
-const { signalR } = require("../microsoft/signalr/dist/browser/signalr");
-
-// Write your JavaScript code.
-
-
-$(() => {
+﻿$(() => {
     LoadPosData();
 
-    var connection = new signalR.HubConnectionBuilder().withUrl("/signalrServer").build();
+    var connection = new signalR.HubConnectionBuilder().withUrl("/SignalrServer").build();
     connection.start();
 
     connection.on("LoadPosts", function () {
@@ -18,25 +9,32 @@ $(() => {
     })
 
     LoadPosData();
-
+   
     function LoadPosData() {
         var tr = '';
         $.ajax({
-            url: '/PostsPage/MainPost',
+            url: '/Posts/GetPostList',
             method: 'GET',
             success: (result) => {
                 $.each(result, (k, v) => {
                     tr += `<tr>
-                            <td>${v.AuthorID}</td>
-                            <td>${v.CreatedDate}</td>
-                            <td>${v.UpdatedDate}</td>
-                            <td>${v.Title}</td>
-                            <td>${v.Content}</td>
-                            <td>${v.PublishStatus}</td>
-                            <td>${v.CategoryID}</td>
-                    </tr>`
+            <td>
+               ${v[0].CreatedDate}
+            </td>
+            <td>
+              ${v[0].PostCategories.CategoryName}
+            </td>
+            <td>
+              
+            </td>
+            <td>
+                <a href='../Posts/Edit?id=${v.PostID}'>Edit</a> |
+                <a href='../Posts/Details?id=${v.PostID}'>Details</a> |
+                <a href='../Posts/Delete?id=${v.PostID}'>Delete</a>
+            </td>
+        </tr>`
                 })
-                $("#tableBody").html(tr)
+                $("#tableBody").html(tr);
             },
 
             error: (error) => {
