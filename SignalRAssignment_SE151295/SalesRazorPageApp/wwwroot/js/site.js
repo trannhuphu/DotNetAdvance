@@ -35,8 +35,9 @@
               ${getCategoryName(post)}
             </td>
             <td>
-                <a href='../Posts/Edit?id=${post.PostID}'>Edit</a> |
-                <a href='../Posts/Delete?id=${post.PostID}'>Delete</a>
+                <a class="btnEdit" href='../Posts/Edit?id=${post.PostID}'>Edit</a>
+                <span class="btnDelete"> | </span>
+                <a class="btnDelete" href='../Posts/Delete?id=${post.PostID}'>Delete</a>
             </td>
         </tr>`
         return tr;
@@ -58,7 +59,6 @@
         postcategory = [];
         var listRow = ""
         
-
         $.ajax({
             url: '/Posts/GetPostList',
             method: 'GET',
@@ -72,7 +72,10 @@
                 }
                 listRow = postList.map(CreateRowList).join("");
                 $("#tableBody").html(listRow);
-                
+                let isMember = $('[name=isMember]').val();
+                if (isMember == "True") {
+                    $('.btnDelete').hide();
+                }
             },
 
             error: (error) => {

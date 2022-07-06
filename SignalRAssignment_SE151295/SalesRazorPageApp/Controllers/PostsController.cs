@@ -15,6 +15,7 @@ namespace SalesRazorPageApp.Controllers
     public class PostsController : Controller
     {
         public IPostRepository repository = new PostRepository();
+        public IUserRepository userRepository = new UserRepository();
         public IHubContext<SignalrServer> _signalRHub;
 
         public PostsController(IHubContext<SignalrServer> signalRHub)
@@ -25,7 +26,7 @@ namespace SalesRazorPageApp.Controllers
         // GET: Posts
         public  IActionResult Index()
         {
-
+            ViewBag.IsMemberLogin = userRepository.CheckIsMemberLogin().ToString();
             return View();
         }
 

@@ -25,11 +25,10 @@ namespace SalesRazorPageApp.Controllers
                 IsLoginSuccess = userRepository.checkLogin(email, password);
                 if (IsLoginSuccess)
                 {
-                    ViewBag.IsMemberLogin = false;
+                   
                     return RedirectToAction("Index", "Posts");
                 }
 
-                ViewBag.IsMemberLogin = true;
             }
             catch(Exception ex)
             {

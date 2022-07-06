@@ -66,6 +66,14 @@ namespace DataAccess
             return post;
         }*/
 
+        public AppUsers CurrentMemberLogin { set; get; }
+
+        public AppUsers GetCurrentMemberLogin() => CurrentMemberLogin;
+
+        public bool IsMemberLogin { set; get; }
+
+        public bool CheckIsMemberLogin() => IsMemberLogin;
+
         public bool checkLogin(string email, string password)
         {
             IConfiguration config = new ConfigurationBuilder()
@@ -77,13 +85,20 @@ namespace DataAccess
             string userPassword = config["Account:password"];
 
             if (userAdmin == email && userPassword == password)
+            {
+                IsMemberLogin = false;
                 return true;
+            }
 
             var db = new ApplicationDBContext();
             AppUsers appUsers = db.AppUsers.Where(p => p.Email == email
                                 && p.Password == password).FirstOrDefault();
             if (appUsers != null)
+            {
+                IsMemberLogin = true;
+                CurrentMemberLogin = appUsers;
                 return true;
+            }
 
             return false;
         }

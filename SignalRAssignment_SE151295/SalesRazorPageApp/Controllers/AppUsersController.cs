@@ -14,17 +14,18 @@ namespace SalesRazorPageApp.Controllers
     {
         public IUserRepository repository = new UserRepository();
 
-        
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
-        }
+            bool IsMemberLogin = repository.CheckIsMemberLogin();
+            if (IsMemberLogin)
+            {
+                return RedirectToAction("Edit", new { id = repository.
+                    GetCurrentMemberLogin().UserID});
+            }
 
-        [HttpGet]
-        public List<AppUsers> GetUserList()
-        {
-            var applicationDBContext = repository.GetUserList();
-            return applicationDBContext;
+            List<AppUsers> appUsers = repository.GetUserList();
+            return View(appUsers);
         }
 
         // GET: AppUsers/Create
@@ -32,14 +33,14 @@ namespace SalesRazorPageApp.Controllers
         {
             return View();
         }
+
          [HttpPost]
          [ValidateAntiForgeryToken]
-         public async Task<IActionResult> Create([Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
+         public  IActionResult Create([Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
          {
              if (ModelState.IsValid)
              {
-                 //_context.Add(appUsers);
-                 //await _context.SaveChangesAsync();
+                 repository.AddUser(appUsers);
                  return RedirectToAction(nameof(Index));
              }
              return View(appUsers);
@@ -61,37 +62,29 @@ namespace SalesRazorPageApp.Controllers
             return View(user);
         }
 
-        /*   [HttpPost]
-           [ValidateAntiForgeryToken]
-           public async Task<IActionResult> Edit(int id, [Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
-           {
-               if (id != appUsers.UserID)
-               {
-                   return NotFound();
-               }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, [Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
+        {
+            if (id != appUsers.UserID)
+            {
+                return NotFound();
+            }
 
-               if (ModelState.IsValid)
-               {
-                   try
-                   {
-                       _context.Update(appUsers);
-                       await _context.SaveChangesAsync();
-                   }
-                   catch (DbUpdateConcurrencyException)
-                   {
-                       if (!AppUsersExists(appUsers.UserID))
-                       {
-                           return NotFound();
-                       }
-                       else
-                       {
-                           throw;
-                       }
-                   }
-                   return RedirectToAction(nameof(Index));
-               }
-               return View(appUsers);
-           }*/
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    repository.UpdateUser(appUsers);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(appUsers);
+        }
 
         // GET: AppUsers/Delete/5
         public IActionResult Delete(int? id)
@@ -103,25 +96,22 @@ namespace SalesRazorPageApp.Controllers
 
             var user = repository.GetUsersById((int)id);
 
-            /* if (posts == null)
+             if (user == null)
              {
                  return NotFound();
-             }*/
+             }
 
             return View(user);
         }
-/*
+
         // POST: AppUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int UserID)
         {
-            var appUsers = await _context.AppUsers.FindAsync(id);
-            _context.AppUsers.Remove(appUsers);
-            await _context.SaveChangesAsync();
+            var appUsers = repository.GetUsersById((int)UserID);
+            repository.DeleteUser(appUsers);
             return RedirectToAction(nameof(Index));
-        }*/
-
-       
+        }
     }
 }

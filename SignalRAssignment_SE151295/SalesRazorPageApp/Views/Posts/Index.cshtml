@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutCustom.cshtml";
 }
 
 <h1>Post Management</h1>
@@ -37,4 +38,6 @@
         </tr>
     </thead>
     <tbody  id="tableBody"></tbody>
+
 </table>
+<input type="hidden" name="isMember" value="@ViewBag.IsMemberLogin"/>

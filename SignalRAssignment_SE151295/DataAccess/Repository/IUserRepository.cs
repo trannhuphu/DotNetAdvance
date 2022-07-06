@@ -16,5 +16,7 @@ namespace DataAccess.Repository
         AppUsers GetUsersById(int userId);
         List<AppUsers> GetUserList();
         bool checkLogin(string email, string password);
+        bool CheckIsMemberLogin();
+        AppUsers GetCurrentMemberLogin();
     }
 }
