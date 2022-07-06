@@ -15,6 +15,6 @@ namespace DataAccess.Repository
         void AddUser(AppUsers user);
         AppUsers GetUsersById(int userId);
         List<AppUsers> GetUserList();
-
+        bool checkLogin(string email, string password);
     }
 }

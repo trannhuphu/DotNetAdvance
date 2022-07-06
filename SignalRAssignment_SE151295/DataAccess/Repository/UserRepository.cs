@@ -15,5 +15,6 @@ namespace DataAccess.Repository
         public void AddUser(AppUsers user) => UserDAO.Instance.AddUser(user);
         public AppUsers GetUsersById(int userId) => UserDAO.Instance.GetUsersById(userId);
         public List<AppUsers> GetUserList() => UserDAO.Instance.GetUserList();
+        public bool checkLogin(string email, string password) => UserDAO.Instance.checkLogin(email, password);
     }
 }

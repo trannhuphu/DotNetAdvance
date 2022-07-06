@@ -23,7 +23,6 @@ namespace SalesRazorPageApp.Controllers
         [HttpGet]
         public List<AppUsers> GetUserList()
         {
-
             var applicationDBContext = repository.GetUserList();
             return applicationDBContext;
         }
@@ -33,18 +32,18 @@ namespace SalesRazorPageApp.Controllers
         {
             return View();
         }
-        /* [HttpPost]
+         [HttpPost]
          [ValidateAntiForgeryToken]
          public async Task<IActionResult> Create([Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
          {
              if (ModelState.IsValid)
              {
-                 _context.Add(appUsers);
-                 await _context.SaveChangesAsync();
+                 //_context.Add(appUsers);
+                 //await _context.SaveChangesAsync();
                  return RedirectToAction(nameof(Index));
              }
              return View(appUsers);
-         }*/
+         }
 
         // GET: AppUsers/Edit/5
         public IActionResult Edit(int? id)

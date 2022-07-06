@@ -1,7 +1,9 @@
 ﻿using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +13,7 @@ namespace DataAccess
     public class UserDAO
     {
         private static UserDAO instance = null;
-        private static readonly object instanceLock = null;
+        private static readonly object instanceLock = new object();
         public UserDAO() { }
        public static UserDAO Instance
         {
@@ -63,5 +65,27 @@ namespace DataAccess
             List<Posts> post = db.Posts.ToList();
             return post;
         }*/
+
+        public bool checkLogin(string email, string password)
+        {
+            IConfiguration config = new ConfigurationBuilder()
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json", true, true)
+                        .Build();
+
+            string userAdmin = config["Account:email"];
+            string userPassword = config["Account:password"];
+
+            if (userAdmin == email && userPassword == password)
+                return true;
+
+            var db = new ApplicationDBContext();
+            AppUsers appUsers = db.AppUsers.Where(p => p.Email == email
+                                && p.Password == password).FirstOrDefault();
+            if (appUsers != null)
+                return true;
+
+            return false;
+        }
     }
 }
