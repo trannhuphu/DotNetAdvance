@@ -33,6 +33,7 @@ namespace SalesRazorPageApp.Controllers
         [HttpGet]
         public List<Posts> GetPostList()
         {
+
             var applicationDBContext = repository.GetPostList();
             return applicationDBContext;
         }
@@ -84,7 +85,7 @@ namespace SalesRazorPageApp.Controllers
         }
 
         // GET: Posts/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -140,10 +141,10 @@ namespace SalesRazorPageApp.Controllers
 
             var posts = repository.GetPostById((int)id);
                
-            if (posts == null)
+           /* if (posts == null)
             {
                 return NotFound();
-            }
+            }*/
 
             return View(posts);
         }
@@ -153,8 +154,6 @@ namespace SalesRazorPageApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int PostID)
         {
-
-
 
             var posts = repository.GetPostById(PostID);
             repository.DeletePost(posts);
