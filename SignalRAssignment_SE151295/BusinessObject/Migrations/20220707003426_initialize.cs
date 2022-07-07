@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BusinessObject.Migrations
 {
-    public partial class Initialize : Migration
+    public partial class initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -71,17 +71,31 @@ namespace BusinessObject.Migrations
             migrationBuilder.InsertData(
                 table: "AppUsers",
                 columns: new[] { "UserID", "Address", "Email", "FullName", "Password" },
-                values: new object[] { 1, "HCM city", "user01@gmail.com", "user01", "123" });
+                values: new object[,]
+                {
+                    { 1, "HCM city", "user01@gmail.com", "user01", "123" },
+                    { 2, "Da Nang city", "user02@gmail.com", "user02", "123" }
+                });
 
             migrationBuilder.InsertData(
                 table: "PostCategories",
                 columns: new[] { "CategoryID", "CategoryName", "Description" },
-                values: new object[] { 1, "Science", "Category include info physical, math, etc." });
+                values: new object[,]
+                {
+                    { 1, "Science", "Category include info physical, math, etc." },
+                    { 2, "Social", "COVID 19" },
+                    { 3, "Entertainment", "Music, video game and movies etc." }
+                });
 
             migrationBuilder.InsertData(
                 table: "Posts",
                 columns: new[] { "PostID", "AuthorID", "CategoryID", "Content", "CreatedDate", "PublishStatus", "Title", "UpdatedDate" },
                 values: new object[] { 1, 1, 1, "NASA fire a rocket", new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Science", new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Posts",
+                columns: new[] { "PostID", "AuthorID", "CategoryID", "Content", "CreatedDate", "PublishStatus", "Title", "UpdatedDate" },
+                values: new object[] { 2, 1, 3, "Recently, the music is kind of chill music", new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Music Today", new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_AuthorID",

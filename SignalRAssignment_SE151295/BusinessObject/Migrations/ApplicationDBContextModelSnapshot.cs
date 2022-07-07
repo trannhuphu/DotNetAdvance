@@ -54,6 +54,14 @@ namespace BusinessObject.Migrations
                             Email = "user01@gmail.com",
                             FullName = "user01",
                             Password = "123"
+                        },
+                        new
+                        {
+                            UserID = 2,
+                            Address = "Da Nang city",
+                            Email = "user02@gmail.com",
+                            FullName = "user02",
+                            Password = "123"
                         });
                 });
 
@@ -82,6 +90,18 @@ namespace BusinessObject.Migrations
                             CategoryID = 1,
                             CategoryName = "Science",
                             Description = "Category include info physical, math, etc."
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryName = "Social",
+                            Description = "COVID 19"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryName = "Entertainment",
+                            Description = "Music, video game and movies etc."
                         });
                 });
 
@@ -139,6 +159,17 @@ namespace BusinessObject.Migrations
                             CreatedDate = new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishStatus = 1,
                             Title = "Science",
+                            UpdatedDate = new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            PostID = 2,
+                            AuthorID = 1,
+                            CategoryID = 3,
+                            Content = "Recently, the music is kind of chill music",
+                            CreatedDate = new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PublishStatus = 1,
+                            Title = "Music Today",
                             UpdatedDate = new DateTime(2022, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });

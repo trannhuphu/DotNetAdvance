@@ -85,6 +85,15 @@ namespace BusinessObject.Models
                     Email = "user01@gmail.com",
                     FullName = "user01",
                     Password = "123"
+                },
+
+                new AppUsers
+                {
+                    UserID = 2,
+                    Address = "Da Nang city",
+                    Email = "user02@gmail.com",
+                    FullName = "user02",
+                    Password = "123"
                 }
             );
 
@@ -94,6 +103,20 @@ namespace BusinessObject.Models
                     CategoryID = 1,
                     CategoryName = "Science",
                     Description = "Category include info physical, math, etc.",
+                },
+
+                new PostCategories
+                {
+                    CategoryID = 2,
+                    CategoryName = "Social",
+                    Description = "COVID 19",
+                },
+
+                new PostCategories
+                {
+                    CategoryID = 3,
+                    CategoryName = "Entertainment",
+                    Description = "Music, video game and movies etc.",
                 }
 
             );
@@ -108,6 +131,17 @@ namespace BusinessObject.Models
                     UpdatedDate = new DateTime(2022, 2, 12),
                     Content = "NASA fire a rocket",
                     Title = "Science",
+                    PublishStatus = 1
+                },
+                new Posts
+                {
+                    PostID = 2,
+                    AuthorID = 1,
+                    CategoryID = 3,
+                    CreatedDate = new DateTime(2022, 2, 12),
+                    UpdatedDate = new DateTime(2022, 2, 12),
+                    Content = "Recently, the music is kind of chill music",
+                    Title = "Music Today",
                     PublishStatus = 1
                 }
             );
