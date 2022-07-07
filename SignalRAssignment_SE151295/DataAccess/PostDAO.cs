@@ -75,6 +75,14 @@ namespace DataAccess
             List<AppUsers> appUsers = db.AppUsers.ToList();
             return appUsers;
         }
+        public List<Posts> SearchPost(string search, int searchID)
+        {
+            var db = new ApplicationDBContext();
+            var searchPost = db.Posts.Include(p => p.PostCategories)
+                                     .Include(o => o.AppUsers)
+                                     .Where(tmp => tmp.PostID == (searchID) || tmp.Title.Contains(search) || tmp.Content.Contains(search)).ToList();
+            return searchPost;
+        }
 
     }
 }

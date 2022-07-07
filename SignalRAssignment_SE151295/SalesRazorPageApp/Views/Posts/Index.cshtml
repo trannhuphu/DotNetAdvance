@@ -4,12 +4,40 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutCustom.cshtml";
 }
+<style>
+    body {
+        background-color: #f5faf9;
+    }
+   /* .search-product {
+        display: flex;
+        flex-flow: row nowrap;
+        column-gap: 8px;
+        align-items: center;
+        margin-bottom: 8px;
+    }
 
+        .search-product > p {
+            margin-bottom: 0;
+        }
+
+    .search-input {
+        height: 38px !important;
+    }*/
+</style>
 <h1>Post Management</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@*<form method="post">
+    <div class="search-product">
+        <p> Search Product</p>
+        <input type="text" asp-for="search" placeholder="search" class="search-input" />
+        <input type="submit" value="Search" asp-page-handler="SearchProduct" class="btn btn-primary" />
+        @{
+            if (!string.IsNullOrEmpty(@Model.MsgErrsearch))
+            {
+                <p class="alert alert-danger" role="alert">@Model.MsgErrsearch</p>
+            }
+        }
+    </div>
+</form>*@
 <table class="table">
     <thead>
         <tr>
@@ -40,4 +68,7 @@
     <tbody  id="tableBody"></tbody>
 
 </table>
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-success">Create New</a>
+</p>
 <input type="hidden" name="isMember" value="@ViewBag.IsMemberLogin"/>

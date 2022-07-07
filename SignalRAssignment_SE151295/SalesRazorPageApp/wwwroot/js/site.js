@@ -1,5 +1,6 @@
 ﻿$(() => {
     var postcategory = [];
+    var fullName = [];
     function getCategoryName(post) {
         if (post.PostCategories["$ref"] == null) {
             return post.PostCategories.CategoryName
@@ -9,9 +10,21 @@
             return category["$id"] === ref
         })?.CategoryName
     }
+    function getAppUserName(post) {
+        if (post.AppUsers["$ref"] == null) {
+            return post.AppUsers.FullName
+        }
+        return fullName.find(fullname => {
+            var ref = post.AppUsers["$ref"]
+            return fullname["$id"] === ref
+        })?.FullName
+    }
     function CreateRowList(post) {
         if (post.PostCategories["$ref"] == null) {           
             postcategory.push(post.PostCategories)
+        }
+        if (post.AppUsers["$ref"] == null) {
+            fullName.push(post.AppUsers)
         }
         
         var tr = "";
@@ -34,10 +47,12 @@
             <td>
               ${getCategoryName(post)}
             </td>
+             <td>
+              ${getAppUserName(post)}
+            </td>
             <td>
-                <a class="btnEdit" href='../Posts/Edit?id=${post.PostID}'>Edit</a>
-                <span class="btnDelete"> | </span>
-                <a class="btnDelete" href='../Posts/Delete?id=${post.PostID}'>Delete</a>
+                <a class="btnEdit" href='../Posts/Edit?id=${post.PostID}' class='btn btn-sm btn-info'>Edit</a>
+                <a class="btnDelete" href='../Posts/Delete?id=${post.PostID}' class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>`
         return tr;

@@ -16,5 +16,6 @@ namespace DataAccess.Repository
         public Posts GetPostById(int postId) => PostDAO.Instance.GetPostById(postId);
         public List<Posts> GetPostList() => PostDAO.Instance.GetPostList();
         public List<AppUsers> GetAppUserList() => PostDAO.Instance.GetAppUserList();
+        public List<Posts> SearchPost(string search, int searchID) => PostDAO.Instance.SearchPost(search, searchID);
     }
 }

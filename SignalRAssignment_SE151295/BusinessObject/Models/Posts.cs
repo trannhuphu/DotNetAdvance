@@ -16,8 +16,14 @@ namespace BusinessObject.Models
         public int AuthorID { set; get; }
         public DateTime CreatedDate { set; get; }
         public DateTime UpdatedDate { set; get; }
+        [Required(ErrorMessage = "Title is required!")]
         public string Title { set; get; }
+
+        [Required(ErrorMessage = "Content is required!")]
         public string Content { set; get; }
+
+        [Required(ErrorMessage = "Status is required")]
+        [RegularExpression("^[01]$", ErrorMessage = "Please enter status 0 or 1")]
         public int PublishStatus { set; get; }
         public int CategoryID { set; get; }
         public virtual PostCategories PostCategories {set; get;} 

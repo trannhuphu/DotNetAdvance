@@ -4,12 +4,12 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutCustom.cshtml";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<style>
+    body {
+        background-color: #f5faf9;
+    }
+</style>
+<h1>Member Management</h1>
 <table class="table">
     <thead>
         <tr>
@@ -44,11 +44,13 @@
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.UserID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UserID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.UserID" class="btn btn-sm btn-info">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.UserID" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-success">Create New</a>
+</p>
