@@ -8,7 +8,8 @@
     body {
         background-color: #f5faf9;
     }
-   /* .search-product {
+
+    .search-posts {
         display: flex;
         flex-flow: row nowrap;
         column-gap: 8px;
@@ -16,30 +17,29 @@
         margin-bottom: 8px;
     }
 
-        .search-product > p {
-            margin-bottom: 0;
-        }
-
-    .search-input {
-        height: 38px !important;
-    }*/
+    .form-controls {
+        height: 40px !important;
+    }
 </style>
 <h1>Post Management</h1>
 <form method="post" asp-action="SearchPostView">
     <div class="search-posts">
         <div class="form-group">
             <label for="SearchPosts" class="control-label">SearchPosts</label>
-            <input type="text" name="search" class="form-control" />
+            <input type="text" name="search" class="form-controls" />
         </div>
-        <input type="submit" value="Search"  class="btn btn-primary" />
-        @{
-                       if (!string.IsNullOrEmpty(ViewBag.ErrMsgSearch))
-            {
-                <p class="alert alert-danger" role="alert">@ViewBag.ErrMsgSearch</p>
-            }
-        }
+        <div class="form-group">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+
     </div>
 </form>
+@{
+    if (!string.IsNullOrEmpty(ViewBag.ErrMsgSearch))
+    {
+        <p class="alert alert-danger" role="alert">@ViewBag.ErrMsgSearch</p>
+    }
+}
 <table class="table">
     <thead>
         <tr>
@@ -72,5 +72,20 @@
 <p>
     <a asp-action="Create" class="btn btn-sm btn-success">Create New</a>
 </p>
+
 <input type="hidden" name="isMember" value="@ViewBag.IsMemberLogin" />
 <input type="hidden" name="UserNameLogin" value="@ViewBag.UserName" />
+@section Scripts{
+    <script type="text/javascript">
+        function openSuccessModal(strMessage) {
+            var myDiv = document.getElementById("MyModalSuccessAlertBody");
+            myDiv.innerHTML = strMessage;
+            $('#myModalSuccess').modal('show');
+        }
+        $(document).ready(function () {
+            var msg = "@TempData["SuccessMessage"]";
+            if (msg)
+                openSuccessModal(msg);
+        });
+    </script>
+}

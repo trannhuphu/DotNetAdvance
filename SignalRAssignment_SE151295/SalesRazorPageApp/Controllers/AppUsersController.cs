@@ -56,9 +56,11 @@ namespace SalesRazorPageApp.Controllers
             if (ModelState.IsValid)
              {
                  repository.AddUser(appUsers);
-                 return RedirectToAction(nameof(Index));
+                TempData["SuccessMessage"] = "Create successfully";
+                return RedirectToAction(nameof(Index));
              }
-             return View(appUsers);
+            
+            return View(appUsers);
          }
 
         // GET: AppUsers/Edit/5
@@ -101,14 +103,17 @@ namespace SalesRazorPageApp.Controllers
             {
                 try
                 {
+                    TempData["SuccessMessage"] = "Edit successfully";
                     repository.UpdateUser(appUsers);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
 
                 }
+                
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(appUsers);
         }
 
@@ -147,6 +152,7 @@ namespace SalesRazorPageApp.Controllers
 
             var appUsers = repository.GetUsersById((int)UserID);
             repository.DeleteUser(appUsers);
+            TempData["SuccessMessage"] = "Delete successfully";
             return RedirectToAction(nameof(Index));
         }
     }

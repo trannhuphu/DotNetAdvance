@@ -24,10 +24,10 @@ namespace SalesRazorPageApp.Controllers
         // GET: Register/Create
         public IActionResult Create()
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+          /*  if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
             {
                 return RedirectToAction("ErrorSession", "Login");
-            }
+            }*/
 
             return View();
         }
@@ -37,15 +37,18 @@ namespace SalesRazorPageApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+           /* if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
             {
                 return RedirectToAction("ErrorSession", "Login");
-            }
+            }*/
 
             if (ModelState.IsValid)
             {
+                              
                 repository.AddUser(appUsers);
-                return RedirectToAction("CheckLogin", "Login");
+                ViewBag.IsUpdateSuccess = true;
+                //    return RedirectToAction("CheckLogin", "Login");
+             //   return RedirectToAction(nameof(Create));
             }
             return View();
         }

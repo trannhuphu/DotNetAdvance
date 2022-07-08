@@ -90,6 +90,7 @@ namespace SalesRazorPageApp.Controllers
             if (ModelState.IsValid)
             {
                 repository.CreatePost(posts);
+                TempData["SuccessMessage"] = "Create successfully";
                 await _signalRHub.Clients.All.SendAsync("LoadPosts");
                 return RedirectToAction(nameof(Index));
             }
@@ -139,6 +140,7 @@ namespace SalesRazorPageApp.Controllers
             {
                 try
                 {
+                    TempData["SuccessMessage"] = "Edit successfully";
                     repository.UpdatePost(posts);
                     await _signalRHub.Clients.All.SendAsync("LoadPosts");
                 }
@@ -189,7 +191,7 @@ namespace SalesRazorPageApp.Controllers
 
             var posts = repository.GetPostById(PostID);
             repository.DeletePost(posts);
-
+            TempData["SuccessMessage"] = "Delete successfully";
             await _signalRHub.Clients.All.SendAsync("LoadPosts");
             return RedirectToAction(nameof(Index));
         }
