@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObject.Models;
 using DataAccess.Repository;
+using Microsoft.AspNetCore.Http;
 
 namespace SalesRazorPageApp.Controllers
 {
@@ -17,6 +18,11 @@ namespace SalesRazorPageApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
+
             bool IsMemberLogin = repository.CheckIsMemberLogin();
             if (IsMemberLogin)
             {
@@ -31,6 +37,10 @@ namespace SalesRazorPageApp.Controllers
         // GET: AppUsers/Create
         public IActionResult Create()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
             return View();
         }
 
@@ -38,7 +48,12 @@ namespace SalesRazorPageApp.Controllers
          [ValidateAntiForgeryToken]
          public  IActionResult Create([Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
          {
-             if (ModelState.IsValid)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
+
+            if (ModelState.IsValid)
              {
                  repository.AddUser(appUsers);
                  return RedirectToAction(nameof(Index));
@@ -49,6 +64,11 @@ namespace SalesRazorPageApp.Controllers
         // GET: AppUsers/Edit/5
         public IActionResult Edit(int? id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -59,14 +79,20 @@ namespace SalesRazorPageApp.Controllers
             {
                 return NotFound();
             }
+
             return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
+        public IActionResult Edit(int UserID, [Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
         {
-            if (id != appUsers.UserID)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
+
+            if (UserID != appUsers.UserID)
             {
                 return NotFound();
             }
@@ -89,6 +115,11 @@ namespace SalesRazorPageApp.Controllers
         // GET: AppUsers/Delete/5
         public IActionResult Delete(int? id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -109,6 +140,11 @@ namespace SalesRazorPageApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int UserID)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
+
             var appUsers = repository.GetUsersById((int)UserID);
             repository.DeleteUser(appUsers);
             return RedirectToAction(nameof(Index));

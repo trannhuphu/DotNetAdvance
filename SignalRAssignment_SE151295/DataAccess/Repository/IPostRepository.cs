@@ -16,7 +16,7 @@ namespace DataAccess.Repository
         Posts GetPostById(int postId);
         List<Posts> GetPostList();
         List<AppUsers> GetAppUserList();
-        List<Posts> SearchPost(string search, int searchID);
+        List<Posts> SearchPost(string search);
 
     }
 }

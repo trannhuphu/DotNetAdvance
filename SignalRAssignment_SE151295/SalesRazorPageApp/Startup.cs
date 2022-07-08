@@ -62,6 +62,8 @@ namespace SalesRazorPageApp
 
             app.UseRouting();
 
+            app.UseSession();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

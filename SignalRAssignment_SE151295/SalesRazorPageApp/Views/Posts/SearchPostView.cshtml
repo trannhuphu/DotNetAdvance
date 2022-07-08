@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BusinessObject.Models.Posts>
+
+@{
+    ViewData["Title"] = "SearchPostView";
+    Layout = "~/Views/Shared/_LayoutCustom.cshtml";
+}
+<style>
+    body {
+        background-color: #f5faf9;
+    }
+</style>
+
+
+<h1>Post Management</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublishStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostCategories)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppUsers)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostCategories.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppUsers.UserID)
+            </td>
+            <td>
+                @{ if (ViewBag.IsMemberLogin == "True")
+                    {
+                        if (ViewBag.UserName == item.AppUsers.FullName)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.PostID">Edit</a>
+                        }            
+                    } else
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.PostID">Edit</a>
+                        <a> | </a>
+                        <a asp-action="Delete" asp-route-id="@item.PostID"> Delete </a>
+                    }
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-success">Create New</a>
+</p>

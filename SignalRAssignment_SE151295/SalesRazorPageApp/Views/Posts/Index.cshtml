@@ -25,19 +25,21 @@
     }*/
 </style>
 <h1>Post Management</h1>
-@*<form method="post">
-    <div class="search-product">
-        <p> Search Product</p>
-        <input type="text" asp-for="search" placeholder="search" class="search-input" />
-        <input type="submit" value="Search" asp-page-handler="SearchProduct" class="btn btn-primary" />
+<form method="post" asp-action="SearchPostView">
+    <div class="search-posts">
+        <div class="form-group">
+            <label for="SearchPosts" class="control-label">SearchPosts</label>
+            <input type="text" name="search" class="form-control" />
+        </div>
+        <input type="submit" value="Search"  class="btn btn-primary" />
         @{
-            if (!string.IsNullOrEmpty(@Model.MsgErrsearch))
+                       if (!string.IsNullOrEmpty(ViewBag.ErrMsgSearch))
             {
-                <p class="alert alert-danger" role="alert">@Model.MsgErrsearch</p>
+                <p class="alert alert-danger" role="alert">@ViewBag.ErrMsgSearch</p>
             }
         }
     </div>
-</form>*@
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -65,10 +67,10 @@
             <th></th>
         </tr>
     </thead>
-    <tbody  id="tableBody"></tbody>
-
+    <tbody id="tableBody"></tbody>
 </table>
 <p>
     <a asp-action="Create" class="btn btn-sm btn-success">Create New</a>
 </p>
-<input type="hidden" name="isMember" value="@ViewBag.IsMemberLogin"/>
+<input type="hidden" name="isMember" value="@ViewBag.IsMemberLogin" />
+<input type="hidden" name="UserNameLogin" value="@ViewBag.UserName" />

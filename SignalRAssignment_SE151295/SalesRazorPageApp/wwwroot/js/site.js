@@ -51,7 +51,9 @@
               ${getAppUserName(post)}
             </td>
             <td>
-                <a class="btnEdit" href='../Posts/Edit?id=${post.PostID}' class='btn btn-sm btn-info'>Edit</a>
+                <a hidden class="btnEdit${getAppUserName(post)}" href='../Posts/Edit?id=${post.PostID}' class='btn btn-sm btn-info'>Edit</a>
+                <a hidden class="btnEditAdmin" href='../Posts/Edit?id=${post.PostID}' class='btn btn-sm btn-info'>Edit</a>
+                <span class="btnDelete"> | </span>
                 <a class="btnDelete" href='../Posts/Delete?id=${post.PostID}' class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>`
@@ -88,8 +90,14 @@
                 listRow = postList.map(CreateRowList).join("");
                 $("#tableBody").html(listRow);
                 let isMember = $('[name=isMember]').val();
+                let UserNameLogin = $('[name=UserNameLogin]').val();
+
+
                 if (isMember == "True") {
                     $('.btnDelete').hide();
+                    $('.btnEdit' + UserNameLogin).removeAttr("hidden");
+                } else {
+                    $('.btnEditAdmin').removeAttr("hidden");
                 }
             },
 

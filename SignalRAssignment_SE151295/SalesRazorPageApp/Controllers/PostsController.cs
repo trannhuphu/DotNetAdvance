@@ -9,6 +9,7 @@ using BusinessObject.Models;
 using SignalRAssignment;
 using Microsoft.AspNetCore.SignalR;
 using DataAccess.Repository;
+using Microsoft.AspNetCore.Http;
 
 namespace SalesRazorPageApp.Controllers
 {
@@ -16,6 +17,7 @@ namespace SalesRazorPageApp.Controllers
     {
         public IPostRepository repository = new PostRepository();
         public IUserRepository userRepository = new UserRepository();
+
         public IHubContext<SignalrServer> _signalRHub;
 
         public PostsController(IHubContext<SignalrServer> signalRHub)
@@ -26,7 +28,16 @@ namespace SalesRazorPageApp.Controllers
         // GET: Posts
         public  IActionResult Index()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
+
             ViewBag.IsMemberLogin = userRepository.CheckIsMemberLogin().ToString();
+            if (userRepository.GetCurrentMemberLogin() != null)
+            {
+                ViewBag.UserName = userRepository.GetCurrentMemberLogin().FullName;
+            }
             return View();
         }
 
@@ -34,36 +45,34 @@ namespace SalesRazorPageApp.Controllers
         [HttpGet]
         public List<Posts> GetPostList()
         {
-
             var applicationDBContext = repository.GetPostList();
             return applicationDBContext;
         }
 
-        // GET: Posts/Details/5
-        public async Task<IActionResult> Details(int? id)
+ 
+        [HttpPost]
+        public IActionResult SearchPostView(string search)
         {
-            if (id == null)
+            var listSearch = repository.SearchPost(search);
+            ViewBag.IsMemberLogin = userRepository.CheckIsMemberLogin().ToString();
+            if (userRepository.GetCurrentMemberLogin() != null)
             {
-                return NotFound();
+                ViewBag.UserName = userRepository.GetCurrentMemberLogin().FullName;
             }
-
-            /*            var posts = await _context.Posts
-                            .Include(p => p.AppUsers)
-                            .Include(p => p.PostCategories)
-                            .FirstOrDefaultAsync(m => m.PostID == id);*/
-            var posts = repository.GetPostById((int)id);
-
-            if (posts == null)
+            if (listSearch == null || listSearch.Count == 0)
             {
-                return NotFound();
+                ViewBag.ErrMsgSearch = "Search not found!";
             }
-
-            return View(posts);
+            return View(listSearch);
         }
 
         // GET: Posts/Create
         public IActionResult Create()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
             ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName");
             ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryName");
             return View();
@@ -74,6 +83,10 @@ namespace SalesRazorPageApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PostID,AuthorID,CreatedDate,UpdatedDate,Title,Content,PublishStatus,CategoryID")] Posts posts)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
             if (ModelState.IsValid)
             {
                 repository.CreatePost(posts);
@@ -88,6 +101,11 @@ namespace SalesRazorPageApp.Controllers
         // GET: Posts/Edit/5
         public IActionResult Edit(int? id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -108,6 +126,10 @@ namespace SalesRazorPageApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int PostID, [Bind("PostID,AuthorID,CreatedDate,UpdatedDate,Title,Content,PublishStatus,CategoryID")] Posts posts)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
             if (PostID != posts.PostID)
             {
                 return NotFound();
@@ -135,6 +157,11 @@ namespace SalesRazorPageApp.Controllers
         // GET: Posts/Delete/5
         public IActionResult Delete(int? id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -155,6 +182,10 @@ namespace SalesRazorPageApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int PostID)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
 
             var posts = repository.GetPostById(PostID);
             repository.DeletePost(posts);
