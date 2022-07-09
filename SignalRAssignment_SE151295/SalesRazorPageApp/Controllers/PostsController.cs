@@ -51,7 +51,7 @@ namespace SalesRazorPageApp.Controllers
             return View();
         }
 
-        public IActionResult IndexUser()
+        public IActionResult IndexUser(int? userId)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
             {
@@ -59,9 +59,19 @@ namespace SalesRazorPageApp.Controllers
             }
 
             ViewBag.IsMemberLogin = "True";
-            if (userRepository.GetCurrentMemberLogin() != null)
+            if (userId != null)
+            {
+                var tempUserName = userRepository.GetUsersById((int)userId);
+                if (tempUserName != null)
+                {
+                    ViewBag.UserName = tempUserName.FullName;
+                    ViewBag.UserID = tempUserName.UserID;
+                }
+            }
+            else if (userRepository.GetCurrentMemberLogin() != null)
             {
                 ViewBag.UserName = userRepository.GetCurrentMemberLogin().FullName;
+                ViewBag.UserID = userRepository.GetCurrentMemberLogin().UserID;
             }
             return View();
         }
@@ -89,13 +99,21 @@ namespace SalesRazorPageApp.Controllers
 
 
         [HttpPost]
-        public IActionResult SearchPostViewUser(string search)
+        public IActionResult SearchPostViewUser(string search, string userId)
         {
             var listSearch = repository.SearchPost(search);
             ViewBag.IsMemberLogin = "True";
-            if (userRepository.GetCurrentMemberLogin() != null)
+
+            var tempUserName = userRepository.GetUsersById(int.Parse(userId));
+
+            if(tempUserName != null)
+            {
+                ViewBag.UserName = tempUserName.FullName;
+                ViewBag.UserID = tempUserName.UserID;
+            } else if (userRepository.GetCurrentMemberLogin() != null)
             {
                 ViewBag.UserName = userRepository.GetCurrentMemberLogin().FullName;
+                ViewBag.UserID = userRepository.GetCurrentMemberLogin().UserID;
             }
             if (listSearch == null || listSearch.Count == 0)
             {
@@ -120,7 +138,7 @@ namespace SalesRazorPageApp.Controllers
         }
 
         // GET: Posts/Create
-        public IActionResult CreateUser()
+        public IActionResult CreateUser(int? userId)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
             {
@@ -128,13 +146,19 @@ namespace SalesRazorPageApp.Controllers
             }
 
             ViewBag.IsMemberLogin = "True";
-            if (userRepository.GetCurrentMemberLogin() != null)
+            var tempUserName = userRepository.GetUsersById((int)userId);
+            if(tempUserName != null)
+            {
+                ViewBag.UserName = tempUserName.FullName;
+                ViewBag.UserID = tempUserName.UserID;
+            } else if (userRepository.GetCurrentMemberLogin() != null)
             {
                 ViewBag.UserName = userRepository.GetCurrentMemberLogin().FullName;
+                ViewBag.UserID = userRepository.GetCurrentMemberLogin().UserID;
             }
 
             List<AppUsers> listApp = new List<AppUsers>();
-            listApp.Add(userRepository.GetCurrentMemberLogin());
+            listApp.Add(tempUserName);
             ViewData["AuthorID"] = new SelectList(listApp, "UserID", "FullName");
             ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryName");
             return View();
@@ -157,7 +181,7 @@ namespace SalesRazorPageApp.Controllers
                 repository.CreatePost(posts);
                 TempData["SuccessMessage"] = "Create successfully";
                 await _signalRHub.Clients.All.SendAsync("LoadPosts");
-                return RedirectToAction(nameof(Index));
+                return View(nameof(Index));
             }
             ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName", posts.AuthorID);
             ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryName", posts.CategoryID);
@@ -175,9 +199,17 @@ namespace SalesRazorPageApp.Controllers
             }
 
             ViewBag.IsMemberLogin = "True";
-            if (userRepository.GetCurrentMemberLogin() != null)
+
+            var tempUserName =  userRepository.GetUsersById(posts.AuthorID);
+               
+            if(tempUserName != null)
+            {
+                ViewBag.UserName = tempUserName.FullName;
+                ViewBag.UserID = tempUserName.UserID;
+            } else if (userRepository.GetCurrentMemberLogin() != null)
             {
                 ViewBag.UserName = userRepository.GetCurrentMemberLogin().FullName;
+                ViewBag.UserID = userRepository.GetCurrentMemberLogin().UserID;
             }
 
             if (ModelState.IsValid)
@@ -185,11 +217,11 @@ namespace SalesRazorPageApp.Controllers
                 repository.CreatePost(posts);
                 TempData["SuccessMessage"] = "Create successfully";
                 await _signalRHub.Clients.All.SendAsync("LoadPosts");
-                return RedirectToAction(nameof(IndexUser));
+                return View(nameof(IndexUser));
             }
 
             List<AppUsers> listApp = new List<AppUsers>();
-            listApp.Add(userRepository.GetCurrentMemberLogin());
+            listApp.Add(tempUserName);
             ViewData["AuthorID"] = new SelectList(listApp, "UserID", "FullName");
             ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryName", posts.CategoryID);
             return View(posts);
@@ -233,11 +265,18 @@ namespace SalesRazorPageApp.Controllers
                 return NotFound();
             }
             ViewBag.IsMemberLogin = "True";
-            if (userRepository.GetCurrentMemberLogin() != null)
+            var tempUserName = repository.GetPostById((int)id).AppUsers;
+            if (tempUserName != null)
+            {
+                ViewBag.UserName = tempUserName.FullName;
+                ViewBag.UserID = tempUserName.UserID;
+            }
+            else if (userRepository.GetCurrentMemberLogin() != null)
             {
                 ViewBag.UserName = userRepository.GetCurrentMemberLogin().FullName;
+                ViewBag.UserID = userRepository.GetCurrentMemberLogin().UserID;
             }
-            
+
 
             var posts = repository.GetPostById((int)id);
             if (posts == null)
@@ -245,7 +284,7 @@ namespace SalesRazorPageApp.Controllers
                 return NotFound();
             }
             List<AppUsers> listApp = new List<AppUsers>();
-            listApp.Add(userRepository.GetCurrentMemberLogin());
+            listApp.Add(repository.GetPostById((int)id).AppUsers);
             ViewData["AuthorID"] = new SelectList(listApp, "UserID", "FullName");
             //   ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName", posts.AuthorID);
             ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryName", posts.CategoryID);
@@ -281,7 +320,7 @@ namespace SalesRazorPageApp.Controllers
 
                 }
 
-                return RedirectToAction(nameof(Index));
+                return View(nameof(Index));
             }
             ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName", posts.AuthorID);
             ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryID", posts.CategoryID);
@@ -303,9 +342,16 @@ namespace SalesRazorPageApp.Controllers
             }
 
             ViewBag.IsMemberLogin = "True";
-            if (userRepository.GetCurrentMemberLogin() != null)
+            var tempUserName = repository.GetPostById(PostID).AppUsers;
+            if(tempUserName != null)
+            {
+                ViewBag.UserName = tempUserName.FullName;
+                ViewBag.UserID = tempUserName.UserID;
+            }    
+            else if (userRepository.GetCurrentMemberLogin() != null)
             {
                 ViewBag.UserName = userRepository.GetCurrentMemberLogin().FullName;
+                ViewBag.UserID = userRepository.GetCurrentMemberLogin().UserID;
             }
 
             if (ModelState.IsValid)
@@ -323,7 +369,11 @@ namespace SalesRazorPageApp.Controllers
 
                 return View(nameof(IndexUser));
             }
-            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName", posts.AuthorID);
+            List<AppUsers> listApp = new List<AppUsers>();
+            listApp.Add(repository.GetPostById((int)PostID).AppUsers);
+            ViewData["AuthorID"] = new SelectList(listApp, "UserID", "FullName");
+            //   ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName", posts.AuthorID);
+
             ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryID", posts.CategoryID);
             return View(posts);
         }

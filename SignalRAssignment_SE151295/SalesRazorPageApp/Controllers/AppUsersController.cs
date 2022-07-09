@@ -80,14 +80,21 @@ namespace SalesRazorPageApp.Controllers
         }
 
         // GET: AppUsers/Edit/5
-        public IActionResult EditUser()
+        public IActionResult EditUser(int? userId)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
             {
                 return RedirectToAction("ErrorSession", "Login");
             }
+             var user = repository.GetUsersById((int)userId);
 
-            var user = repository.GetCurrentMemberLogin();
+            if (user == null)
+            {
+                user = repository.GetCurrentMemberLogin();
+            }
+
+            ViewBag.UserID = user.UserID;
+
             if (user == null)
             {
                 return NotFound();

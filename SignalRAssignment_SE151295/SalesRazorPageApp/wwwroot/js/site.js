@@ -94,10 +94,13 @@
 
                 let isMember = $('[name=isMember]').val();
                 let UserNameLogin = $('[name=UserNameLogin]').val();
-
+             
 
                 if (isMember == "True") {
-                    $("#tableBody").html(listRow);
+                    
+                    $("#id").$values = "tableBody" + UserNameLogin;
+                    $("#tableBody").attr("id", "tableBody" + UserNameLogin);
+                    $("#tableBody" + UserNameLogin).html(listRow);
                     $('.btnEdit' + UserNameLogin).removeAttr("hidden");
                 } else {
                     $("#tableBodyAdmin").html(listRow);
