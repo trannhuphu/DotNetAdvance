@@ -79,6 +79,39 @@ namespace SalesRazorPageApp.Controllers
             return View(user);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int UserID, [Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
+
+            if (UserID != appUsers.UserID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    TempData["SuccessMessage"] = "Edit successfully";
+                    repository.UpdateUser(appUsers);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+
+                }
+
+                //return RedirectToAction("EditUser",new { id = appUsers.UserID});
+            }
+
+            return View(appUsers);
+        }
+
         // GET: AppUsers/Edit/5
         public IActionResult EditUser(int? userId)
         {

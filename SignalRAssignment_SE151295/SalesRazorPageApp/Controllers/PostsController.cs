@@ -146,6 +146,7 @@ namespace SalesRazorPageApp.Controllers
             }
 
             ViewBag.IsMemberLogin = "True";
+            
             var tempUserName = userRepository.GetUsersById((int)userId);
             if(tempUserName != null)
             {
