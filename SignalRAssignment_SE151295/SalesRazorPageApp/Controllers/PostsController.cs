@@ -79,13 +79,31 @@ namespace SalesRazorPageApp.Controllers
         public IActionResult SearchPostView(string search)
         {
             var listSearch = repository.SearchPost(search);
-            checkPermission();
+            ViewBag.IsMemberLogin = "False";
             if (listSearch == null || listSearch.Count == 0)
             {
                 ViewBag.ErrMsgSearch = "Search not found!";
             }
             return View(listSearch);
         }
+
+
+        [HttpPost]
+        public IActionResult SearchPostViewUser(string search)
+        {
+            var listSearch = repository.SearchPost(search);
+            ViewBag.IsMemberLogin = "True";
+            if (userRepository.GetCurrentMemberLogin() != null)
+            {
+                ViewBag.UserName = userRepository.GetCurrentMemberLogin().FullName;
+            }
+            if (listSearch == null || listSearch.Count == 0)
+            {
+                ViewBag.ErrMsgSearch = "Search not found!";
+            }
+            return View(listSearch);
+        }
+
 
         // GET: Posts/Create
         public IActionResult Create()

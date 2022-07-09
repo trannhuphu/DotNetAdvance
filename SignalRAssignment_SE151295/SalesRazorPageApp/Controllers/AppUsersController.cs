@@ -23,16 +23,10 @@ namespace SalesRazorPageApp.Controllers
                 return RedirectToAction("ErrorSession", "Login");
             }
 
-            bool IsMemberLogin = repository.CheckIsMemberLogin();
-            if (IsMemberLogin)
-            {
-                return RedirectToAction("Edit", new { id = repository.
-                    GetCurrentMemberLogin().UserID});
-            }
-
             List<AppUsers> appUsers = repository.GetUserList();
             return View(appUsers);
         }
+
 
         // GET: AppUsers/Create
         public IActionResult Create()
@@ -85,9 +79,29 @@ namespace SalesRazorPageApp.Controllers
             return View(user);
         }
 
+        // GET: AppUsers/Edit/5
+        public IActionResult EditUser()
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
+            {
+                return RedirectToAction("ErrorSession", "Login");
+            }
+
+            var user = repository.GetCurrentMemberLogin();
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        
+    
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int UserID, [Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
+        public IActionResult EditUser(int UserID, [Bind("UserID,FullName,Address,Email,Password")] AppUsers appUsers)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("username")))
             {
@@ -111,7 +125,7 @@ namespace SalesRazorPageApp.Controllers
 
                 }
                 
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction("EditUser",new { id = appUsers.UserID});
             }
             
             return View(appUsers);
