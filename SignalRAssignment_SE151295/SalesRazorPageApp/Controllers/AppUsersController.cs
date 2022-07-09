@@ -46,7 +46,7 @@ namespace SalesRazorPageApp.Controllers
             {
                 return RedirectToAction("ErrorSession", "Login");
             }
-
+           
             if (ModelState.IsValid)
              {
                  repository.AddUser(appUsers);

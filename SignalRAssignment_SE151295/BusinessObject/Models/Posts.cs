@@ -17,9 +17,13 @@ namespace BusinessObject.Models
         public DateTime CreatedDate { set; get; }
         public DateTime UpdatedDate { set; get; }
         [Required(ErrorMessage = "Title is required!")]
+        [RegularExpression("^[^\\s]+(\\s+[^\\s]+)*$", ErrorMessage = "Title must not space")]
+
         public string Title { set; get; }
 
         [Required(ErrorMessage = "Content is required!")]
+        [RegularExpression("^[^\\s]+(\\s+[^\\s]+)*$", ErrorMessage = "Content must not space")]
+
         public string Content { set; get; }
 
         [Required(ErrorMessage = "Status is required")]

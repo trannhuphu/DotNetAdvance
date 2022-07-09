@@ -215,7 +215,7 @@ namespace SalesRazorPageApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "UserID", posts.AuthorID);
+            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName", posts.AuthorID);
             ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryName", posts.CategoryID);
             return View(posts);
         }
@@ -244,7 +244,10 @@ namespace SalesRazorPageApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "UserID", posts.AuthorID);
+            List<AppUsers> listApp = new List<AppUsers>();
+            listApp.Add(userRepository.GetCurrentMemberLogin());
+            ViewData["AuthorID"] = new SelectList(listApp, "UserID", "FullName");
+            //   ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName", posts.AuthorID);
             ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryName", posts.CategoryID);
             return View(posts);
         }
@@ -280,7 +283,7 @@ namespace SalesRazorPageApp.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "UserID", posts.AuthorID);
+            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName", posts.AuthorID);
             ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryID", posts.CategoryID);
             return View(posts);
         }
@@ -320,7 +323,7 @@ namespace SalesRazorPageApp.Controllers
 
                 return View(nameof(IndexUser));
             }
-            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "UserID", posts.AuthorID);
+            ViewData["AuthorID"] = new SelectList(repository.GetAppUserList(), "UserID", "FullName", posts.AuthorID);
             ViewData["CategoryID"] = new SelectList(repository.GetCategoryList(), "CategoryID", "CategoryID", posts.CategoryID);
             return View(posts);
         }

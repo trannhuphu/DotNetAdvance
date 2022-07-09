@@ -19,7 +19,7 @@
         height: 40px !important;
     }
 </style>
-<form method="post" asp-action="SearchPostView">
+<form method="post" asp-action="SearchPostViewUser">
     <div class="search-posts">
         <div class="form-group">
             <label for="SearchPosts" class="control-label">SearchPosts</label>
@@ -97,7 +97,7 @@
                         {
                             if (ViewBag.UserName == item.AppUsers.FullName)
                             {
-                                <a asp-action="Edit" asp-route-id="@item.PostID">Edit</a>
+                                <a asp-action="EditUser" asp-route-id="@item.PostID">Edit</a>
                             }
                         }
                     }
@@ -108,7 +108,7 @@
 </table>
 
 <p>
-    <a asp-action="Create" class="btn btn-sm btn-success">Create New</a>
+    <a asp-action="CreateUser" class="btn btn-sm btn-success">Create New</a>
 </p>
 <div>
     <a asp-action="IndexUser">List All</a>
