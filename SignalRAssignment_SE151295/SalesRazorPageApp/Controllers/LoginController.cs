@@ -18,9 +18,14 @@ namespace SalesRazorPageApp.Controllers
             return View(nameof(CheckLogin));
         }
 
-        public IActionResult CheckLogin()
+        public IActionResult LogOut()
         {
             HttpContext.Session.Clear();
+            return View(nameof(CheckLogin));
+        }
+
+        public IActionResult CheckLogin()
+        {
             return View();
         }
 
@@ -34,8 +39,17 @@ namespace SalesRazorPageApp.Controllers
                 IsLoginSuccess = userRepository.checkLogin(email, password);
                 if (IsLoginSuccess)
                 {
-                    HttpContext.Session.SetString("username",email);
-                    return RedirectToAction("Index", "Posts");
+                    HttpContext.Session.SetString("username", email);
+
+                    if (userRepository.CheckIsMemberLogin() == true)
+                    {
+                        return RedirectToAction("IndexUser", "Posts");
+                    } 
+                    else
+                    {
+                        return RedirectToAction("Index", "Posts");
+                    }
+
                 }
 
             }
